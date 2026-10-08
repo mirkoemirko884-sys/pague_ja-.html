@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mairiporã Agro | Teste 1</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #cc092f; /* IDENTIDADE VERMELHA RESTRITA */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: #cc092f;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        h2 { margin-bottom: 5px; font-size: 24px; }
+        .subtitle { color: #f1f5f9; font-size: 14px; margin-bottom: 15px; opacity: 0.9; }
+        
+        .status-bar {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badge-online {
+            background-color: #5eff5e;
+            color: #000000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Mairiporã Agro</h2>
+    <div class="subtitle">Módulo de Teste Isolado — JCS_software</div>
+    
+    <div class="status-bar">
+        <span class="badge-online">● Servidor Ativo</span>
+        <span id="relogioDigital">Carregando data...</span>
+    </div>
+    
+    <div class="info-box">
+        Olá, Mundo!<br/>
+        <span style="font-size: 14px; font-weight: normal; opacity: 0.8;">Página Base de Verificação</span>
+    </div>
+</div>
+
+<script>
+    function atualizarRelogio() {
+        const agora = new Date();
+        const dia = String(agora.getDate()).padStart(2, '0');
+        const mes = String(agora.getMonth() + 1).padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+        const segundos = String(agora.getSeconds()).padStart(2, '0');
+        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
+    }
+    setInterval(atualizarRelogio, 1000);
+    atualizarRelogio();
+</script>
+</body>
+</html>
