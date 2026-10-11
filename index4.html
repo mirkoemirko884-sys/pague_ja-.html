@@ -170,11 +170,11 @@
     </select>
 
     <div class="faturamento-box">
-        <p><strong>Item Emissão (Max 2 dias):</strong> <span id="labelProduto">1 Cartela (30un) - R\$: 13,00</span></p>
-        <p><strong>Condição:</strong> <span id="labelCondicao">À Vista Regular</span></p>
+        <p><strong>Item Emissão (Max 2 dias):</strong> <span id="labelProduto">Faturamento Geral Simplificado</span></p>
+        <p><strong>Condição de Crédito:</strong> <span id="labelCondicao">À Vista Regular</span></p>
         <p><strong>Vencimento Ajustado:</strong> <span id="labelVencimento" style="color: #5eff5e; font-weight: bold;">Imediato</span></p>
         <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 8px; margin-bottom: 0;">
-            <strong>Total a Pagar:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 13,00</span>
+            <strong>Total a Pagar:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R$: 13,00</span>
         </p>
     </div>
 
@@ -206,10 +206,9 @@
 </div>
 
 <script>
-    // Feriados Nacionais e locais fixos de Mairiporã para segurança imediata
+    // Feriados Nacionais e locais fixos de Mairiporã (como 15/09 Padroeira e 09/07)
     let feriadosMapeados = ["01/01", "21/04", "01/05", "09/07", "07/09", "15/09", "12/10", "02/11", "15/11", "20/11", "25/12"];
 
-    // Buscador Inteligente - Conecta na API Pública para varrer feriados estaduais e municipais
     async function carregarBuscadorFeriados() {
         try {
             const anoAtual = new Date().getFullYear();
@@ -226,18 +225,15 @@
                 document.getElementById('statusBuscador').innerText = "● Buscador Online ✔";
             }
         } catch (e) {
-            // Em caso de falta de rede, usa o banco de dados de contingência local (incluindo 15/09)
             document.getElementById('statusBuscador').innerText = "● Proteção Local Ativa";
         }
     }
 
     function ehDiaUtil(data) {
-        const diaSemana = data.getDay(); // 0 = Domingo, 6 = Sábado
+        const diaSemana = data.getDay();
         if (diaSemana === 0 || diaSemana === 6) return false;
-        
         const stringData = String(data.getDate()).padStart(2, '0') + "/" + String(data.getMonth() + 1).padStart(2, '0');
         if (feriadosMapeados.includes(stringData)) return false;
-        
         return true;
     }
 
@@ -248,3 +244,8 @@
             dataTeste.setDate(dataTeste.getDate() + 1);
             diasAdicionados++;
         }
+        return { dataFinal: dataTeste, prorrogado: diasAdicionados > 0 };
+    }
+
+    function calcularVencimentosVIP() {
+        const prazoSelecionado = parseInt(document.getElementById('comboPrazo').value);
