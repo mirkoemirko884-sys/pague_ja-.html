@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mairiporã Agro | Boleto VIP Bradesco</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #15803d; /* VERDE DINHEIRO / CRÉDITO COMERCIAL */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: #15803d;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        h2 { margin-bottom: 5px; font-size: 24px; color: #ffffff; }
+        .subtitle { color: #f1f5f9; font-size: 14px; margin-bottom: 15px; opacity: 0.9; font-weight: bold; }
+        
+        .status-bar {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badge-online {
+            background-color: #ffffff;
+            color: #15803d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .faturamento-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .seletor-prazo {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .seletor-prazo option { background: #15803d; }
+        
+        .opcao-pagamento {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .opcao-titulo {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 4px;
+        }
+
+        .qrcode-box {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .qrcode-box img { width: 150px; height: 150px; display: block; }
+        
+        .dados-texto {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            word-break: break-all;
+            margin-bottom: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            text-align: left;
+            font-family: monospace;
+        }
+
+        .btn-copiar {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: #ffffff;
+            color: #15803d;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-imprimir {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #cc092f;
+            border: 2px solid #ffffff;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        @media print {
+            body { background-color: #ffffff; color: #000000; }
+            .container { border: none; background: #ffffff; color: #000000; max-width: 100%; padding: 0; }
+            .btn-copiar, .btn-imprimir, .status-bar, .seletor-prazo { display: none !important; }
+            .faturamento-box, .opcao-pagamento { background: none; border: 1px solid #000000; color: #000000; }
+            .opcao-titulo { color: #000000; border-bottom: 1px solid #000000; }
+            .dados-texto { color: #000000; border: 1px dashed #000000; background: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Mairiporã Agro</h2>
+    <div class="subtitle">Canal 2: Carteira de Crédito VIP — JCS_software</div>
+    
+    <div class="status-bar">
+        <span class="badge-online" id="statusBuscador">● Proteção Local Ativa</span>
+        <span id="relogioDigital">Carregando data...</span>
+    </div>
+    
+    <label style="font-size: 13px; font-weight: bold; text-align: left; display: block; margin-bottom: 5px;">Selecione o Prazo Comercial VIP:</label>
+    <select class="seletor-prazo" id="comboPrazo" onchange="calcularVencimentosVIP()">
+        <option value="7">Faturado 07 Dias (VIP)</option>
+        <option value="14">Faturado 14 Dias (VIP)</option>
+        <option value="21">Faturado 21 Dias (VIP)</option>
+        <option value="28">Faturado 28 Dias (VIP)</option>
+    </select>
+
+    <div class="faturamento-box">
+        <p><strong>Item Emissão (Max 2 dias):</strong> <span>Boleto Simplificado Garantido</span></p>
+        <p><strong>Condição de Crédito:</strong> <span id="labelCondicao">Faturado VIP 7 dias</span></p>
+        <p><strong>Vencimento Ajustado:</strong> <span id="labelVencimento" style="color: #5eff5e; font-weight: bold;">Calculando...</span></p>
+        <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 8px; margin-bottom: 0;">
+            <strong>Total a Pagar:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R$: 13,00</span>
+        </p>
+    </div>
+
+    <!-- RENDERIZAÇÃO EXCLUSIVA DO BOLETO TRADICIONAL BRADESCO -->
+    <div class="opcao-pagamento">
+        <div class="opcao-titulo">1. Linha Digitável do Boleto Simplificado</div>
+        <div class="dados-texto" id="boletoCodigo">23791.79001 01043.513184 91020.150008 7 98480000008500</div>
+        <button class="btn-copiar" onclick="copiarTexto('boletoCodigo', 'btnBoleto')" id="btnBoleto">📋 Copiar Linha do Boleto</button>
+    </div>
+
+    <div class="opcao-pagamento">
+        <div class="opcao-titulo">2. QR Code da Barra do Boleto</div>
+        <div class="qrcode-box"><img src="qrcode_pagamento.png" onerror="this.src='https://placeholder.com'"></div>
+    </div>
+
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Romaneio de Faturamento</button>
+</div>
+
+<script>
+    let feriadosMapeados = ["01/01", "21/04", "01/05", "09/07", "07/09", "15/09", "12/10", "02/11", "15/11", "20/11", "25/12"];
+
+    async function carregarBuscadorFeriados() {
+        try {
+            const anoAtual = new Date().getFullYear();
+            const resposta = await fetch(`https://brasilapi.com.br{anoAtual}`);
+            if (resposta.ok) {
+                const dados = await resposta.json();
+                dados.forEach(feriado => {
+                    const partes = feriado.date.split('-');
+                    const formatoDiaMes = `${partes}/${partes}`;
+                    if (!feriadosMapeados.includes(formatoDiaMes)) {
+                        feriadosMapeados.push(formatoDiaMes);
+                    }
+                });
+                document.getElementById('statusBuscador').innerText = "● Buscador Online ✔";
+            }
+        } catch (e) {}
+    }
+
+    function ehDiaUtil(data) {
+        const diaSemana = data.getDay();
+        if (diaSemana === 0 || diaSemana === 6) return false;
+        const stringData = String(data.getDate()).padStart(2, '0') + "/" + String(data.getMonth() + 1).padStart(2, '0');
+        if (feriadosMapeados.includes(stringData)) return false;
+        return true;
+    }
+
+    function ajustarProximoDiaUtil(dataBase) {
+        let dataTeste = new Date(dataBase);
+        let diasAdicionados = 0;
+        while (!ehDiaUtil(dataTeste)) {
+            dataTeste.setDate(dataTeste.getDate() + 1);
+            diasAdicionados++;
+        }
+        return { dataFinal: dataTeste, prorrogado: diasAdicionados > 0 };
+    }
+
+    function calcularVencimentosVIP() {
+        const prazoSelecionado = parseInt(document.getElementById('comboPrazo').value);
+        let valorBase = 13.00; 
+        let hoje = new Date();
+        
+        let dataVencimento = new Date(hoje);
+        dataVencimento.setDate(hoje.getDate() + prazoSelecionado);
+        
+        const resultado = ajustarProximoDiaUtil(dataVencimento);
+        
+        const diaF = String(resultado.dataFinal.getDate()).padStart(2, '0');
+        const mesF = String(resultado.dataFinal.getMonth() + 1).padStart(2, '0');
+        const anoF = resultado.dataFinal.getFullYear();
+        
+        document.getElementById('labelCondicao').innerText = `Faturado VIP ${prazoSelecionado} dias`;
+        document.getElementById('labelPreco').innerText = "R$: " + valorBase.toFixed(2).replace('.', ',');
+        document.getElementById('labelVencimento').innerText = `${diaF}/${mesF}/${anoF} ${resultado.prorrogado ? '(Ajustado por Feriado/Fim de Semana ✔)' : ''}`;
+    }
+
+    function copiarTexto(idElemento, idBotao) {
+        const texto = document.getElementById(idElemento).innerText;
