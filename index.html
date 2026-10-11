@@ -158,8 +158,9 @@
 </div>
 
 <script>
-    let 'descricaoSelecionada' = "1 Cartela (30un) - R\$: 13,00";
-    let 'descontoTexto' = "Sem desconto";
+    // ASPAS CORRIGIDAS AQUI - SEM TRAVAR O SCRIPT
+    let descricaoSelecionada = "1 Cartela (30un) - R\$: 13,00";
+    let descontoTexto = "Sem desconto";
 
     function atualizarTotal(descricao, desconto) {
         const preco = document.querySelector('input[name="opcaoOvos"]:checked').value;
@@ -170,7 +171,7 @@
 
     function avancarParaFaturamento() {
         const preco = document.querySelector('input[name="opcaoOvos"]:checked').value;
-        // DIRECIONAMENTO CIRÚRGICO PARA O INDEX4 DO NOVO REPOSITÓRIO
+        // DIRECIONA CORRETAMENTE PARA O INDEX4 QUE É O NOSSO CANAL DE PAGAMENTO
         window.location.href = "index4.html?valor=" + preco + "&desc=" + encodeURIComponent(descricaoSelecionada) + "&desconto=" + encodeURIComponent(descontoTexto);
     }
 
