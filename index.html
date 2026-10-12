@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mairiporã Agro | Teste 1</title>
+    <title>Mairiporã Agro | Seleção de Combos</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #cc092f; /* FINALIDADE DA PAGINA LHE DAR 0PÇÕES PARA VOCÊ EFETUAR OS SEU PAGAMENTO " confira adiantando a pagina " IDENTIDADE VERMELHA RESTRITA */  IDENTIDADE VERMELHA RESTRITA */
-
+            background-color: #cc092f; /* IDENTIDADE VERMELHA RESTRITA */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -23,11 +22,10 @@
             border: 2px solid #ffffff;
             border-radius: 12px;
             width: 100%;
-            max-width: 440px;
+            max-width: 480px;
             text-align: center;
-            box-sizing: border-box;
         }
-        h2 { margin-bottom: 5px; font-size: 24px; }
+        h2 { color: #ffffff; margin-bottom: 5px; font-size: 24px; }
         .subtitle { color: #f1f5f9; font-size: 14px; margin-bottom: 15px; opacity: 0.9; }
         
         .status-bar {
@@ -50,35 +48,127 @@
             font-size: 10px;
             text-transform: uppercase;
         }
-        .info-box {
+
+        .opcoes-box {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid #ffffff;
             border-radius: 8px;
             padding: 20px;
-            text-align: center;
-            font-size: 18px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .radio-group {
+            margin-bottom: 22px;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+        .radio-group:last-child { margin-bottom: 0; }
+        .radio-group input {
+            margin-top: 4px;
+            margin-right: 14px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .label-texto { font-size: 16px; color: #ffffff; line-height: 1.4; }
+        .preco-destaque { font-weight: bold; text-decoration: underline; }
+        .desconto-tag {
+            display: block;
+            font-size: 13px;
+            color: #5eff5e;
             font-weight: bold;
+            margin-top: 2px;
+        }
+        .total-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+        .total-value { font-weight: bold; font-size: 22px; }
+        .btn-avancar {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #ffffff;
+            color: #cc092f;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>JCS_software</h2>
-    <div class="subtitle">Módulo de Teste Isolado — JCS_software</div>
+    <h2>Mairiporã Agro</h2>
+    <div class="subtitle">Painel de Romaneio — Laboratório JCS_software</div>
     
     <div class="status-bar">
-        <span class="badge-online">● Servidor Ativo</span>
+        <span class="badge-online">● Sistema On-line</span>
         <span id="relogioDigital">Carregando data...</span>
     </div>
     
-    <div class="info-box">
-        Pagina para diversas formas de Pagamento ao seu critério!<br/>
-        <span style="font-size: 14px; font-weight: normal; opacity: 0.8;">Página Base de Verificação</span>
+    <div class="opcoes-box">
+        <label class="radio-group">
+            <input type="radio" name="opcaoOvos" value="13.00" checked onchange="atualizarTotal('1 Cartela (30un) - R\$: 13,00')">
+            <span class="label-texto">
+                Se levar <strong>1 Cartela</strong> (30 un) ➔ sai por <span class="preco-destaque">R\$: 13,00</span>
+                <span class="desconto-tag" style="color: #e2e8f0; font-weight: normal; opacity: 0.7;">Preço regular por volume</span>
+            </span>
+        </label>
+        
+        <label class="radio-group">
+            <input type="radio" name="opcaoOvos" value="24.00" onchange="atualizarTotal('2 Cartelas (60un) - R\$: 24,00')">
+            <span class="label-texto">
+                Se levar <strong>2 Cartelas</strong> (60 un) ➔ ganha bônus e sai por <span class="preco-destaque">R\$: 24,00</span>
+                <span class="desconto-tag">★ Você ganha R\$: 2,00 de desconto comercial! (R\$: 12,00 cada)</span>
+            </span>
+        </label>
+        
+        <label class="radio-group">
+            <input type="radio" name="opcaoOvos" value="33.00" onchange="atualizarTotal('3 Cartelas (90un) - R\$: 33,00')">
+            <span class="label-texto">
+                Se levar <strong>3 Cartelas</strong> (90 un) ➔ super bônus e sai por <span class="preco-destaque">R\$: 33,00</span>
+                <span class="desconto-tag">★★ Você ganha R\$: 6,00 de desconto comercial! (R\$: 11,00 cada)</span>
+            </span>
+        </label>
     </div>
+
+    <div class="total-box">
+        <span>Faturamento Selecionado:</span>
+        <span id="valorTotalExibido" class="total-value">R\$: 13,00</span>
+    </div>
+
+    <button class="btn-avancar" onclick="avancarParaFaturamento()">Avançar para Meios de Pagamento</button>
 </div>
 
 <script>
+    let descricaoSelecionada = "1 Cartela (30un) - R\$: 13,00";
+
+    function atualizarTotal(descricao) {
+        const preco = document.querySelector('input[name="opcaoOvos"]:checked').value;
+        descricaoSelecionada = descricao;
+        document.getElementById('valorTotalExibido').innerText = `R$: ${preco.replace('.', ',')}`;
+    }
+
+    function avancarParaFaturamento() {
+        const preco = document.querySelector('input[name="opcaoOvos"]:checked').value;
+        window.location.href = "index1.html?valor=" + preco + "&desc=" + encodeURIComponent(descricaoSelecionada);
+    }
+
     function atualizarRelogio() {
         const agora = new Date();
         const dia = String(agora.getDate()).padStart(2, '0');
@@ -89,6 +179,7 @@
         const segundos = String(agora.getSeconds()).padStart(2, '0');
         document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
     }
+    
     setInterval(atualizarRelogio, 1000);
     atualizarRelogio();
 </script>
