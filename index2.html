@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Cédula de Autenticação Bancária</title>
+    <title>JCS_software | Cupom de Liberação e Rastreio</title>
     <style>
         body {
-            font-family: "Courier New", Courier, monospace; /* ESTILO CLÁSSICO DE AUTENTICAÇÃO */
+            font-family: "Courier New", Courier, monospace;
             background-color: #15803d; /* VERDE DINHEIRO */
             color: #ffffff;
             display: flex;
@@ -18,181 +18,51 @@
         }
         .container {
             background: #15803d;
-            padding: 20px;
             border: 2px solid #ffffff;
             border-radius: 8px;
+            padding: 20px;
             width: 100%;
-            max-width: 550px; /* LARGURA IDEAL PARA MEIA FOLHA A4 */
-            box-sizing: border-box;
+            max-width: 550px;
         }
-        
-        .seletor-prazo {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid #ffffff;
-            color: white;
-            padding: 8px;
-            width: 100%;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .seletor-prazo option { background: #15803d; }
-
-        /* ESTRUTURA DE MEIA FOLHA EM DUAS VIAS */
         .via-cedula {
             background: #ffffff;
             color: #000000;
             border: 3px double #000000;
             padding: 15px;
             margin-bottom: 15px;
-            position: relative;
             text-align: left;
         }
-        .via-cedula:last-of-type { margin-bottom: 0; }
-        
-        .via-tag {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 1px solid #000000;
-            padding: 2px 5px;
-        }
-        
-        .timbre-titulo {
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            letter-spacing: 1px;
-            border-bottom: 1px dashed #000000;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        
-        .linha-dados {
-            font-size: 13px;
-            margin: 5px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        /* TARJA DE AUTENTICAÇÃO MECÂNICA DO BANCO */
-        .tarja-autenticacao {
-            margin-top: 12px;
-            border-top: 2px solid #000000;
-            padding-top: 6px;
-            font-size: 11px;
-            font-weight: bold;
-            text-align: center;
-            background: #e2e8f0;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-imprimir {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #ffffff;
-            color: #15803d;
-            border: none;
-            border-radius: 4px;
+        .titulo-timbre {
             font-size: 14px;
             font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        /* CONFIGURAÇÃO DO CORTE DE MEIA FOLHA COMPACTA PARA IMPRESSÃO */
-        @media print {
-            body { background: #ffffff; color: #000000; padding: 0; }
-            .container { border: none; max-width: 100%; padding: 0; }
-            .btn-imprimir, .seletor-prazo, style { display: none !important; }
-            .via-cedula { border: 3px double #000000; page-break-inside: avoid; }
-            .tarja-autenticacao { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
+            text-align: center;
+            border-bottom: 2px dashed #000000;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- VIA ÚNICA MEIA FOLHA FORMATO PROVA FIEL SHOPEE -->
+    <div class="via-cedula">
+        <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
+        <div style="font-size: 13px; margin: 5px 0;"><strong>VALIDADOR RESPONSÁVEL:</strong> RODRIGO_CRED VIP</div>
+        <div style="font-size: 13px; margin: 5px 0;"><strong>CANAL EMISSOR:</strong> MAIRIPORÃ RAÇÕES</div>
+        <div style="font-size: 13px; margin: 5px 0;"><strong>CÓDIGO DE RASTREIO VIP:</strong> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
+        <div style="font-size: 13px; margin: 5px 0;"><strong>CONDIÇÃO FISCAL:</strong> <span>Faturamento em Carteira Comercial (Até 28 Dias)</span></div>
+        
+        <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
+            VALOR DE DESCONTO DE FÁBRICA: R\$: 33,00
+        </div>
+        
+        <div style="margin-top: 12px; border-top: 2px solid #000000; padding-top: 6px; font-size: 9px; font-weight: bold; text-align: center; background: #e2e8f0;">
+            【 AUTENTICAÇÃO MECÂNICA: PROVA DE COMPRA FIEL - RETIRADA ADERIDA 】
+        </div>
+    </div>
     
-    <!-- SELETOR DINÂMICO QUE VALIDA O EFEITO DA COMPENSAÇÃO -->
-    <select class="seletor-prazo" id="comboPrazo" onchange="alternarAutenticacaoMecanica()">
-        <option value="PIX">Liquidação Imediata: À Vista via PIX Bradesco</option>
-        <option value="7">Faturado em Carteira: 07 Dias VIP</option>
-        <option value="14">Faturado em Carteira: 14 Dias VIP</option>
-        <option value="21">Faturado in Carteira: 21 Dias VIP</option>
-        <option value="28">Faturado em Carteira: 28 Dias VIP</option>
-    </select>
-
-    <!-- VIA 1: ESTABELECIMENTO -->
-    <div class="via-cedula">
-        <div class="via-tag">Via Loja</div>
-        <div class="timbre-titulo">★★ JCS_SOFTWARE · COBRANÇA INDEPENDENTE ★★</div>
-        <div class="linha-dados"><span>EMISSOR EXTRAJUDICIAL:</span> <strong>MAIRIPORÃ AGRO</strong></div>
-        <div class="linha-dados"><span>DOCUMENTO DE CRÉDITO:</span> <strong>ROMANEIO NUMERADO VIP</strong></div>
-        <div class="linha-dados"><span>PRODUTO/VALOR BASE:</span> <span>3 Cartelas (90un) - R\$: 33,00</span></div>
-        <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="condicaoVia1" style="font-weight: bold;">À Vista Regular</span></div>
-        <div class="linha-dados" style="font-size: 15px; border-top: 1px dashed #000000; padding-top: 5px; margin-top: 5px;">
-            <span>TOTAL LIQUIDADO:</span> <strong id="precoVia1">R\$: 33,00</strong>
-        </div>
-        <div class="tarja-autenticacao" id="autenticacaoVia1">
-            【 AUTENTICAÇÃO MECÂNICA: PIX LIQUIDADO À VISTA - BANCO CENTRAL 】
-        </div>
-    </div>
-
-    <!-- LINHA DE CORTE DE MEIA FOLHA -->
-    <div style="border-top: 2px dashed #ffffff; margin: 15px 0; text-align: center; font-size: 11px;" class="seletor-prazo">
-        ✂- - - - - - - - - - - - - LINHA DE CORTE DA MEIA FOLHA (A5) - - - - - - - - - - - - -
-    </div>
-
-    <!-- VIA 2: CLIENTE -->
-    <div class="via-cedula">
-        <div class="via-tag">Via Cliente</div>
-        <div class="timbre-titulo">★★ JCS_SOFTWARE · COBRANÇA INDEPENDENTE ★★</div>
-        <div class="linha-dados"><span>EMISSOR EXTRAJUDICIAL:</span> <strong>MAIRIPORÃ AGRO</strong></div>
-        <div class="linha-dados"><span>DOCUMENTO DE CRÉDITO:</span> <strong>ROMANEIO NUMERADO VIP</strong></div>
-        <div class="linha-dados"><span>PRODUTO/VALOR BASE:</span> <span>3 Cartelas (90un) - R\$: 33,00</span></div>
-        <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="condicaoVia2" style="font-weight: bold;">À Vista Regular</span></div>
-        <div class="linha-dados" style="font-size: 15px; border-top: 1px dashed #000000; padding-top: 5px; margin-top: 5px;">
-            <span>TOTAL LIQUIDADO:</span> <strong id="precoVia2">R\$: 33,00</strong>
-        </div>
-        <div class="tarja-autenticacao" id="autenticacaoVia2">
-            【 AUTENTICAÇÃO MECÂNICA: PIX LIQUIDADO À VISTA - BANCO CENTRAL 】
-        </div>
-    </div>
-
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Cédula Dupla (Meia Folha)</button>
+    <button style="width: 100%; padding: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; background: #fff; color: #15803d; border: none; border-radius: 4px;" onclick="window.print()">🖨️ Imprimir Cupom de Rastreio (Meia Folha)</button>
 </div>
-
-<script>
-    function alternarAutenticacaoMecanica() {
-        const opcao = document.getElementById('comboPrazo').value;
-        let textoAutenticacao = "";
-        let textoCondicao = "";
-        let valorFinal = "R\$: 33,00";
-
-        if (opcao === "PIX") {
-            textoCondicao = "À Vista (Brecha 5% Aplicada)";
-            valorFinal = "R\$: 31,35";
-            textoAutenticacao = "【 AUTENTICAÇÃO MECÂNICA: PIX LIQUIDADO À VISTA - BANCO CENTRAL DO BRASIL 】";
-        } else {
-            textoCondicao = `Faturado em Carteira VIP - ${opcao} Dias`;
-            valorFinal = "R\$: 33,00";
-            textoAutenticacao = `【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】`;
-        }
-
-        // Atualiza dinamicamente as duas vias na tela ou no papel
-        document.getElementById('condicaoVia1').innerText = textoCondicao;
-        document.getElementById('condicaoVia2').innerText = textoCondicao;
-        document.getElementById('precoVia1').innerText = valorFinal;
-        document.getElementById('precoVia2').innerText = valorFinal;
-        document.getElementById('autenticacaoVia1').innerText = textoAutenticacao;
-        document.getElementById('autenticacaoVia2').innerText = textoAutenticacao;
-    }
-</script>
 </body>
 </html>
