@@ -136,11 +136,10 @@
     <div class="subtitle">Meio de Pagamento 2: Carteira de Crédito — JCS_software</div>
     
     <div class="status-bar">
-        <span class="badge-online" id="statusBuscador">● Buscando Feriados...</span>
+        <span class="badge-online" id="statusBuscador">● Proteção Local Ativa</span>
         <span id="relogioDigital">Carregando data...</span>
     </div>
 
-    <!-- BRINDE VIP COMERCIAL DESCRITO -->
     <div style="background: #ffffff; color: #15803d; font-weight: bold; font-size: 13px; padding: 8px; border-radius: 6px; margin-bottom: 15px; text-transform: uppercase;">
         🎁 BRINDE VIP: Ganhe 5% de desconto pagando em até 5 dias!
     </div>
@@ -155,11 +154,11 @@
     </select>
 
     <div class="faturamento-box">
-        <p><strong>Item:</strong> <span id="labelProduto">Carregando...</span></p>
-        <p><strong>Condição:</strong> <span id="labelCondicao">Calculando...</span></p>
+        <p><strong>Item:</strong> <span id="labelProduto">1 Cartela (30un) - R$: 13,00</span></p>
+        <p><strong>Condição:</strong> <span id="labelCondicao">Antecipado com 5% de Desconto</span></p>
         <p><strong>Vencimento Ajustado:</strong> <span id="labelVencimento" style="color: #5eff5e; font-weight: bold;">...</span></p>
         <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 8px; margin-bottom: 0;">
-            <strong>Total a Pagar:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 0,00</span>
+            <strong>Total a Pagar:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R$: 12,35</span>
         </p>
     </div>
 
@@ -174,24 +173,19 @@
 
 <script>
     let feriadosMapeados = ["01/01", "21/04", "01/05", "09/07", "07/09", "15/09", "12/10", "02/11", "15/11", "20/11", "25/12"];
-    let valorOriginal Título = 13.00;
+    let valorOriginalTítulo = 13.00;
+    let descOriginal = "1 Cartela (30un) - R\$: 13,00";
 
-    async function carregarBuscadorFeriados() {
-        try {
-            const anoAtual = new Date().getFullYear();
-            const resposta = await fetch(`https://brasilapi.com.br{anoAtual}`);
-            if (resposta.ok) {
-                const dados = await resposta.json();
-                dados.forEach(f => {
-                    const p = f.date.split('-');
-                    const fmt = `${p}/${p}`;
-                    if (!feriadosMapeados.includes(fmt)) feriadosMapeados.push(fmt);
-                });
-                document.getElementById('statusBuscador').innerText = "● Buscador Online ✔";
-            }
-        } catch (e) {
-            document.getElementById('statusBuscador').innerText = "● Proteção Local Ativa";
+    function extrairDados() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('valor')) {
+            valorOriginalTítulo = parseFloat(urlParams.get('valor'));
         }
+        if (urlParams.has('desc')) {
+            descOriginal = decodeURIComponent(urlParams.get('desc'));
+        }
+        document.getElementById('labelProduto').innerText = descOriginal;
+        calcularVencimentosVIP();
     }
 
     function ehDiaUtil(data) {
@@ -217,19 +211,12 @@
         if (prazo === 5) {
             let desc = (valorOriginalTítulo * 0.95).toFixed(2).replace('.', ',');
             document.getElementById('labelCondicao').innerText = "Antecipado com 5% de Desconto";
-            document.getElementById('labelPreco').innerText = "R\$: " + desc;
+            document.getElementById('labelPreco').innerText = "R$: " + desc;
         } else {
             document.getElementById('labelCondicao').innerText = `Faturamento Regulamentar ${prazo} Dias`;
-            document.getElementById('labelPreco').innerText = "R\$: " + valorOriginalTítulo.toFixed(2).replace('.', ',');
+            document.getElementById('labelPreco').innerText = "R$: " + valorOriginalTítulo.toFixed(2).replace('.', ',');
         }
         document.getElementById('labelVencimento').innerText = `${d}/${m}/${a} (Dia Útil Garantido ✔)`;
-    }
-
-    function extrairDados() {
-        const urlParams = new URLSearchParams(window.location.search);
-        valorOriginalTítulo = parseFloat(urlParams.get('valor')) || 13.00;
-        document.getElementById('labelProduto').innerText = urlParams.get('desc') ? decodeURIComponent(urlParams.get('desc')) : "Faturamento Geral Simplificado";
-        calcularVencimentosVIP();
     }
 
     function copiarLinha() {
@@ -246,12 +233,28 @@
         document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}:${String(agora.getSeconds()).padStart(2, '0')}`;
     }
 
+    // INICIALIZAÇÃO SEGURA E IMEDIATA
+    atualizarRelogio();
     setInterval(atualizarRelogio, 1000);
-    window.onload = async function() {
-        extrairDados();
-        await carregarBuscadorFeriados();
-        atualizarRelogio();
+    extrairDados();
+    
+    // API EM SEGUNDO PLANO APENAS PAR COMPLEMENTAR
+    async function carregarBuscadorFeriados() {
+        try {
+            const anoAtual = new Date().getFullYear();
+            const resposta = await fetch(`https://brasilapi.com.br{anoAtual}`);
+            if (resposta.ok) {
+                const dados = await resposta.json();
+                dados.forEach(f => {
+                    const p = f.date.split('-');
+                    const fmt = `${p}/${p}`;
+                    if (!feriadosMapeados.includes(fmt)) feriadosMapeados.push(fmt);
+                });
+                document.getElementById('statusBuscador').innerText = "● Buscador Online ✔";
+                calcularVencimentosVIP();
+            }
+        } catch (e) {
+            document.getElementById('statusBuscador').innerText = "● Proteção Local Ativa";
+        }
     }
-</script>
-</body>
-</html>
+    carregarBuscadorFeriados();
