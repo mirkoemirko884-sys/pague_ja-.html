@@ -1,1 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mairiporã Agro | Pix Bradesco BCB</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #facc15; /* AMARELO OURO PASTEL */
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: #facc15;
+            padding: 30px;
+            border: 2px solid #000000;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        h2 { margin-bottom: 5px; font-size: 24px; color: #cc092f; }
+        .subtitle { color: #000000; font-size: 14px; margin-bottom: 15px; font-weight: bold; opacity: 0.9; }
+        
+        .status-bar {
+            background: rgba(0, 0, 0, 0.08);
+            border: 1px solid #000000;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .badge-online {
+            background-color: #000000;
+            color: #5eff5e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 10px;
+        }
 
+        .faturamento-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 15px;
+        }
+        
+        .opcao-pagamento {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .opcao-titulo {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+        }
+
+        .qrcode-box {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid #000000;
+        }
+        .qrcode-box img { width: 150px; height: 150px; display: block; }
+        
+        .dados-texto {
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            word-break: break-all;
+            margin-bottom: 8px;
+            border: 1px dashed #000000;
+            text-align: left;
+            font-family: monospace;
+        }
+
+        .btn-copiar {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: #000000;
+            color: #5eff5e;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-avancar {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #15803d;
+            border: 2px solid #000000;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Mairiporã Agro</h2>
+    <div class="subtitle">Meio de Pagamento 1: Pix à Vista — JCS_software</div>
+    
+    <div class="status-bar">
+        <span class="badge-online">● Canal Pix Ativo</span>
+        <span id="relogioDigital">Carregando data...</span>
+    </div>
+
+    <div class="faturamento-box">
+        <p><strong>Item:</strong> <span id="labelProduto">Carregando combo...</span></p>
+        <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid #000000; padding-top: 8px; margin-bottom: 0;">
+            <strong>Total Líquido:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 0,00</span>
+        </p>
+    </div>
+
+    <div class="opcao-pagamento">
+        <div class="opcao-titulo">QR Code Pix Bradesco</div>
+        <div class="qrcode-box"><img src="imagemqrcode.png" onerror="this.src='https://placeholder.com'"></div>
+    </div>
+    
+    <div class="opcao-pagamento">
+        <div class="opcao-titulo">Código Pix Copia e Cola</div>
+        <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
+        <button class="btn-copiar" onclick="copiarTexto()">📋 Copiar Código Pix</button>
+    </div>
+
+    <button class="btn-avancar" onclick="avancarParaBoleto()">Ir para Opção: Boleto VIP ➔</button>
+</div>
+
+<script>
+    let valorGlobal = 13.00;
+    let descGlobal = "";
+
+    function extrairParametros() {
+        const urlParams = new URLSearchParams(window.location.search);
+        valorGlobal = parseFloat(urlParams.get('valor')) || 13.00;
+        descGlobal = urlParams.get('desc') ? decodeURIComponent(urlParams.get('desc')) : "1 Cartela (30un) - R\$: 13,00";
+        
+        document.getElementById('labelProduto').innerText = descGlobal;
+        document.getElementById('labelPreco').innerText = "R\$: " + valorGlobal.toFixed(2).replace('.', ',');
+    }
+
+    function avancarParaBoleto() {
+        window.location.href = "index2.html?valor=" + valorGlobal + "&desc=" + encodeURIComponent(descGlobal);
+    }
+
+    function copiarTexto() {
+        const texto = document.getElementById('pixCodigo').innerText;
+        navigator.clipboard.writeText(texto).then(() => {
+            alert("Código Pix Copiado com Sucesso!");
+        });
+    }
+
+    function atualizarRelogio() {
+        const agora = new Date();
+        const dia = String(agora.getDate()).padStart(2, '0');
+        const mes = String(agora.getMonth() + 1).padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+        const segundos = String(agora.getSeconds()).padStart(2, '0');
+        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
+    }
+    
+    setInterval(atualizarRelogio, 1000);
+    window.onload = function() {
+        extrairParametros();
+        atualizarRelogio();
+    }
+</script>
+</body>
+</html>
