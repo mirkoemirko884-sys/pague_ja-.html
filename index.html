@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Portal de Cadastro VIP</title>
+    <title>JCS_software | Cadastro de Lojas Oficiais</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #cc092f; /* IDENTIDADE VERMELHA RESTRITA */
+            background-color: #cc092f; /* VERMELHO RESTRITO */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -15,7 +15,6 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
         .container {
             background: #cc092f;
@@ -26,18 +25,9 @@
             max-width: 450px;
             text-align: center;
         }
-        h2 { color: #ffffff; margin-bottom: 5px; font-size: 26px; font-weight: bold; letter-spacing: 1px; }
+        h2 { font-size: 26px; margin-bottom: 5px; font-weight: bold; }
+        .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; }
         
-        .slogan-forte { 
-            color: #5eff5e; 
-            font-size: 13px; 
-            font-weight: bold; 
-            margin-bottom: 25px; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
-        }
-
         .status-bar {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -47,7 +37,26 @@
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+        }
+        
+        /* SELOS ESTILO SHOPEE / MERCADO LIVRE */
+        .badge-shopee {
+            background-color: #ff4500; /* Laranja Shopee */
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+        .badge-ml {
+            background-color: #fff159; /* Amarelo ML */
+            color: #333333;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
         }
 
         .login-box {
@@ -58,16 +67,6 @@
             text-align: left;
             margin-bottom: 15px;
         }
-
-        label {
-            font-size: 13px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
         .input-vip {
             width: 100%;
             padding: 10px;
@@ -80,18 +79,6 @@
             margin-bottom: 15px;
             font-weight: bold;
         }
-
-        .diretriz-adesao {
-            font-size: 11px;
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px dashed rgba(255,255,255,0.4);
-            line-height: 1.4;
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
         .btn-portal {
             display: block;
             width: 100%;
@@ -104,66 +91,41 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            box-sizing: border-box;
         }
-        .btn-portal:hover { background-color: #4cd14c; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>JCS_software</h2>
-    <div class="slogan-forte">"Não estamos vendendo nada,<br>estamos te dando crédito"</div>
+    <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     
     <div class="status-bar">
-        <span>● Homologação de Parceiros</span>
-        <span id="relogioDigital">Carregando data...</span>
+        <span class="badge-shopee">⚡ VENDEDOR INDICADO</span>
+        <span class="badge-ml">✔ LOJA OFICIAL</span>
     </div>
     
     <div class="login-box">
-        <label>Nome do Lojista / Proprietário:</label>
-        <input type="text" class="input-vip" id="txtLojista" value="RODRIGO" placeholder="Digite seu nome">
+        <label style="font-size: 13px; font-weight: bold;">NOME DO PROPRIETÁRIO (VALIDADOR):</label>
+        <input type="text" class="input-vip" id="txtLojista" value="RODRIGO">
         
-        <label>Identificação Comercial (Timbre):</label>
-        <input type="text" class="input-vip" id="txtEstabelecimento" value="MAIRIPORÃ RAÇÕES" placeholder="Ex: Mairiporã Rações">
+        <label style="font-size: 13px; font-weight: bold;">NOME DO ESTABELECIMENTO MERCANTIL:</label>
+        <input type="text" class="input-vip" id="txtEstabelecimento" value="MAIRIPORÃ RAÇÕES">
         
-        <div class="diretriz-adesao">
-            ⚠️ <strong>TERMO DE SOBERANIA FISCAL:</strong><br>
-            Ao ativar este terminal, o lojista parceiro declara-se ciente de que seu aparelho celular passa a operar como uma estação independente de recebíveis. 100% dos créditos gerados serão liquidados via Pix Bradesco BCB ou Duplicatas sem taxas de intermediação financeira.
+        <div style="font-size: 11px; opacity: 0.8; text-align: justify; line-height: 1.4;">
+            🔒 <strong>GARANTIA DE CONTA PROTEGIDA:</strong> Este terminal ativa a emissão de cupons de crédito e recebíveis direto em carteira local com taxa zero de intermediação.
         </div>
     </div>
 
-    <button class="btn-portal" onclick="homologarAcessoParceiro()">Ativar Maquininha Invisível ➔</button>
+    <button class="btn-portal" onclick="ativarLojaIndicada()">Ativar Loja Indicada ➔</button>
 </div>
 
 <script>
-    function homologarAcessoParceiro() {
+    function activarLojaIndicada() {
         const lojista = document.getElementById('txtLojista').value.trim();
         const loja = document.getElementById('txtEstabelecimento').value.trim();
-        
-        if(!lojista || !loja) {
-            alert("Por favor, preencha os campos de validação do parceiro!");
-            return;
-        }
-
-        // DIRECIONA O NOVO PARCEIRO PARA A MAQUININHA DE DIGITAÇÃO LIVRE (INDEX3)
-        // PASSANDO O NOME DELE E DA LOJA PELA URL DE FORMA AUTOMÁTICA
         window.location.href = `index3.html?parceiro=${encodeURIComponent(lojista)}&loja=${encodeURIComponent(loja)}`;
     }
-
-    function atualizarRelogio() {
-        const agora = new Date();
-        const dia = String(agora.getDate()).padStart(2, '0');
-        const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        const ano = agora.getFullYear();
-        const horas = String(agora.getHours()).padStart(2, '0');
-        const minutos = String(agora.getMinutes()).padStart(2, '0');
-        const segundos = String(agora.getSeconds()).padStart(2, '0');
-        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
-    }
-    
-    setInterval(atualizarRelogio, 1000);
-    atualizarRelogio();
 </script>
 </body>
 </html>
