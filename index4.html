@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mairiporã Agro | Pix Bradesco BCB</title>
+    <title>Mairiporã Agro | Teste 1</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #facc15; /* IDENTIDADE AMARELA DE TESTE ISOLADO */
-            color: #000000; /* Texto escuro para dar contraste no amarelo */
+            background-color: #cc092f; /* FINALIDADE DA PAGINA LHE DAR 0PÇÕES PARA VOCÊ EFETUAR OS SEU PAGAMENTO " confira adiantando a pagina " IDENTIDADE VERMELHA RESTRITA */  IDENTIDADE VERMELHA RESTRITA */
+
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,21 +18,21 @@
             padding: 20px;
         }
         .container {
-            background: #facc15;
+            background: #cc092f;
             padding: 30px;
-            border: 2px solid #000000;
+            border: 2px solid #ffffff;
             border-radius: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 440px;
             text-align: center;
             box-sizing: border-box;
         }
-        h2 { margin-bottom: 5px; font-size: 24px; color: #cc092f; }
-        .subtitle { color: #000000; font-size: 14px; margin-bottom: 15px; font-weight: bold; opacity: 0.9; }
+        h2 { margin-bottom: 5px; font-size: 24px; }
+        .subtitle { color: #f1f5f9; font-size: 14px; margin-bottom: 15px; opacity: 0.9; }
         
         .status-bar {
-            background: rgba(0, 0, 0, 0.1);
-            border: 1px solid #000000;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 6px;
             padding: 8px;
             font-size: 12px;
@@ -39,143 +40,45 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
         }
         .badge-online {
-            background-color: #000000;
-            color: #5eff5e;
+            background-color: #5eff5e;
+            color: #000000;
             padding: 2px 8px;
             border-radius: 4px;
             font-weight: bold;
             font-size: 10px;
             text-transform: uppercase;
         }
-
-        .faturamento-box {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid #000000;
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ffffff;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 15px;
-        }
-        
-        .opcao-pagamento {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid #000000;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 20px;
             text-align: center;
-        }
-        .opcao-titulo {
-            font-size: 13px;
+            font-size: 18px;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-            color: #000000;
-            border-bottom: 1px solid #000000;
-            padding-bottom: 4px;
-        }
-
-        .qrcode-box {
-            background: #ffffff;
-            padding: 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 5px;
-            border: 1px solid #000000;
-        }
-        .qrcode-box img { width: 150px; height: 150px; display: block; }
-        
-        .dados-texto {
-            background: #ffffff;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            word-break: break-all;
-            margin-bottom: 8px;
-            border: 1px dashed #000000;
-            text-align: left;
-            font-family: monospace;
-            color: #000000;
-        }
-
-        .btn-copiar {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            background-color: #000000;
-            color: #5eff5e;
-            border: none;
-            border-radius: 5px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-imprimir {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #ffffff;
-            color: #cc092f;
-            border: 2px solid #000000;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Mairiporã Agro</h2>
-    <div class="subtitle">Canal 1: Pix Validado BCB — JCS_software</div>
+    <h2>JCS_software</h2>
+    <div class="subtitle">Módulo de Teste Isolado — JCS_software</div>
     
     <div class="status-bar">
-        <span class="badge-online">● Pix À Vista Ativo</span>
+        <span class="badge-online">● Servidor Ativo</span>
         <span id="relogioDigital">Carregando data...</span>
     </div>
-
-    <div class="faturamento-box">
-        <p><strong>Item Emissão:</strong> <span>Faturamento Geral Simplificado</span></p>
-        <p><strong>Condição:</strong> <span>À Vista (Brecha VIP 5% de Desconto Comercial)</span></p>
-        <p><strong>Vencimento:</strong> <span>Até 5 dias úteis para quitação</span></p>
-        <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid #000000; padding-top: 8px; margin-bottom: 0;">
-            <strong>Total com Desconto:</strong> <span style="font-weight: bold; text-decoration: underline;">R\$: 12,35</span>
-        </p>
-    </div>
-
-    <!-- RENDERIZAÇÃO EXCLUSIVA DO PIX BRADESCO -->
-    <div class="opcao-pagamento">
-        <div class="opcao-titulo">1. QR Code Pix Dinâmico Bradesco</div>
-        <div class="qrcode-box"><img src="imagemqrcode.png" onerror="this.src='https://placeholder.com'"></div>
-    </div>
     
-    <div class="opcao-pagamento">
-        <div class="opcao-titulo">2. Chave Aleatória Copia e Cola</div>
-        <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
-        <button class="btn-copiar" onclick="copiarTexto('pixCodigo', 'btnPix')" id="btnPix">📋 Copiar Código Pix</button>
+    <div class="info-box">
+        Pagina para com QRCODE BRADESCO IMAGEM E COPIE E COLE!<br/>
+        <span style="font-size: 14px; font-weight: normal; opacity: 0.8;">Página Base de Verificação</span>
     </div>
-
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Comprovante Pix</button>
 </div>
 
 <script>
-    function copiarTexto(idElemento, idBotao) {
-        const texto = document.getElementById(idElemento).innerText;
-        navigator.clipboard.writeText(texto).then(() => {
-            const btn = document.getElementById(idBotao);
-            btn.innerText = "✅ Copiado!";
-            setTimeout(() => { btn.innerText = "📋 Copiar Código Pix"; }, 2000);
-        });
-    }
-
     function atualizarRelogio() {
         const agora = new Date();
         const dia = String(agora.getDate()).padStart(2, '0');
@@ -186,9 +89,8 @@
         const segundos = String(agora.getSeconds()).padStart(2, '0');
         document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
     }
-    
-    atualizarRelogio();
     setInterval(atualizarRelogio, 1000);
+    atualizarRelogio();
 </script>
 </body>
 </html>
