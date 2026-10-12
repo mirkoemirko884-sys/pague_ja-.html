@@ -3,94 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mairiporã Agro | Teste 1</title>
+    <title>JCS_software | Vale-Desconto Parceiro VIP</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #cc092f; /* FINALIDADE DA PAGINA LHE DAR 0PÇÕES PARA VOCÊ EFETUAR OS SEU PAGAMENTO " confira adiantando a pagina " IDENTIDADE VERMELHA RESTRITA */  IDENTIDADE VERMELHA RESTRITA */
-
+            font-family: "Courier New", Courier, monospace; /* ESTILO TIMBRADO CLÁSSICO */
+            background-color: #0284c7; /* AZUL CELESTE DE ALTA CLASSE */
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
         }
         .container {
-            background: #cc092f;
-            padding: 30px;
-            border: 2px solid #ffffff;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 440px;
-            text-align: center;
-            box-sizing: border-box;
-        }
-        h2 { margin-bottom: 5px; font-size: 24px; }
-        .subtitle { color: #f1f5f9; font-size: 14px; margin-bottom: 15px; opacity: 0.9; }
-        
-        .status-bar {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 6px;
-            padding: 8px;
-            font-size: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .badge-online {
-            background-color: #5eff5e;
-            color: #000000;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
-        .info-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #ffffff;
-            border-radius: 8px;
+            background: #0284c7;
             padding: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 550px; /* FORMATO MEIA FOLHA A5 */
+            box-sizing: border-box;
             text-align: center;
-            font-size: 18px;
+        }
+        
+        /* CARD IMPRESSO EM MEIA FOLHA */
+        .cedula-vale {
+            background: #ffffff;
+            color: #000000;
+            border: 3px double #000000;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+        }
+        
+        .carimbo-vip {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border: 2px solid #cc092f;
+            color: #cc092f;
+            font-size: 12px;
             font-weight: bold;
+            padding: 4px 8px;
+            text-transform: uppercase;
+            transform: rotate(5deg);
+        }
+
+        .titulo-vale {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 6px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .valor-destaque {
+            font-size: 32px;
+            font-weight: bold;
+            color: #15803d; /* VERDE DINHEIRO */
+            text-align: center;
+            margin: 15px 0;
+            border: 1px dashed #000000;
+            padding: 10px;
+            background: #f8fafc;
+        }
+
+        .regra-fidelidade {
+            font-size: 12px;
+            background: #f1f5f9;
+            padding: 10px;
+            border-left: 4px solid #0284c7;
+            margin-top: 15px;
+            line-height: 1.4;
+            font-weight: bold;
+        }
+
+        .btn-imprimir {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #0284c7;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        @media print {
+            body { background: #ffffff; color: #000000; padding: 0; }
+            .container { border: none; max-width: 100%; padding: 0; }
+            .btn-imprimir { display: none !important; }
+            .cedula-vale { border: 3px double #000000; }
+            .regra-fidelidade { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>JCS_software</h2>
-    <div class="subtitle">Módulo de Teste Isolado — JCS_software</div>
-    
-    <div class="status-bar">
-        <span class="badge-online">● Servidor Ativo</span>
-        <span id="relogioDigital">Carregando data...</span>
+
+    <!-- CÉDULA EM MEIA FOLHA DO VALE-DESCONTO -->
+    <div class="cedula-vale">
+        <div class="carimbo-vip">BÔNUS RETIDO</div>
+        <div class="titulo-vale">🎟️ VALE-DESCONTO PARCEIRO VIP 🎟️</div>
+        
+        <div style="font-size: 13px; margin: 4px 0;"><strong>EMISSOR DO CRÉDITO:</strong> MAIRIPORÃ RAÇÕES</div>
+        <div style="font-size: 13px; margin: 4px 0;"><strong>BENEFICIÁRIO:</strong> CLIENTE DE TOTAL CONFIANÇA</div>
+        <div style="font-size: 13px; margin: 4px 0;"><strong>PROVA FIEL DE ORIGEM:</strong> FATURAMENTO ANTECIPADO (5 DIAS)</div>
+        
+        <!-- VALOR DO BRINDE EXTRAÍDO DOS 5% ECONOMIZADOS -->
+        <div class="valor-destaque">
+            CRÉDITO DE R\$: 1,65
+        </div>
+
+        <!-- A REGRA DE OURO DA BLINDAGEM DE CAIXA QUE VOCÊ DEFINIU -->
+        <div class="regra-fidelidade">
+            ⚠️ REGRA DE FIDELIDADE ABSOLUTA:<br>
+            Este crédito é um brinde comercial regional. Ele serve única e exclusivamente para ser descontado na próxima compra realizada dentro deste mesmo estabelecimento emissor (MAIRIPORÃ RAÇÕES). Proibida a troca por dinheiro vivo ou transferência para terceiros.
+        </div>
+        
+        <div style="font-size: 10px; text-align: center; margin-top: 15px; opacity: 0.7; border-top: 1px dashed #000000; padding-top: 5px;">
+            TECNOLOGIA EXCLUSIVA JCS_SOFTWARE · PRESTIGIE O COMÉRCIO LOCAL
+        </div>
     </div>
-    
-    <div class="info-box">
-        Pagina para com BOLETO BANCARIO DO BRADESCO IMAGEM PARA IMPRIMIR PDF E CÓDIGO DE BARRAS E COM AS OPÇÕES PARA PODER FATURAR EM 07, 14 E SE PAGAR EM 5 DIAS COMO " VIP " GOZARÁ DE UM DESCONTOS DE % !<br/>
-        <span style="font-size: 14px; font-weight: normal; opacity: 0.8;">Página Base de Verificação</span>
-    </div>
+
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Vale-Desconto (Meia Folha)</button>
 </div>
 
 <script>
-    function atualizarRelogio() {
-        const agora = new Date();
-        const dia = String(agora.getDate()).padStart(2, '0');
-        const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        const ano = agora.getFullYear();
-        const horas = String(agora.getHours()).padStart(2, '0');
-        const minutos = String(agora.getMinutes()).padStart(2, '0');
-        const segundos = String(agora.getSeconds()).padStart(2, '0');
-        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
-    }
-    setInterval(atualizarRelogio, 1000);
-    atualizarRelogio();
+    // Captura os dados reais do faturamento anterior para gerar o brinde exato na tela
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const valorOriginal = parseFloat(urlParams.get('valor')) || 33.00;
+        const nomeLoja = urlParams.get('loja') || "MAIRIPORÃ RAÇÕES";
+        
+        // Calcula os 5% do brinde de fidelidade em cima do combo do faturamento
+        const brindeCalculado = (valorOriginal * 0.05).toFixed(2).replace('.', ',');
+        
+        document.querySelector('.valor-destaque').innerText = "CRÉDITO DE R\$: " + brindeCalculado;
+    };
 </script>
 </body>
 </html>
