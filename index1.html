@@ -139,9 +139,9 @@
     </div>
 
     <div class="faturamento-box">
-        <p><strong>Item:</strong> <span id="labelProduto">Carregando combo...</span></p>
+        <p><strong>Item:</strong> <span id="labelProduto">1 Cartela (30un) - R\$: 13,00</span></p>
         <p style="font-size: 18px; margin-top: 12px; border-top: 1px solid #000000; padding-top: 8px; margin-bottom: 0;">
-            <strong>Total Líquido:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 0,00</span>
+            <strong>Total Líquido:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 13,00</span>
         </p>
     </div>
 
@@ -161,13 +161,16 @@
 
 <script>
     let valorGlobal = 13.00;
-    let descGlobal = "";
+    let descGlobal = "1 Cartela (30un) - R\$: 13,00";
 
     function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
-        valorGlobal = parseFloat(urlParams.get('valor')) || 13.00;
-        descGlobal = urlParams.get('desc') ? decodeURIComponent(urlParams.get('desc')) : "1 Cartela (30un) - R\$: 13,00";
-        
+        if (urlParams.has('valor')) {
+            valorGlobal = parseFloat(urlParams.get('valor'));
+        }
+        if (urlParams.has('desc')) {
+            descGlobal = decodeURIComponent(urlParams.get('desc'));
+        }
         document.getElementById('labelProduto').innerText = descGlobal;
         document.getElementById('labelPreco').innerText = "R\$: " + valorGlobal.toFixed(2).replace('.', ',');
     }
@@ -177,8 +180,7 @@
     }
 
     function copiarTexto() {
-        const texto = document.getElementById('pixCodigo').innerText;
-        navigator.clipboard.writeText(texto).then(() => {
+        navigator.clipboard.writeText(document.getElementById('pixCodigo').innerText).then(() => {
             alert("Código Pix Copiado com Sucesso!");
         });
     }
@@ -194,11 +196,10 @@
         document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
     }
     
+    // EXECUÇÃO IMEDIATA SEM BLOQUEIOS
+    extrairParametros();
+    atualizarRelogio();
     setInterval(atualizarRelogio, 1000);
-    window.onload = function() {
-        extrairParametros();
-        atualizarRelogio();
-    }
 </script>
 </body>
 </html>
