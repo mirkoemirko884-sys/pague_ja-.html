@@ -1,9 +1,11 @@
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Dashboard de Soberania Comercial</title>
+    <title>JCS_software | Dashboard de Soberania e Resoluções Bancárias</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -15,6 +17,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 15px;
+            box-sizing: border-box;
         }
         .container {
             background: #000000;
@@ -22,7 +25,7 @@
             border: 3px double #ffffff; /* BORDAS DUPLAS ELEGANTES */
             border-radius: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             text-align: center;
             box-sizing: border-box;
         }
@@ -31,15 +34,15 @@
             padding-bottom: 12px;
             margin-bottom: 20px;
         }
-        .header-timbre h2 { margin: 0; font-size: 26px; color: #5eff5e; letter-spacing: 1px; text-transform: uppercase; }
-        .header-timbre span { font-size: 11px; letter-spacing: 2px; opacity: 0.7; }
+        .header-timbre h2 { margin: 0; font-size: 24px; color: #5eff5e; letter-spacing: 1px; text-transform: uppercase; }
+        .header-timbre span { font-size: 11px; letter-spacing: 1px; opacity: 0.7; font-weight: bold; }
         
         .status-bar {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
             padding: 8px;
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
@@ -52,10 +55,8 @@
             border-radius: 4px;
             font-weight: bold;
             font-size: 10px;
-            animation: piscar 1.5s infinite;
         }
 
-        /* CARD PRINCIPAL ONDE O DINHEIRO CANTA */
         .card-caixa {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid #5eff5e;
@@ -78,9 +79,9 @@
             border-radius: 8px;
             padding: 15px;
             text-align: left;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .linha-auditoria {
             display: flex;
@@ -88,7 +89,40 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding: 6px 0;
         }
-        .linha-auditoria:last-child { border: none; }
+
+        .tarja-antifraude {
+            background-color: #cc092f; /* VERMELHO ALERTA */
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.4;
+            border: 1px solid #ffffff;
+        }
+
+        .bloco-leis {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+            font-size: 11px;
+            font-family: "Courier New", Courier, monospace;
+            max-height: 150px;
+            overflow-y: scroll;
+            margin-bottom: 15px;
+        }
+        .lei-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 6px;
+        }
+        .lei-item:last-child { border: none; margin-bottom: 0; }
+        .lei-titulo { font-weight: bold; color: #cc092f; text-transform: uppercase; font-size: 11px; }
 
         .btn-alternar {
             width: 100%;
@@ -100,61 +134,82 @@
             font-size: 13px;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 10px;
             text-transform: uppercase;
-        }
-        
-        @keyframes piscar {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-header" id="blocoTimbre">
+    <div class="header-header">
         <div class="header-timbre">
             <h2 id="txtNomeEmpresa">RODRIGO_CRED VIP</h2>
-            <span>Soberania de Caixa Independente</span>
+            <span>"NÃO ESTAMOS VENDENDO NADA, ESTAMOS TE DANDO CRÉDITO!"</span>
         </div>
     </div>
     
     <div class="status-bar">
-        <span class="badge-alerta">● CAIXA SEGURO</span>
+        <span class="badge-alerta">● COMPRA PROTEGIDA (AUDITADO)</span>
         <span id="relogioDigital">Carregando data...</span>
     </div>
 
-    <!-- TELA DA MAQUININHA PROPRIA CANTANDO VENDA -->
     <div class="card-caixa">
-        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Venda Detectada no Celular!</div>
-        <div class="valor-neon">+ R\$: 33,00</div>
-        <div style="font-size: 12px; color: #5eff5e; font-weight: bold;">✔ DINHEIRO RETIDO DIRETO NO BRADESCO</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">LIQUIDEZ EM TRÂNSITO DETECTADA:</div>
+        <div class="valor-neon" id="lblValorNeon">R\$: 0,00</div>
+        <div style="font-size: 12px; color: #5eff5e; font-weight: bold; text-transform: uppercase;" id="lblDescricaoNeon">Aguardando dados...</div>
+    </div>
+
+    <div class="tarja-antifraude">
+        🛡️ CERTIFICAÇÃO ANTIFRAUDE & AUDITORIA DE COMPLIANCE:<br>
+        Este software opera estritamente como um utilitário tecnológico local de automação comercial e faturamento mercantil. O JCS_software NÃO realiza captação de recursos de terceiros, NÃO opera investimentos e NÃO retém saldos financeiros. Todo e qualquer capital transacionado pertence única e exclusivamente ao lojista adquirente, liquidado diretamente via canais bancários oficiais do Banco Central (BCB), livre de pirâmides ou modelos de corretagem financeira.
     </div>
 
     <div class="auditoria-box">
-        <div style="font-weight: bold; border-bottom: 1px solid #ffffff; padding-bottom: 4px; margin-bottom: 8px; color: #5eff5e; text-transform: uppercase; font-size: 12px;">📊 Demonstrativo de Juros Salvos (Problema Mundial)</div>
-        <div class="linha-auditoria"><span>Taxa de Intermediação Retida:</span> <strong>R\$: 0,00 (0%)</strong></div>
-        <div class="linha-auditoria"><span>Juros pagos para Laranjinhas:</span> <span style="color: #5eff5e; font-weight: bold;">NENHUM (Livre)</span></div>
-        <div class="linha-auditoria"><span>Duplicatas Disponíveis:</span> <span>7 a 28 Dias (Contra-prova)</span></div>
-        <div class="linha-auditoria"><span>Poder de Desconto Bancário:</span> <span>100% Autônomo</span></div>
+        <div class="linha-auditoria"><span>Taxa Adquirente Retida:</span> <strong style="color: #5eff5e;">R\$: 0,00 (ZERO %)</strong></div>
+        <div class="linha-auditoria"><span>Soberania de Caixa Regional:</span> <span>100% Livre de Intermediários</span></div>
     </div>
 
-    <!-- INOVAÇÃO: CLIQUE PARA MUDAR O TIMBRE NA FRENTE DO PAI DO RODRIGO -->
-    <button class="btn-alternar" onclick="alternarModeloDeNegocio()">🔄 Dar o Estalo (Mudar p/ Mairiporã Rações)</button>
+    <div style="text-align: left; font-size: 12px; font-weight: bold; margin-bottom: 6px; color: #5eff5e;">⚖️ PARECER, RESOLUÇÕES E LEIS EXECUTIVAS DA CARTEIRA:</div>
+    <div class="bloco-leis">
+        <div class="lei-item">
+            <div class="lei-titulo">1. Lei Federal Nº 13.775/2018 (Duplicata Escritural)</div>
+            Regulamenta a emissão e a validade jurídica da Duplicata Eletrônica. O aceite digital via celular ou e-mail confere força de Título Executivo Extrajudicial, permitindo a cobrança e o desconto bancário imediato sem a necessidade de papel físico.
+        </div>
+        <div class="lei-item">
+            <div class="lei-titulo">2. Resolução BCB Nº 1/2020 (Banco Central do Brasil)</div>
+            Institui as diretrizes do arranjo Pix. Garante a liquidação direta entre contas, vedando qualquer tipo de barreira, exclusividade ou cobrança de taxas ocultas abusivas sobre o faturamento do lojista adquirente do sistema livre.
+        </div>
+    </div>
+
+    <button class="btn-alternar" onclick="alternarModeloDeNegocio()">🔄 Mudar Timbre (Rodrigo ➔ Mairiporã Rações)</button>
 </div>
 
 <script>
     let modoAtual = "RODRIGO";
-    
+    let valorOriginal = 33.00;
+    let descOriginal = "3 Cartelas (90un)";
+    let lojaOriginal = "MAIRIPORÃ RAÇÕES";
+    let validadorOriginal = "RODRIGO";
+
+    function extrairDadosURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('valor')) valorOriginal = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descOriginal = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaOriginal = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorOriginal = decodeURIComponent(urlParams.get('parceiro'));
+
+        document.getElementById('txtNomeEmpresa').innerText = validadorOriginal + "_CRED VIP";
+        document.getElementById('lblValorNeon').innerText = "R\$: " + valorOriginal.toFixed(2).replace('.', ',');
+        document.getElementById('lblDescricaoNeon').innerText = "✔ " + descOriginal;
+    }
+
     function alternarModeloDeNegocio() {
         const titulo = document.getElementById('txtNomeEmpresa');
         if (modoAtual === "RODRIGO") {
-            titulo.innerText = "MAIRIPORÃ RAÇÕES";
-            modoAtual = "RACOES";
+            titulo.innerText = lojaOriginal;
+            modoAtual = "LOJA";
         } else {
-            titulo.innerText = "RODRIGO_CRED VIP";
+            titulo.innerText = validadorOriginal + "_CRED VIP";
             modoAtual = "RODRIGO";
         }
     }
@@ -164,13 +219,14 @@
         const dia = String(agora.getDate()).padStart(2, '0');
         const mes = String(agora.getMonth() + 1).padStart(2, '0');
         const ano = agora.getFullYear();
-        const horas = String(agora.getHours()).padStart(2, '0');
-        const minutos = String(agora.getMinutes()).padStart(2, '0');
-        const segundos = String(agora.getSeconds()).padStart(2, '0');
-        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
+        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}:${String(agora.getSeconds()).padStart(2, '0')}`;
     }
+    
     setInterval(atualizarRelogio, 1000);
-    atualizarRelogio();
+    window.onload = function() {
+        extrairDadosURL();
+        atualizarRelogio();
+    }
 </script>
 </body>
 </html>
