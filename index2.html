@@ -6,7 +6,7 @@
     <title>JCS_software | Cupom de Liberação e Rastreio</title>
     <style>
         body {
-            font-family: "Courier New", Courier, monospace;
+            font-family: "Courier New", Courier, monospace; /* ESTILO TIMBRADO CLASSICO */
             background-color: #15803d; /* VERDE DINHEIRO */
             color: #ffffff;
             display: flex;
@@ -15,6 +15,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 10px;
+            box-sizing: border-box;
         }
         .container {
             background: #15803d;
@@ -23,7 +24,22 @@
             padding: 20px;
             width: 100%;
             max-width: 550px;
+            box-sizing: border-box;
         }
+        
+        .seletor-prazo {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #ffffff;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .seletor-prazo option { background: #15803d; }
+
         .via-cedula {
             background: #ffffff;
             color: #000000;
@@ -31,6 +47,17 @@
             padding: 15px;
             margin-bottom: 15px;
             text-align: left;
+            position: relative;
+        }
+        .via-tag {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid #000000;
+            padding: 2px 5px;
         }
         .titulo-timbre {
             font-size: 14px;
@@ -40,29 +67,158 @@
             padding-bottom: 6px;
             margin-bottom: 12px;
         }
+        .linha-dados {
+            font-size: 12px;
+            margin: 4px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .tarja-autenticacao {
+            margin-top: 12px;
+            border-top: 2px solid #000000;
+            padding-top: 6px;
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            background: #e2e8f0;
+        }
+        .bloco-botoes {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-acao {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .btn-print { background-color: #ffffff; color: #15803d; }
+        .btn-zap { background-color: #25d366; color: #ffffff; }
+
+        @media print {
+            body { background: #ffffff; color: #000000; padding: 0; }
+            .container { border: none; max-width: 100%; padding: 0; }
+            .bloco-botoes, .seletor-prazo, .linha-corte { display: none !important; }
+            .via-cedula { border: 3px double #000000; page-break-inside: avoid; }
+            .tarja-autenticacao { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- VIA ÚNICA MEIA FOLHA FORMATO PROVA FIEL SHOPEE -->
+    <!-- SELETOR DE PRAZOS COM CÁLCULO DE ANTECIÇÃO BANCÁRIA EXTRAJUDICIAL -->
+    <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
+        <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira - Taxa Zero)</option>
+        <option value="1">Antecipação Bancária: Receber Amanhã (Desconto Proporcional 1%)</option>
+    </select>
+
+    <!-- VIA 1: LOJA -->
     <div class="via-cedula">
+        <div class="via-tag">Via Loja</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div style="font-size: 13px; margin: 5px 0;"><strong>VALIDADOR RESPONSÁVEL:</strong> RODRIGO_CRED VIP</div>
-        <div style="font-size: 13px; margin: 5px 0;"><strong>CANAL EMISSOR:</strong> MAIRIPORÃ RAÇÕES</div>
-        <div style="font-size: 13px; margin: 5px 0;"><strong>CÓDIGO DE RASTREIO VIP:</strong> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
-        <div style="font-size: 13px; margin: 5px 0;"><strong>CONDIÇÃO FISCAL:</strong> <span>Faturamento em Carteira Comercial (Até 28 Dias)</span></div>
+        <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador">RODRIGO_CRED VIP</strong></div>
+        <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
+        <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
+        <div class="linha-dados"><span>CONDIÇÃO LOGÍSTICA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR DE DESCONTO DE FÁBRICA: R\$: 33,00
+            LIQUIDEZ DISPONÍVEL: <span id="labelPreco">R\$: 0,00</span>
         </div>
         
-        <div style="margin-top: 12px; border-top: 2px solid #000000; padding-top: 6px; font-size: 9px; font-weight: bold; text-align: center; background: #e2e8f0;">
-            【 AUTENTICAÇÃO MECÂNICA: PROVA DE COMPRA FIEL - RETIRADA ADERIDA 】
+        <div class="tarja-autenticacao" id="autenticacaoVia1">
+            【 DUPLICATA EM CARTEIRA REGIONAL - REGISTRADA COMO PROVA FIEL 】
         </div>
     </div>
-    
-    <button style="width: 100%; padding: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; background: #fff; color: #15803d; border: none; border-radius: 4px;" onclick="window.print()">🖨️ Imprimir Cupom de Rastreio (Meia Folha)</button>
+
+    <div style="border-top: 2px dashed #ffffff; margin: 15px 0; text-align: center; font-size: 11px; color: white;" class="linha-corte">
+        ✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -
+    </div>
+
+    <!-- VIA 2: CLIENTE -->
+    <div class="via-cedula">
+        <div class="via-tag">Via Cliente</div>
+        <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
+        <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador2">RODRIGO_CRED VIP</strong></div>
+        <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre2">MAIRIPORÃ RAÇÕES</strong></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
+        <div class="linha-dados"><span>CONDIÇÃO LOGÍSTICA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
+        
+        <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
+            LIQUIDEZ DISPONÍVEL: <span id="labelPreco2">R\$: 0,00</span>
+        </div>
+        
+        <div class="tarja-autenticacao" id="autenticacaoVia2">
+            【 DUPLICATA EM CARTEIRA REGIONAL - REGISTRADA COMO PROVA FIEL 】
+        </div>
+    </div>
+
+    <div class="bloco-botoes">
+        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir Vias</button>
+        <button class="btn-acao btn-zap" onclick="dispararWhatsAppLojista()">💬 Notificar Cliente</button>
+    </div>
 </div>
-</body>
-</html>
+
+<script>
+    let valorOriginalTítulo = 33.00;
+    let descOriginal = "Carregando...";
+    let lojaOriginal = "MAIRIPORÃ RAÇÕES";
+    let validadorOriginal = "RODRIGO";
+
+    function extrairParametros() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('valor')) valorOriginalTítulo = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descOriginal = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaOriginal = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorOriginal = decodeURIComponent(urlParams.get('parceiro'));
+
+        document.getElementById('lblValidador').innerText = validadorOriginal + "_CRED VIP";
+        document.getElementById('lblValidador2').innerText = validadorOriginal + "_CRED VIP";
+        document.getElementById('lblLojaTimbre').innerText = lojaOriginal;
+        document.getElementById('lblLojaTimbre2').innerText = lojaOriginal;
+        document.getElementById('labelProduto').innerText = descOriginal;
+        document.getElementById('labelProduto2').innerText = descOriginal;
+        
+        calcularPrecosBancariosVIP();
+    }
+
+    // A MATEMÁTICA BRUTAL DE MERCADO QUE VOCÊ DESENHOU CONTRA AS LARANJINHAS
+    function calcularPrecosBancariosVIP() {
+        const opcao = document.getElementById('comboPrazo').value;
+        let valorFinal = valorOriginalTítulo;
+        let textoCondicao = "";
+        let textoTarja = "";
+
+        if (opcao === "28") {
+            textoCondicao = "Retido em Carteira VIP (28 Dias cheios)";
+            valorFinal = valorOriginalTítulo;
+            textoTarja = "【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】";
+        } else {
+            // Desconto de antecipação bancária proporcional de 1% (R$: 1,00 a cada R$: 100,00)
+            let descontoAntecipado = valorOriginalTítulo * 0.01;
+            valorFinal = valorOriginalTítulo - descontoAntecipado;
+            textoCondicao = "Antecipação de Título via Débito Automático (Liquidação 24h)";
+            textoTarja = "【 AUTENTICAÇÃO MECÂNICA: ANTECIPADO VIA CONTA BANCO CENTRAL - TAXA SIMBÓLICA ✔ 】";
+        }
+
+        const valorFormatado = "R\$: " + valorFinal.toFixed(2).replace('.', ',');
+        document.getElementById('labelCondicao').innerText = textoCondicao;
+        document.getElementById('labelCondicao2').innerText = textoCondicao;
+        document.getElementById('labelPreco').innerText = valorFormatado;
+        document.getElementById('labelPreco2').innerText = valorFormatado;
+        document.getElementById('autenticacaoVia1').innerText = textoTarja;
+        document.getElementById('autenticacaoVia2').innerText = textoTarja;
+    }
+
+    function dispararWhatsAppLojista() {
+        const opcao = document.getElementById('comboPrazo').value;
+        let msg = "";
+        if (opcao === "28") {
