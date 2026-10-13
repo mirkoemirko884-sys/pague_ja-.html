@@ -6,7 +6,7 @@
     <title>JCS_software | Cupom de Liberação e Rastreio</title>
     <style>
         body {
-            font-family: "Courier New", Courier, monospace; /* ESTILO TIMBRADO CLASSICO */
+            font-family: "Courier New", Courier, monospace;
             background-color: #15803d; /* VERDE DINHEIRO */
             color: #ffffff;
             display: flex;
@@ -38,7 +38,19 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-        .seletor-prazo option { background: #15803d; }
+
+        .alerta-peixao {
+            background-color: #fff159;
+            color: #000000;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid #000000;
+        }
 
         .via-cedula {
             background: #ffffff;
@@ -84,28 +96,35 @@
         }
         .bloco-botoes {
             display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-top: 15px;
+        }
+        .linha-botoes-duplos {
+            display: flex;
+            gap: 10px;
         }
         .btn-acao {
             flex: 1;
             padding: 12px;
             border: none;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
             text-transform: uppercase;
+            box-sizing: border-box;
         }
         .btn-print { background-color: #ffffff; color: #15803d; }
         .btn-zap { background-color: #25d366; color: #ffffff; }
+        .btn-email { background-color: #3b82f6; color: #ffffff; }
 
         @media print {
             body { background: #ffffff; color: #000000; padding: 0; }
             .container { border: none; max-width: 100%; padding: 0; }
-            .bloco-botoes, .seletor-prazo, .linha-corte { display: none !important; }
+            .bloco-botoes, .seletor-prazo, .linha-corte, .alerta-peixao { display: none !important; }
             .via-cedula { border: 3px double #000000; page-break-inside: avoid; }
             .tarja-autenticacao { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
         }
@@ -114,7 +133,10 @@
 <body>
 
 <div class="container">
-    <!-- SELETOR DE PRAZOS COM CÁLCULO DE ANTECIÇÃO BANCÁRIA EXTRAJUDICIAL -->
+    <div class="alerta-peixao" id="lblAlertaPeixao">
+        🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO! CLIENTE DE CONFIANÇA NA CARTEIRA!
+    </div>
+
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira - Taxa Zero)</option>
         <option value="1">Antecipação Bancária: Receber Amanhã (Desconto Proporcional 1%)</option>
@@ -135,7 +157,7 @@
         </div>
         
         <div class="tarja-autenticacao" id="autenticacaoVia1">
-            【 DUPLICATA EM CARTEIRA REGIONAL - REGISTRADA COMO PROVA FIEL 】
+            【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】
         </div>
     </div>
 
@@ -156,14 +178,21 @@
             LIQUIDEZ DISPONÍVEL: <span id="labelPreco2">R\$: 0,00</span>
         </div>
         
+        <div style="font-size: 11px; color: #15803d; font-weight: bold; text-align: center; margin-top: 8px; border: 1px dashed #15803d; padding: 4px; background: #f0fdf4;" id="lblTagBrinde">
+            🎁 BRINDE PARCEIRO: 5% RETIDO PARA SUA PRÓXIMA COMPRA!
+        </div>
+        
         <div class="tarja-autenticacao" id="autenticacaoVia2">
-            【 DUPLICATA EM CARTEIRA REGIONAL - REGISTRADA COMO PROVA FIEL 】
+            【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】
         </div>
     </div>
 
     <div class="bloco-botoes">
-        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir Vias</button>
-        <button class="btn-acao btn-zap" onclick="dispararWhatsAppLojista()">💬 Notificar Cliente</button>
+        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir Cédulas Fiscais</button>
+        <div class="linha-botoes-duplos">
+            <button class="btn-acao btn-zap" onclick="dispararCanaisDeValidacao('ZAP')">💬 Enviar via WhatsApp</button>
+            <button class="btn-acao btn-email" onclick="dispararCanaisDeValidacao('EMAIL')">✉️ Enviar via E-mail</button>
+        </div>
     </div>
 </div>
 
@@ -187,10 +216,11 @@
         document.getElementById('labelProduto').innerText = descOriginal;
         document.getElementById('labelProduto2').innerText = descOriginal;
         
+        document.getElementById('lblAlertaPeixao').innerText = `🎣 PARABÉNS ${validadorOriginal}: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!`;
+        
         calcularPrecosBancariosVIP();
     }
 
-    // A MATEMÁTICA BRUTAL DE MERCADO QUE VOCÊ DESENHOU CONTRA AS LARANJINHAS
     function calcularPrecosBancariosVIP() {
         const opcao = document.getElementById('comboPrazo').value;
         let valorFinal = valorOriginalTítulo;
@@ -198,27 +228,9 @@
         let textoTarja = "";
 
         if (opcao === "28") {
-            textoCondicao = "Retido em Carteira VIP (28 Dias cheios)";
+            textoCondicao = "Retido em Carteira VIP (28 Days cheios)";
             valorFinal = valorOriginalTítulo;
             textoTarja = "【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】";
+            document.getElementById('lblTagBrinde').style.display = "block";
         } else {
-            // Desconto de antecipação bancária proporcional de 1% (R$: 1,00 a cada R$: 100,00)
             let descontoAntecipado = valorOriginalTítulo * 0.01;
-            valorFinal = valorOriginalTítulo - descontoAntecipado;
-            textoCondicao = "Antecipação de Título via Débito Automático (Liquidação 24h)";
-            textoTarja = "【 AUTENTICAÇÃO MECÂNICA: ANTECIPADO VIA CONTA BANCO CENTRAL - TAXA SIMBÓLICA ✔ 】";
-        }
-
-        const valorFormatado = "R\$: " + valorFinal.toFixed(2).replace('.', ',');
-        document.getElementById('labelCondicao').innerText = textoCondicao;
-        document.getElementById('labelCondicao2').innerText = textoCondicao;
-        document.getElementById('labelPreco').innerText = valorFormatado;
-        document.getElementById('labelPreco2').innerText = valorFormatado;
-        document.getElementById('autenticacaoVia1').innerText = textoTarja;
-        document.getElementById('autenticacaoVia2').innerText = textoTarja;
-    }
-
-    function dispararWhatsAppLojista() {
-        const opcao = document.getElementById('comboPrazo').value;
-        let msg = "";
-        if (opcao === "28") {
