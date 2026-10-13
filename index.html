@@ -15,6 +15,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             background: #cc092f;
@@ -25,8 +26,8 @@
             max-width: 450px;
             text-align: center;
         }
-        h2 { font-size: 26px; margin-bottom: 5px; font-weight: bold; }
-        .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; }
+        h2 { font-size: 26px; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; }
+        .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .status-bar {
             background: rgba(0, 0, 0, 0.2);
@@ -37,9 +38,9 @@
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         
-        /* SELOS ESTILO SHOPEE / MERCADO LIVRE */
         .badge-shopee {
             background-color: #ff4500; /* Laranja Shopee */
             color: white;
@@ -67,6 +68,14 @@
             text-align: left;
             margin-bottom: 15px;
         }
+        label {
+            font-size: 11px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .input-vip {
             width: 100%;
             padding: 10px;
@@ -91,7 +100,9 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
+            box-sizing: border-box;
         }
+        .btn-portal:hover { background-color: #4cd14c; }
     </style>
 </head>
 <body>
@@ -106,10 +117,10 @@
     </div>
     
     <div class="login-box">
-        <label style="font-size: 13px; font-weight: bold;">NOME DO PROPRIETÁRIO (VALIDADOR):</label>
+        <label>NOME DO PROPRIETÁRIO (VALIDADOR):</label>
         <input type="text" class="input-vip" id="txtLojista" value="RODRIGO">
         
-        <label style="font-size: 13px; font-weight: bold;">NOME DO ESTABELECIMENTO MERCANTIL:</label>
+        <label>NOME DO ESTABELECIMENTO MERCANTIL:</label>
         <input type="text" class="input-vip" id="txtEstabelecimento" value="MAIRIPORÃ RAÇÕES">
         
         <div style="font-size: 11px; opacity: 0.8; text-align: justify; line-height: 1.4;">
@@ -117,14 +128,26 @@
         </div>
     </div>
 
+    <!-- CHAMADA EXATA IGUAL AO NOME DA FUNÇÃO -->
     <button class="btn-portal" onclick="ativarLojaIndicada()">Ativar Loja Indicada ➔</button>
 </div>
 
 <script>
+    // FUNÇÃO CORRIGIDA - NOME IDENTICO SEM NENHUMA LETRA DIFERENTE
+    function evitarErro() {
+        console.log("Sistema Pronto");
+    }
+
     function activarLojaIndicada() {
         const lojista = document.getElementById('txtLojista').value.trim();
         const loja = document.getElementById('txtEstabelecimento').value.trim();
-        window.location.href = `index3.html?parceiro=${encodeURIComponent(lojista)}&loja=${encodeURIComponent(loja)}`;
+        window.location.href = "index3.html?parceiro=" + encodeURIComponent(lojista) + "&loja=" + encodeURIComponent(loja);
+    }
+
+    function ativarLojaIndicada() {
+        const lojista = document.getElementById('txtLojista').value.trim();
+        const loja = document.getElementById('txtEstabelecimento').value.trim();
+        window.location.href = "index3.html?parceiro=" + encodeURIComponent(lojista) + "&loja=" + encodeURIComponent(loja);
     }
 </script>
 </body>
