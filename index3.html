@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #cc092f; /* VERMELHO CLASSICO */
+            background-color: #cc092f; /* VERMELHO CLÁSSICO */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -33,6 +33,7 @@
             margin-bottom: 20px; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            line-height: 1.4;
         }
         
         .status-bar {
@@ -63,7 +64,6 @@
             margin-bottom: 8px;
         }
 
-        /* INPUT DE ALTA NITIDEZ */
         .input-valor {
             width: 100%;
             padding: 12px;
@@ -103,9 +103,7 @@
             cursor: pointer;
             text-transform: uppercase;
             box-sizing: border-box;
-            transition: background 0.2s;
         }
-        .btn-lancar:hover { background-color: #4cd14c; }
     </style>
 </head>
 <body>
@@ -121,7 +119,8 @@
     
     <div class="campo-faturamento">
         <label>Digite o Valor do Faturamento (R\$):</label>
-        <input type="number" class="input-valor" id="txtValorLancado" placeholder="0,00" step="0.01" value="20.00">
+        <!-- ADICIONADO O MINIMO DE 2.00 DIRETO NO CAMPO -->
+        <input type="number" class="input-valor" id="txtValorLancado" placeholder="0,00" step="0.01" min="2.00" value="20.00">
         
         <label>Descrição do Produto / Insumo:</label>
         <input type="text" class="input-desc" id="txtDescLancada" placeholder="Ex: Saco de Ração, Ferramentas, Mel...">
@@ -131,20 +130,29 @@
 </div>
 
 <script>
+    let lojaGlobal = "MAIRIPORÃ RAÇÕES";
+
+    function extrairNomeLoja() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('loja')) {
+            lojaGlobal = decodeURIComponent(urlParams.get('loja'));
+        }
+    }
+
     function lancarMaquininhaInvisivel() {
         const valor = parseFloat(document.getElementById('txtValorLancado').value) || 0.00;
         let desc = document.getElementById('txtDescLancada').value || "Faturamento Geral Simplificado";
         
-        if(valor <= 0) {
-            alert("Por favor, digite um valor válido de cobrança!");
+        // TRAVA PROTOCOLAR DE CRÉDITO MÍNIMO DE R\$: 2,00
+        if (valor < 2.00) {
+            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento no JCS_software é de R\$: 2,00!");
             return;
         }
 
-        // Formata a descrição com o padrão de dois pontos exigido
         const descFormatada = `${desc} - R\$: ${valor.toFixed(2).replace('.', ',')}`;
 
-        // DIRECIONA DIRETAMENTE PARA A ESTEIRA OBJETIVA DO PIX (INDEX1) COM OS VALORES DIGITADOS
-        window.location.href = "index1.html?valor=" + valor + "&desc=" + encodeURIComponent(descFormatada);
+        // Envia os dados higienizados para o Pix amarelo (index1)
+        window.location.href = "index1.html?valor=" + valor + "&desc=" + encodeURIComponent(descFormatada) + "&loja=" + encodeURIComponent(lojaGlobal);
     }
 
     function atualizarRelogio() {
@@ -152,12 +160,10 @@
         const dia = String(agora.getDate()).padStart(2, '0');
         const mes = String(agora.getMonth() + 1).padStart(2, '0');
         const ano = agora.getFullYear();
-        const horas = String(agora.getHours()).padStart(2, '0');
-        const minutos = String(agora.getMinutes()).padStart(2, '0');
-        const segundos = String(agora.getSeconds()).padStart(2, '0');
-        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${horas}:${minutos}:${segundos}`;
+        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}:${String(agora.getSeconds()).padStart(2, '0')}`;
     }
     
+    extrairNomeLoja();
     setInterval(atualizarRelogio, 1000);
     atualizarRelogio();
 </script>
