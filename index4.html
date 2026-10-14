@@ -1,11 +1,9 @@
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Dashboard de Soberania e Resoluções Bancárias</title>
+    <title>JCS_software | Dashboard de Soberania e Auditoria de Taxas</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -25,7 +23,7 @@
             border: 3px double #ffffff; /* BORDAS DUPLAS ELEGANTES */
             border-radius: 12px;
             width: 100%;
-            max-width: 520px;
+            max-width: 550px;
             text-align: center;
             box-sizing: border-box;
         }
@@ -73,23 +71,6 @@
             text-decoration: underline;
         }
 
-        .auditoria-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed #ffffff;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: left;
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-        .linha-auditoria {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 0;
-        }
-
         .tarja-antifraude {
             background-color: #cc092f; /* VERMELHO ALERTA */
             color: #ffffff;
@@ -103,27 +84,54 @@
             border: 1px solid #ffffff;
         }
 
-        .bloco-leis {
-            background: #ffffff;
-            color: #000000;
-            border: 2px solid #ffffff;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: left;
-            font-size: 11px;
-            font-family: "Courier New", Courier, monospace;
-            max-height: 150px;
-            overflow-y: scroll;
+        /* 📋 TABELA COMPARATIVA ATUALIZADA */
+        .tabela-valores {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
             margin-bottom: 15px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        .lei-item {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 6px;
+        .tabela-valores th {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+            padding: 6px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-transform: uppercase;
         }
-        .lei-item:last-child { border: none; margin-bottom: 0; }
-        .lei-titulo { font-weight: bold; color: #cc092f; text-transform: uppercase; font-size: 11px; }
+        .tabela-valores td {
+            padding: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .cor-banco { color: #ff5e5e; font-weight: bold; }
+        .cor-jcs { color: #5eff5e; font-weight: bold; }
 
+        /* 🚨 NOVO BLOCO DENÚNCIA: ESPECULAÇÃO NO EXTERIOR EXPOSTA */
+        .painel-especulacao {
+            background: rgba(255, 241, 89, 0.08);
+            border: 1px dashed #fff159;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: justify;
+            font-size: 11px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            color: #fff159;
+        }
+
+        .painel-cambial {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed #5eff5e;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
         .btn-alternar {
             width: 100%;
             padding: 12px;
@@ -149,36 +157,71 @@
     </div>
     
     <div class="status-bar">
-        <span class="badge-alerta">● COMPRA PROTEGIDA (AUDITADO)</span>
+        <span class="badge-alerta">● CAIXA BLOQUEADO CONTRA EVASÃO</span>
         <span id="relogioDigital">Carregando data...</span>
     </div>
 
+    <!-- PAINEL DE LIQUIDEZ -->
     <div class="card-caixa">
-        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">LIQUIDEZ EM TRÂNSITO DETECTADA:</div>
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">LIQUIDEZ PROTEGIDA REGIONALMENTE:</div>
         <div class="valor-neon" id="lblValorNeon">R\$: 0,00</div>
         <div style="font-size: 12px; color: #5eff5e; font-weight: bold; text-transform: uppercase;" id="lblDescricaoNeon">Aguardando dados...</div>
     </div>
 
+    <!-- 🚨 DENÚNCIA DO MECANISMO DE RETENÇÃO INTERNACIONAL -->
+    <div class="painel-especulacao">
+        💥 <strong>AUDITORIA CONTRA O MERCADO SPECULATIVO:</strong><br>
+        Diferente das grandes Fintechs e carteiras (PicPay, Mercado Pago, etc.) que capturam o dinheiro "parado" dos usuários e aplicam em fundos de investimento no exterior para lucrar em dólar às suas custas, o JCS_software opera em fluxo local fechado de Juros Zero. O fracionamento de 5 a 28 dias é controlado inteiramente pelo lojista, impedindo que o seu faturamento vire combustível de especulação internacional.
+    </div>
+
+    <!-- PAINEL DE SOBERANIA CAMBIAL -->
+    <div class="painel-cambial">
+        <div style="font-weight: bold; color: #5eff5e; text-transform: uppercase; margin-bottom: 6px; font-size: 11px;">🏛️ RECONHECIMENTO JURÍDICO EM BALCÃO:</div>
+        • <strong>Custas Diferidas em Cartório:</strong> O custo de apontamento de títulos para protesto mercantil é de <strong>R\$: 0,00</strong>. Emolumentos e custas de fé pública ficam a cargo do devedor no ato da baixa!<br>
+        • <strong>Autonomia de Amortização Parcial:</strong> Aceite frações de valores diretamente no balcão físico como Moeda de Troca humana.
+    </div>
+
+    <!-- DEMONSTRATIVO TAXA ZERO -->
+    <table class="tabela-valores">
+        <thead>
+            <tr>
+                <th>Valor Base</th>
+                <th>APLICATIVOS / SANGRE (Média 4,99%)</th>
+                <th>BANCOS / TAXA + TAC (Média 5,98%)</th>
+                <th>JCS_software (Taxa Única 1,0%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>R\$: 10,00</strong></td>
+                <td class="cor-banco">R\$: 0,50</td>
+                <td class="cor-banco">R\$: 2,50</td>
+                <td class="cor-jcs">R\$: 0,10</td>
+            </tr>
+            <tr>
+                <td><strong>R\$: 100,00</strong></td>
+                <td class="cor-banco">R\$: 4,99</td>
+                <td class="cor-banco">R\$: 7,20</td>
+                <td class="cor-jcs">R\$: 1,00</td>
+            </tr>
+            <tr>
+                <td><strong>R\$: 1.000,00</strong></td>
+                <td class="cor-banco">R\$: 49,90</td>
+                <td class="cor-banco">R\$: 61,80</td>
+                <td class="cor-jcs">R\$: 10,00</td>
+            </tr>
+            <tr>
+                <td><strong>R\$: 10.000,00</strong></td>
+                <td class="cor-banco">R\$: 499,00</td>
+                <td class="cor-banco">R\$: 598,00</td>
+                <td class="cor-jcs">R\$: 100,00</td>
+            </tr>
+        </tbody>
+    </table>
+
     <div class="tarja-antifraude">
         🛡️ CERTIFICAÇÃO ANTIFRAUDE & AUDITORIA DE COMPLIANCE:<br>
-        Este software opera estritamente como um utilitário tecnológico local de automação comercial e faturamento mercantil. O JCS_software NÃO realiza captação de recursos de terceiros, NÃO opera investimentos e NÃO retém saldos financeiros. Todo e qualquer capital transacionado pertence única e exclusivamente ao lojista adquirente, liquidado diretamente via canais bancários oficiais do Banco Central (BCB), livre de pirâmides ou modelos de corretagem financeira.
-    </div>
-
-    <div class="auditoria-box">
-        <div class="linha-auditoria"><span>Taxa Adquirente Retida:</span> <strong style="color: #5eff5e;">R\$: 0,00 (ZERO %)</strong></div>
-        <div class="linha-auditoria"><span>Soberania de Caixa Regional:</span> <span>100% Livre de Intermediários</span></div>
-    </div>
-
-    <div style="text-align: left; font-size: 12px; font-weight: bold; margin-bottom: 6px; color: #5eff5e;">⚖️ PARECER, RESOLUÇÕES E LEIS EXECUTIVAS DA CARTEIRA:</div>
-    <div class="bloco-leis">
-        <div class="lei-item">
-            <div class="lei-titulo">1. Lei Federal Nº 13.775/2018 (Duplicata Escritural)</div>
-            Regulamenta a emissão e a validade jurídica da Duplicata Eletrônica. O aceite digital via celular ou e-mail confere força de Título Executivo Extrajudicial, permitindo a cobrança e o desconto bancário imediato sem a necessidade de papel físico.
-        </div>
-        <div class="lei-item">
-            <div class="lei-titulo">2. Resolução BCB Nº 1/2020 (Banco Central do Brasil)</div>
-            Institui as diretrizes do arranjo Pix. Garante a liquidação direta entre contas, vedando qualquer tipo de barreira, exclusividade ou cobrança de taxas ocultas abusivas sobre o faturamento do lojista adquirente do sistema livre.
-        </div>
+        O JCS_software opera unicamente como utilitário local de faturamento. Não capta recursos, não faz custódia e não retém capitais. Todo o montante financeiro cai diretamente na conta do Bradesco do lojista adquirente sob regulação do Banco Central (BCB), livre de pirâmides.
     </div>
 
     <button class="btn-alternar" onclick="alternarModeloDeNegocio()">🔄 Mudar Timbre (Rodrigo ➔ Mairiporã Rações)</button>
@@ -209,24 +252,3 @@
             titulo.innerText = lojaOriginal;
             modoAtual = "LOJA";
         } else {
-            titulo.innerText = validadorOriginal + "_CRED VIP";
-            modoAtual = "RODRIGO";
-        }
-    }
-
-    function atualizarRelogio() {
-        const agora = new Date();
-        const dia = String(agora.getDate()).padStart(2, '0');
-        const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        const ano = agora.getFullYear();
-        document.getElementById('relogioDigital').innerText = `${dia}/${mes}/${ano} - ${String(agora.getHours()).padStart(2, '0')}:${String(agora.getMinutes()).padStart(2, '0')}:${String(agora.getSeconds()).padStart(2, '0')}`;
-    }
-    
-    setInterval(atualizarRelogio, 1000);
-    window.onload = function() {
-        extrairDadosURL();
-        atualizarRelogio();
-    }
-</script>
-</body>
-</html>
