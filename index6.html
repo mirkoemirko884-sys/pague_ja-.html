@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Vale-Desconto Parceiro VIP</title>
+    <title>JCS_software | Central de Lealdade e Brinde VIP</title>
     <style>
         body {
-            font-family: "Courier New", Courier, monospace; /* ESTILO TIMBRADO CLÁSSICO */
+            font-family: "Courier New", Courier, monospace; /* TIMBRADO CLASSICO BANCÁRIO */
             background-color: #0284c7; /* AZUL CELESTE DE ALTA CLASSE */
             color: #ffffff;
             display: flex;
@@ -14,21 +14,21 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 15px;
+            box-sizing: border-box;
         }
         .container {
             background: #0284c7;
-            padding: 20px;
+            padding: 25px;
             border: 2px solid #ffffff;
             border-radius: 8px;
             width: 100%;
-            max-width: 550px; /* FORMATO MEIA FOLHA A5 */
+            max-width: 540px;
             box-sizing: border-box;
             text-align: center;
         }
         
-        /* CARD IMPRESSO EM MEIA FOLHA */
-        .cedula-vale {
+        .cedula-brinde {
             background: #ffffff;
             color: #000000;
             border: 3px double #000000;
@@ -37,48 +37,60 @@
             position: relative;
         }
         
-        .carimbo-vip {
+        .carimbo-indicao {
             position: absolute;
             top: 15px;
             right: 15px;
-            border: 2px solid #cc092f;
-            color: #cc092f;
-            font-size: 12px;
+            border: 2px solid #0284c7;
+            color: #0284c7;
+            font-size: 11px;
             font-weight: bold;
-            padding: 4px 8px;
+            padding: 4px 6px;
             text-transform: uppercase;
-            transform: rotate(5deg);
+            transform: rotate(4deg);
         }
 
         .titulo-vale {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             text-align: center;
             border-bottom: 2px solid #000000;
             padding-bottom: 6px;
             margin-bottom: 15px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .valor-destaque {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: bold;
             color: #15803d; /* VERDE DINHEIRO */
             text-align: center;
-            margin: 15px 0;
+            margin: 12px 0;
             border: 1px dashed #000000;
             padding: 10px;
             background: #f8fafc;
         }
 
+        .manifesto-liberdade {
+            font-size: 11px;
+            background: #fff159; /* AMARELO ALERTA */
+            color: #000000;
+            padding: 10px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            margin-top: 12px;
+            line-height: 1.4;
+            text-align: justify;
+            font-weight: bold;
+        }
+
         .regra-fidelidade {
-            font-size: 12px;
+            font-size: 11px;
             background: #f1f5f9;
             padding: 10px;
             border-left: 4px solid #0284c7;
-            margin-top: 15px;
+            margin-top: 12px;
             line-height: 1.4;
-            font-weight: bold;
         }
 
         .btn-imprimir {
@@ -93,60 +105,63 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
+            text-transform: uppercase;
         }
 
         @media print {
             body { background: #ffffff; color: #000000; padding: 0; }
             .container { border: none; max-width: 100%; padding: 0; }
             .btn-imprimir { display: none !important; }
-            .cedula-vale { border: 3px double #000000; }
-            .regra-fidelidade { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
+            .cedula-brinde { border: 3px double #000000; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-
-    <!-- CÉDULA EM MEIA FOLHA DO VALE-DESCONTO -->
-    <div class="cedula-vale">
-        <div class="carimbo-vip">BÔNUS RETIDO</div>
-        <div class="titulo-vale">🎟️ VALE-DESCONTO PARCEIRO VIP 🎟️</div>
+    <div class="cedula-brinde">
+        <div class="carimbo-indicao">RECONHECIMENTO P/P</div>
+        <div class="titulo-vale">🎟️ CERTIFICADO DE LEALDADE E BRINDE VIP 🎟️</div>
         
-        <div style="font-size: 13px; margin: 4px 0;"><strong>EMISSOR DO CRÉDITO:</strong> MAIRIPORÃ RAÇÕES</div>
-        <div style="font-size: 13px; margin: 4px 0;"><strong>BENEFICIÁRIO:</strong> CLIENTE DE TOTAL CONFIANÇA</div>
-        <div style="font-size: 13px; margin: 4px 0;"><strong>PROVA FIEL DE ORIGEM:</strong> FATURAMENTO ANTECIPADO (5 DIAS)</div>
+        <div style="font-size: 12px; margin: 4px 0;"><strong>ESTABELECIMENTO EMISSOR:</strong> <span id="lblLoja">MAIRIPORÃ RAÇÕES</span></div>
+        <div style="font-size: 12px; margin: 4px 0;"><strong>EMISSOR DO SISTEMA:</strong> <span id="lblValidador">RODRIGO_CRED VIP</span></div>
+        <div style="font-size: 12px; margin: 4px 0;"><strong>REGISTRO DA OPERAÇÃO:</strong> CARTEIRA COMERCIAL NEGOCIADA DIA A DIA</div>
         
-        <!-- VALOR DO BRINDE EXTRAÍDO DOS 5% ECONOMIZADOS -->
-        <div class="valor-destaque">
-            CRÉDITO DE R\$: 1,65
+        <!-- CORRIGIDO DIRETAMENTE NO VISOR TEXTUAL BRASILEIRO -->
+        <div class="valor-destaque" id="lblValorBrinde">
+            CRÉDITO DE R$: 1,65
         </div>
 
-        <!-- A REGRA DE OURO DA BLINDAGEM DE CAIXA QUE VOCÊ DEFINIU -->
+        <div class="manifesto-liberdade">
+            📢 <strong>CRÉDITO HUMANO SEM AS AMARRAS DO BANCO:</strong><br>
+            Este estabelecimento reconhece que o seu faturamento virou uma moeda de troca negociável dia a dia, livre das datas fixas e faturas abusivas impostas pelas corporações financeiras. Aqui, o trabalhador ou aposentado NÃO deixa de comprar o presente ou o panetone do seu neto porque a fatura do cartão engessado não fechou! Nós confiamos na sua lealdade e financiamos o seu prazo direto no balcão, com taxa zero!
+        </div>
+
         <div class="regra-fidelidade">
-            ⚠️ REGRA DE FIDELIDADE ABSOLUTA:<br>
-            Este crédito é um brinde comercial regional. Ele serve única e exclusivamente para ser descontado na próxima compra realizada dentro deste mesmo estabelecimento emissor (MAIRIPORÃ RAÇÕES). Proibida a troca por dinheiro vivo ou transferência para terceiros.
+            🤝 <strong>PROGRAMA DE INDICAÇÃO BOCA A BOCA (P/P):</strong><br>
+            Como cliente fiel da nossa comunidade regional, este brinde de lealdade de 5% fica retido para ser abatido na sua próxima compra ou utilizado como indicação para novos parceiros locais, fortalecendo e blindando a economia de quem trabalha em nossa região!
         </div>
         
-        <div style="font-size: 10px; text-align: center; margin-top: 15px; opacity: 0.7; border-top: 1px dashed #000000; padding-top: 5px;">
-            TECNOLOGIA EXCLUSIVA JCS_SOFTWARE · PRESTIGIE O COMÉRCIO LOCAL
+        <div style="font-size: 9px; text-align: center; margin-top: 15px; opacity: 0.7; border-top: 1px dashed #000000; padding-top: 5px;">
+            TECNOLOGIA SOBERANA JCS_software · CRÉDITO DIRETO REGIONAL
         </div>
     </div>
 
-    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Vale-Desconto (Meia Folha)</button>
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Cédula de Lealdade (Meia Folha)</button>
 </div>
 
 <script>
-    // Captura os dados reais do faturamento anterior para gerar o brinde exato na tela
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const valorOriginal = parseFloat(urlParams.get('valor')) || 33.00;
         const nomeLoja = urlParams.get('loja') || "MAIRIPORÃ RAÇÕES";
+        const validador = urlParams.get('parceiro') || "RODRIGO";
         
-        // Calcula os 5% do brinde de fidelidade em cima do combo do faturamento
         const brindeCalculado = (valorOriginal * 0.05).toFixed(2).replace('.', ',');
         
-        document.querySelector('.valor-destaque').innerText = "CRÉDITO DE R\$: " + brindeCalculado;
+        document.getElementById('lblLoja').innerText = decodeURIComponent(nomeLoja);
+        document.getElementById('lblValidador').innerText = decodeURIComponent(validador) + "_CRED VIP";
+        document.getElementById('lblValorBrinde').innerText = "CRÉDITO DE R$: " + brindeCalculado;
     };
 </script>
 </body>
