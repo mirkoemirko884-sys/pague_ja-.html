@@ -38,6 +38,7 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
+        .seletor-prazo option { background: #15803d; }
 
         .alerta-peixao {
             background-color: #fff159;
@@ -215,18 +216,18 @@
 </div>
 
 <script>
-    let valorOriginalLocal = 10.00;
-    let descOriginalLocal = "Carregando...";
-    let lojaOriginalLocal = "MAIRIPORÃ RAÇÕES";
-    let validadorOriginalLocal = "RODRIGO";
+    // ELEMENTOS COM VARIAVEL PURA PARA NÃO ROMPER O PARÂMETRO DA URL
+    let valorGeralMestre = 10.00;
+    let descGeralMestre = "Carregando...";
+    let lojaGeralMestre = "MAIRIPORÃ RAÇÕES";
+    let validadorGeralMestre = "RODRIGO";
 
     function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('valor')) valorOriginalLocal = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descOriginalLocal = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaOriginalLocal = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorOriginalLocal = decodeURIComponent(urlParams.get('parceiro'));
+        
+        // PESCA CIRÚRGICA DE VARIÁVEIS COM LETRA MINÚSCULA EXATAS VINDAS DA PÁGINA 1
+        if (urlParams.has('valor')) valorGeralMestre = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descGeralMestre = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaGeralMestre = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorGeralMestre = decodeURIComponent(urlParams.get('parceiro'));
 
-        document.getElementById('lblValidador').innerText = validadorOriginalLocal + "_CRED VIP";
-        document.getElementById('lblValidador2').innerText = validadorOriginalLocal + "_CRED VIP";
-        document.getElementById('lblLojaTimbre').innerText = lojaOriginalLocal;
