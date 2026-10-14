@@ -163,11 +163,11 @@
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">uso de jcs_software mensal</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco">R$: 0,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco">R$: 60,00</span>
         </div>
 
         <div class="painel-moeda-troca">
@@ -190,11 +190,11 @@
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador2">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre2">MAIRIPORÃ RAÇÕES</strong></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">uso de jcs_software mensal</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 0,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 60,00</span>
         </div>
 
         <div style="font-size: 11px; color: #15803d; font-weight: bold; text-align: center; margin-top: 8px; border: 1px dashed #15803d; padding: 4px; background: #f0fdf4;" id="lblTagBrinde">
@@ -216,20 +216,18 @@
 </div>
 
 <script>
-    // CAPTURA CRUA ULTRA-SIMPLIFICADA À PROVA DE FALHAS DE CACHE
+    // DEFINE OS VALORES PADRÕES DIRETOS PARA FORÇAR O NAVEGADOR TRAVADO
+    window.valorMestreBase = 60.00;
+    let descPadrao = "uso de jcs_software mensal";
+    let lojaPadrao = "MAIRIPORÃ RAÇÕES";
+    let validadorPadrao = "RODRIGO";
+
     function extrairParametrosUniversais() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Puxa as chaves puras enviadas na URL de index1
-        let v = urlParams.get('valor') || "10.00";
-        let d = urlParams.get('desc') || "Uso do Sistema";
-        let l = urlParams.get('loja') || "MAIRIPORÃ RAÇÕES";
-        let p = urlParams.get('parceiro') || "RODRIGO";
+        // Se a URL trouxer novos dados (ex: cabo de enxada), o sistema assume o comando novo
+        if (urlParams.has('valor')) window.valorMestreBase = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descPadrao = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaPadrao = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorPadrao = decodeURIComponent(urlParams.get('parceiro'));
 
-        // Converte e injeta de forma crua nos elementos HTML
-        window.valorMestreBase = parseFloat(v);
-        
-        document.getElementById('lblValidador').innerText = p + "_CRED VIP";
-        document.getElementById('lblValidador2').innerText = p + "_CRED VIP";
-        document.getElementById('lblLojaTimbre').innerText = l;
-        document.getElementById('lblLojaTimbre2').innerText = l;
