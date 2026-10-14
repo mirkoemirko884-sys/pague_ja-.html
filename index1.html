@@ -15,6 +15,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             background: #facc15;
@@ -24,6 +25,7 @@
             width: 100%;
             max-width: 500px;
             text-align: center;
+            box-sizing: border-box;
         }
         h2 { margin-bottom: 5px; font-size: 24px; color: #cc092f; }
         
@@ -74,24 +76,75 @@
 <body>
 
 <div class="container">
-    <h2>Mairiporã Agro</h2>
+    <h2 id="lblNomeLoja">Mairiporã Agro</h2>
     <div style="font-size: 14px; font-weight: bold; margin-bottom: 15px;">Checkout Exclusivo de Vendedor Indicado</div>
 
     <div class="faturamento-box">
         <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
-        <p><strong>Item Emissão:</strong> <span>3 Cartelas (90un) - R\$: 33,00</span></p>
+        <p><strong>Item Emissão:</strong> <span id="labelProduto">Carregando dados...</span></p>
         <p style="font-size: 18px; margin-top: 10px; border-top: 1px solid #000000; padding-top: 8px; margin-bottom: 0;">
-            <strong>Total do Pedido:</strong> <span style="font-weight: bold; text-decoration: underline;">R\$: 33,00</span>
+            <strong>Total do Pedido:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 0,00</span>
         </p>
     </div>
 
     <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; border: 1px solid #000000;">
         <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Código Copia e Cola Oficial</div>
         <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
-        <button class="btn-acao" style="background-color: #000000; color: #5eff5e;" onclick="navigator.clipboard.writeText(document.getElementById('pixCodigo').innerText).then(() => alert('Pix Copiado!'))">📋 Copiar Código Pix</button>
+        <button class="btn-acao" style="background-color: #000000; color: #5eff5e;" onclick="copiarChavePix()">📋 Copiar Código Pix</button>
     </div>
 
-    <button class="btn-acao" style="background-color: #ffffff; color: #15803d; border: 2px solid #000000;" onclick="window.location.href='index2.html'">Liberar Cupom de Boleto VIP ➔</button>
+    <button class="btn-acao" style="background-color: #ffffff; color: #15803d; border: 2px solid #000000;" onclick="avancarParaBoleto()">Liberar Cupom de Boleto VIP ➔</button>
 </div>
+
+<script>
+    let valorGlobal = 10.00;
+    let descGlobal = "cabo de madeira";
+    let lojaGlobal = "MAIRIPORÃ RAÇÕES";
+    let validadorGlobal = "RODRIGO";
+
+    function extrairParametrosDinamicos() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Capta o valor livre digitado na tela anterior
+        if (urlParams.has('valor')) {
+            valorGlobal = parseFloat(urlParams.get('valor'));
+        }
+        
+        // Capta a descrição digitada na tela anterior
+        if (urlParams.has('desc')) {
+            descGlobal = decodeURIComponent(urlParams.get('desc'));
+        }
+
+        // Capta os dados do estabelecimento vindos do login
+        if (urlParams.has('loja')) {
+            lojaGlobal = decodeURIComponent(urlParams.get('loja'));
+            document.getElementById('lblNomeLoja').innerText = lojaGlobal;
+        }
+        if (urlParams.has('parceiro')) {
+            validadorGlobal = decodeURIComponent(urlParams.get('parceiro'));
+        }
+
+        // Ajusta a formatação caso a descrição venha crua sem a string de valor
+        if (!descGlobal.includes("R\$:")) {
+            descGlobal = `${descGlobal} - R\$: ${valorGlobal.toFixed(2).replace('.', ',')}`;
+        }
+        
+        document.getElementById('labelProduto').innerText = descGlobal;
+        document.getElementById('labelPreco').innerText = "R\$: " + valorGlobal.toFixed(2).replace('.', ',');
+    }
+
+    function copiarChavePix() {
+        navigator.clipboard.writeText(document.getElementById('pixCodigo').innerText).then(() => {
+            alert('Código Pix Copiado com Sucesso!');
+        });
+    }
+
+    function avancarParaBoleto() {
+        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descGlobal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
+    }
+
+    // Inicialização direta local
+    extrairParametrosDinamicos();
+</script>
 </body>
 </html>
