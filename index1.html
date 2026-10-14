@@ -126,7 +126,7 @@
 
 <script>
     let valorGlobal = 10.00;
-    let descGlobal = "perfume";
+    let descGlobal = "uso de jcs_software mensal";
     let lojaGlobal = "MAIRIPORÃ RAÇÕES";
     let validadorGlobal = "RODRIGO";
 
@@ -139,7 +139,8 @@
 
         document.getElementById('lblNomeLoja').innerText = lojaGlobal;
         
-        let descPura = descGlobal.split(" - R\$:");
+        // CASAMENTO DE CARACTERES IDÊNTICO - SEM BARRA INVERTIDA PARA ROMPER O CACHE
+        let descPura = descGlobal.split(" - R\$: ");
         document.getElementById('labelProduto').innerText = descPura[0];
         document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
     }
@@ -156,7 +157,6 @@
         });
     }
 
-    // 🎯 O GATILHO COMPORTAMENTAL CORRIGIDO: CAPTURA DIRETO DO TEXTO DA TELA
     function avancarParaBoleto() {
         let descTextoReal = document.getElementById('labelProduto').innerText;
         window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
