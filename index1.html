@@ -56,7 +56,6 @@
             text-transform: uppercase;
         }
         
-        /* 🚨 CAMPO PISCANTE SOLICITADO PARA EVITAR ERROS */
         .input-ajuste-fino {
             width: 100%;
             padding: 10px;
@@ -127,7 +126,7 @@
 
 <script>
     let valorGlobal = 10.00;
-    let descGlobal = "cabo de madeira";
+    let descGlobal = "perfume";
     let lojaGlobal = "MAIRIPORÃ RAÇÕES";
     let validadorGlobal = "RODRIGO";
 
@@ -140,8 +139,8 @@
 
         document.getElementById('lblNomeLoja').innerText = lojaGlobal;
         
-        let descPura = descGlobal.split(" - R\$:")[0];
-        document.getElementById('labelProduto').innerText = descPura;
+        let descPura = descGlobal.split(" - R\$:");
+        document.getElementById('labelProduto').innerText = descPura[0];
         document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
     }
 
@@ -157,9 +156,10 @@
         });
     }
 
+    // 🎯 O GATILHO COMPORTAMENTAL CORRIGIDO: CAPTURA DIRETO DO TEXTO DA TELA
     function avancarParaBoleto() {
-        let descPura = document.getElementById('labelProduto').innerText;
-        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descPura)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
+        let descTextoReal = document.getElementById('labelProduto').innerText;
+        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
     }
 
     extrairParametrosDinamicos();
