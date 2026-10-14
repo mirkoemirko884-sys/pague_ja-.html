@@ -216,18 +216,20 @@
 </div>
 
 <script>
-    // ELEMENTOS COM VARIAVEL PURA PARA NÃO ROMPER O PARÂMETRO DA URL
-    let valorGeralMestre = 10.00;
-    let descGeralMestre = "Carregando...";
-    let lojaGeralMestre = "MAIRIPORÃ RAÇÕES";
-    let validadorGeralMestre = "RODRIGO";
-
-    function extrairParametros() {
+    // CAPTURA CRUA ULTRA-SIMPLIFICADA À PROVA DE FALHAS DE CACHE
+    function extrairParametrosUniversais() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // PESCA CIRÚRGICA DE VARIÁVEIS COM LETRA MINÚSCULA EXATAS VINDAS DA PÁGINA 1
-        if (urlParams.has('valor')) valorGeralMestre = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descGeralMestre = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaGeralMestre = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorGeralMestre = decodeURIComponent(urlParams.get('parceiro'));
+        // Puxa as chaves puras enviadas na URL de index1
+        let v = urlParams.get('valor') || "10.00";
+        let d = urlParams.get('desc') || "Uso do Sistema";
+        let l = urlParams.get('loja') || "MAIRIPORÃ RAÇÕES";
+        let p = urlParams.get('parceiro') || "RODRIGO";
 
+        // Converte e injeta de forma crua nos elementos HTML
+        window.valorMestreBase = parseFloat(v);
+        
+        document.getElementById('lblValidador').innerText = p + "_CRED VIP";
+        document.getElementById('lblValidador2').innerText = p + "_CRED VIP";
+        document.getElementById('lblLojaTimbre').innerText = l;
+        document.getElementById('lblLojaTimbre2').innerText = l;
