@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mairiporã Agro | Pagamento Seguro</title>
+    <title>JCS_software | Pagamento Seguro</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -27,7 +27,12 @@
             text-align: center;
             box-sizing: border-box;
         }
-        h2 { margin-bottom: 5px; font-size: 24px; color: #cc092f; }
+        .logo-parceria {
+            width: 90px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        h2 { margin: 0 0 5px 0; font-size: 24px; color: #cc092f; text-transform: uppercase; }
         
         .faturamento-box {
             background: #ffffff;
@@ -51,6 +56,19 @@
             text-transform: uppercase;
         }
         
+        .input-ajuste-fino {
+            width: 100%;
+            padding: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #cc092f;
+            text-align: center;
+            border: 2px solid #000000;
+            border-radius: 6px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
         .dados-texto {
             background: #f1f5f9;
             padding: 8px;
@@ -76,20 +94,22 @@
 <body>
 
 <div class="container">
-    <h2 id="lblNomeLoja">Mairiporã Agro</h2>
-    <div style="font-size: 14px; font-weight: bold; margin-bottom: 15px;">Checkout Exclusivo de Vendedor Indicado</div>
+    <img src="https://github.io" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
+    <h2 id="lblNomeLoja">JCS_software</h2>
+    <div style="font-size: 13px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">Checkout Exclusivo de Vendedor Indicado</div>
 
     <div class="faturamento-box">
         <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
-        <p><strong>Item Emissão:</strong> <span id="labelProduto">Carregando dados...</span></p>
-        <p style="font-size: 18px; margin-top: 10px; border-top: 1px solid #000000; padding-top: 8px; margin-bottom: 0;">
-            <strong>Total do Pedido:</strong> <span id="labelPreco" style="font-weight: bold; text-decoration: underline;">R\$: 0,00</span>
-        </p>
+        <p><strong>Item Emissão / Descrição:</strong> <br><span id="labelProduto" style="font-weight: bold; color: #333;">Carregando dados...</span></p>
+        
+        <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R\$):</label>
+        <!-- 💡 CAMPO DE AJUSTE DIRETO NA TELA DO PIX EXIGIDO POR VOCÊ -->
+        <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00" oninput="recalcularValorNaHora()">
     </div>
 
     <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; border: 1px solid #000000;">
         <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Código Copia e Cola Oficial</div>
-        <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
+        <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214JCS_software5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
         <button class="btn-acao" style="background-color: #000000; color: #5eff5e;" onclick="copiarChavePix()">📋 Copiar Código Pix</button>
     </div>
 
@@ -104,46 +124,36 @@
 
     function extrairParametrosDinamicos() {
         const urlParams = new URLSearchParams(window.location.search);
-        
-        // Capta o valor livre digitado na tela anterior
-        if (urlParams.has('valor')) {
-            valorGlobal = parseFloat(urlParams.get('valor'));
-        }
-        
-        // Capta a descrição digitada na tela anterior
-        if (urlParams.has('desc')) {
-            descGlobal = decodeURIComponent(urlParams.get('desc'));
-        }
+        if (urlParams.has('valor')) valorGlobal = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descGlobal = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaGlobal = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorGlobal = decodeURIComponent(urlParams.get('parceiro'));
 
-        // Capta os dados do estabelecimento vindos do login
-        if (urlParams.has('loja')) {
-            lojaGlobal = decodeURIComponent(urlParams.get('loja'));
-            document.getElementById('lblNomeLoja').innerText = lojaGlobal;
-        }
-        if (urlParams.has('parceiro')) {
-            validadorGlobal = decodeURIComponent(urlParams.get('parceiro'));
-        }
-
-        // Ajusta a formatação caso a descrição venha crua sem a string de valor
-        if (!descGlobal.includes("R\$:")) {
-            descGlobal = `${descGlobal} - R\$: ${valorGlobal.toFixed(2).replace('.', ',')}`;
-        }
+        document.getElementById('lblNomeLoja').innerText = lojaGlobal;
+        document.getElementById('labelProduto').innerText = descGlobal.split(" - R\$: ")[0];
         
-        document.getElementById('labelProduto').innerText = descGlobal;
-        document.getElementById('labelPreco').innerText = "R\$: " + valorGlobal.toFixed(2).replace('.', ',');
+        // Alimenta o campo numérico com o valor inicial vindo do motor anterior
+        document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
+    }
+
+    // FUNÇÃO QUE FAZ A MÁGICA DO AJUSTE DE VALOR EM TEMPO REAL
+    function recalcularValorNaHora() {
+        let novoValor = parseFloat(document.getElementById('txtValorDinamico').value) || 0.00;
+        valorGlobal = novoValor;
     }
 
     function copiarChavePix() {
-        navigator.clipboard.writeText(document.getElementById('pixCodigo').innerText).then(() => {
-            alert('Código Pix Copiado com Sucesso!');
+        let codigoMutado = document.getElementById('pixCodigo').innerText;
+        navigator.clipboard.writeText(codigoMutado).then(() => {
+            alert('Código Pix JCS_software Copiado com Sucesso! Valor Ajustado: R\$ ' + valorGlobal.toFixed(2).replace('.', ','));
         });
     }
 
     function avancarParaBoleto() {
-        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descGlobal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
+        let descFinal = document.getElementById('labelProduto').innerText + ` - R$: ${valorGlobal.toFixed(2).replace('.', ',')}`;
+        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descFinal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
     }
 
-    // Inicialização direta local
     extrairParametrosDinamicos();
 </script>
 </body>
