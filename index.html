@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Cadastro de Lojas Oficiais</title>
+    <title>JCS_software | Portal de Autenticação WhatsApp</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -23,42 +23,32 @@
             border: 2px solid #ffffff;
             border-radius: 12px;
             width: 100%;
-            max-width: 450px;
+            max-width: 460px;
             text-align: center;
+            position: relative;
         }
-        h2 { font-size: 26px; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; }
-        .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .logo-parceria {
+            width: 110px;
+            height: auto;
+            margin-bottom: 12px;
+        }
+        h2 { font-size: 26px; margin: 0 0 5px 0; font-weight: bold; letter-spacing: 1px; }
+        .slogan { color: #5eff5e; font-size: 12px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .status-bar {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 6px;
             padding: 8px;
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .badge-shopee {
-            background-color: #ff4500; /* Laranja Shopee */
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 6px;
-            border-radius: 3px;
-            text-transform: uppercase;
-        }
-        .badge-ml {
-            background-color: #fff159; /* Amarelo ML */
-            color: #333333;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 6px;
-            border-radius: 3px;
-            text-transform: uppercase;
-        }
+        .badge-shopee { background-color: #ff4500; color: white; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 3px; text-transform: uppercase; }
+        .badge-ml { background-color: #fff159; color: #333333; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 3px; text-transform: uppercase; }
 
         .login-box {
             background: rgba(255, 255, 255, 0.1);
@@ -68,18 +58,11 @@
             text-align: left;
             margin-bottom: 15px;
         }
-        label {
-            font-size: 11px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        label { font-size: 11px; font-weight: bold; display: block; margin-bottom: 6px; text-transform: uppercase; }
         .input-vip {
             width: 100%;
             padding: 10px;
-            font-size: 15px;
+            font-size: 14px;
             color: #000000;
             background-color: #ffffff;
             border: none;
@@ -88,26 +71,42 @@
             margin-bottom: 15px;
             font-weight: bold;
         }
+
+        /* 🔒 TARJA DO CADEADO DE FECHAMENTO DE SEGURANÇA */
+        .tarja-cadeado {
+            background: #000000;
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            font-size: 10px;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.4;
+        }
+
         .btn-portal {
             display: block;
             width: 100%;
             padding: 14px;
-            background-color: #5eff5e;
-            color: #000000;
+            background-color: #25d366; /* VERDE WHATSAPP */
+            color: #ffffff;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
             box-sizing: border-box;
         }
-        .btn-portal:hover { background-color: #4cd14c; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <img src="https://github.io" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
+    
     <h2>JCS_software</h2>
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     
@@ -121,33 +120,31 @@
         <input type="text" class="input-vip" id="txtLojista" value="RODRIGO">
         
         <label>NOME DO ESTABELECIMENTO MERCANTIL:</label>
-        <input type="text" class="input-vip" id="txtEstabelecimento" value="MAIRIPORÃ RAÇÕES">
+        <input type="text" class="input-vip" id="txtEstablishment" value="MAIRIPORÃ RAÇÕES">
         
-        <div style="font-size: 11px; opacity: 0.8; text-align: justify; line-height: 1.4;">
-            🔒 <strong>GARANTIA DE CONTA PROTEGIDA:</strong> Este terminal ativa a emissão de cupons de crédito e recebíveis direto em carteira local com taxa zero de intermediação.
+        <!-- PROTOCOLO DE CADEADO E PROIBIÇÃO EXCLUSIVA -->
+        <div class="tarja-cadeado">
+            🔒 [SINAL LOCK: FECHAMENTO DE SEGURANÇA ATIVO]<br>
+            PROIBIDA STRICTAMENTE A REPRODUÇÃO, CÓPIA, ENGENHARIA REVERSA NÃO AUTORIZADA OU COMERCIALIZAÇÃO DESTE SOFTWARE POR TERCEIROS. O compartilhamento ou transferência oculta de credenciais de login e chaves de validação JCS_software resulta no bloqueio eletrônico imediato do terminal de carteira, sem prejuízo das sanções cambiais vigentes.
         </div>
     </div>
 
-    <!-- CHAMADA EXATA IGUAL AO NOME DA FUNÇÃO -->
-    <button class="btn-portal" onclick="ativarLojaIndicada()">Ativar Loja Indicada ➔</button>
+    <button class="btn-portal" onclick="autenticarViaWhatsApp()">💬 Validar e Acessar via WhatsApp ➔</button>
 </div>
 
 <script>
-    // FUNÇÃO CORRIGIDA - NOME IDENTICO SEM NENHUMA LETRA DIFERENTE
-    function evitarErro() {
-        console.log("Sistema Pronto");
-    }
+    function autenticarViaWhatsApp() {
+        const validador = document.getElementById('txtLojista').value.trim();
+        const loja = document.getElementById('txtEstablishment').value.trim();
+        
+        if (!validador || !loja) {
+            alert("Por favor, preencha os dados de validação do parceiro!");
+            return;
+        }
 
-    function activarLojaIndicada() {
-        const lojista = document.getElementById('txtLojista').value.trim();
-        const loja = document.getElementById('txtEstabelecimento').value.trim();
-        window.location.href = "index3.html?parceiro=" + encodeURIComponent(lojista) + "&loja=" + encodeURIComponent(loja);
-    }
-
-    function ativarLojaIndicada() {
-        const lojista = document.getElementById('txtLojista').value.trim();
-        const loja = document.getElementById('txtEstabelecimento').value.trim();
-        window.location.href = "index3.html?parceiro=" + encodeURIComponent(lojista) + "&loja=" + encodeURIComponent(loja);
+        const mensagemAdesao = `JCS_software Compliance: Eu, ${validador}, proprietário do estabelecimento ${loja}, declaro assinado o termo de intenção digital para emissão de créditos comerciais e duplicatas com taxa zero de intermediação financeira. Rota ativada com sucesso! 🤝🔒`;
+        window.open(`https://whatsapp.com{encodeURIComponent(mensagemAdesao)}`, '_blank');
+        window.location.href = `index3.html?parceiro=${encodeURIComponent(validador)}&loja=${encodeURIComponent(loja)}`;
     }
 </script>
 </body>
