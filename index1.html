@@ -111,15 +111,14 @@
         <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
         <p><strong>Item Emissão / Descrição:</strong> <br><span id="labelProduto" style="font-weight: bold; color: #333;">Carregando dados...</span></p>
         
-        <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R$):</label>
-        <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00" oninput="recalcularValorNaHora()">
+        <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R\$):</label>
+        <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00">
     </div>
 
     <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; border: 1px solid #000000;">
         <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Código Copia e Cola Oficial</div>
         <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214JCS_software5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
         
-        <!-- TEXTO DO BOTÃO ALTERADO PARA DAR TOTAL CLAREZA -->
         <button class="btn-acao" style="background-color: #000000; color: #5eff5e;" onclick="copiarChaveEIrParaQRCode()">📋 Copiar Código & Ver QR Code Imagem ➔</button>
     </div>
 
@@ -127,50 +126,53 @@
 </div>
 
 <script>
-    let valorGlobal = 10.00;
-    let descGlobal = "cabo de enxada";
-    let lojaGlobal = "MAIRIPORÃ RAÇÕES";
-    let validadorGlobal = "RODRIGO";
+    // DEFINE AS VARIÁVEIS UNIVERSAIS COESAS À PROVA DE COMPLICAÇÕES DE URL
+    let valorGlobalMestre = 10.00;
+    let descGlobalMestre = "cabo de enxada";
+    let lojaGlobalMestre = "MAIRIPORÃ RAÇÕES";
+    let validadorGlobalMestre = "RODRIGO";
 
-    function extrairParametrosDinamicos() {
+    function extrairParametrosUniversais() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('valor')) valorGlobal = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descGlobal = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaGlobal = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorGlobal = decodeURIComponent(urlParams.get('parceiro'));
+        
+        // Captura as chaves universais e limpas vindas diretamente da tela 3
+        if (urlParams.has('valor')) valorGlobalMestre = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descGlobalMestre = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
 
-        document.getElementById('lblNomeLoja').innerText = lojaGlobal;
-        let partes = descGlobal.split(" - R$: ");
-        document.getElementById('labelProduto').innerText = partes[0];
-        document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
+        // Limpa a string de balcão tirando o R\$ antigo se necessário
+        let textoLimpo = descGlobalMestre.split(" - R\$: ")[0];
+
+        // Injeta os dados limpos direto nos campos de visão do Rodrigo
+        document.getElementById('labelProduto').innerText = textoLimpo;
+        document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
 
-    function recalcularValorNaHora() {
-        let novoValor = parseFloat(document.getElementById('txtValorDinamico').value) || 0.00;
-        valorGlobal = novoValor;
-    }
-
-    // 🎯 COPIA E ABRE A TELA DO QR CODE SEM ENTRAVES DE NAVEGADOR
     function copiarChaveEIrParaQRCode() {
+        let valorAjustado = parseFloat(document.getElementById('txtValorDinamico').value) || valorGlobalMestre;
         let codigoMutado = document.getElementById('pixCodigo').innerText;
         
-        // Tenta copiar para a memória por segurança
         try {
             navigator.clipboard.writeText(codigoMutado);
         } catch(err) {
-            console.log("Cópia em segundo plano.");
+            console.log("Cópia processada.");
         }
         
-        // SALTO FORÇADO E IMEDIATO PARA A GAVETA EXCLUSIVA DA IMAGEM INDEX7
-        window.location.href = "index7.html?valor=" + valorGlobal;
+        // Salto forçado direto para a imagem limpa no index7
+        window.location.href = `index7.html?valor=${valorAjustado}`;
     }
 
     function avancarParaBoleto() {
+        let valorAjustado = parseFloat(document.getElementById('txtValorDinamico').value) || valorGlobalMestre;
         let descTextoReal = document.getElementById('labelProduto').innerText;
-        window.location.href = "index2.html?valor=" + valorGlobal + "&desc=" + encodeURIComponent(descTextoReal) + "&loja=" + encodeURIComponent(lojaGlobal) + "&parceiro=" + encodeURIComponent(validadorGlobal);
+        window.location.href = `index2.html?valor=${valorAjustado}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobalMestre)}&parceiro=${encodeURIComponent(validadorGlobalMestre)}`;
     }
 
-    extrairParametrosDinamicos();
+    // Inicialização universal sem travas
+    window.onload = function() {
+        extrairParametrosUniversais();
+    }
 </script>
 </body>
 </html>
