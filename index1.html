@@ -56,17 +56,27 @@
             text-transform: uppercase;
         }
         
+        /* 🚨 CAMPO PISCANTE SOLICITADO PARA EVITAR ERROS */
         .input-ajuste-fino {
             width: 100%;
-            padding: 8px;
-            font-size: 20px;
+            padding: 10px;
+            font-size: 24px;
             font-weight: bold;
-            color: #cc092f;
+            color: #15803d;
+            background-color: #ffffff;
             text-align: center;
-            border: 2px solid #000000;
+            border: 3px solid #15803d;
             border-radius: 6px;
             margin-top: 5px;
             box-sizing: border-box;
+            outline: none;
+            animation: piscarCaixaBorda 1.5s infinite;
+        }
+
+        @keyframes piscarCaixaBorda {
+            0% { border-color: #15803d; box-shadow: 0 0 4px rgba(21, 128, 61, 0.2); }
+            50% { border-color: #cc092f; box-shadow: 0 0 15px rgba(204, 9, 47, 0.6); }
+            100% { border-color: #15803d; box-shadow: 0 0 4px rgba(21, 128, 61, 0.2); }
         }
 
         .dados-texto {
@@ -96,14 +106,13 @@
 <div class="container">
     <img src="https://github.io" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
     <h2 id="lblNomeLoja">JCS_software</h2>
-    <div style="font-size: 13px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px;">Checkout Exclusivo de Vendedor Indicado</div>
+    <div style="font-size: 13px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">Checkout Exclusivo de Vendedor Indicado</div>
 
     <div class="faturamento-box">
         <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
         <p><strong>Item Emissão / Descrição:</strong> <br><span id="labelProduto" style="font-weight: bold; color: #333;">Carregando dados...</span></p>
         
         <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R\$):</label>
-        <!-- 💡 CAMPO DE AJUSTE DIRETO NA TELA DO PIX EXIGIDO POR VOCÊ -->
         <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00" oninput="recalcularValorNaHora()">
     </div>
 
@@ -130,13 +139,12 @@
         if (urlParams.has('parceiro')) validadorGlobal = decodeURIComponent(urlParams.get('parceiro'));
 
         document.getElementById('lblNomeLoja').innerText = lojaGlobal;
-        document.getElementById('labelProduto').innerText = descGlobal.split(" - R\$: ")[0];
         
-        // Alimenta o campo numérico com o valor inicial vindo do motor anterior
+        let descPura = descGlobal.split(" - R\$:")[0];
+        document.getElementById('labelProduto').innerText = descPura;
         document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
     }
 
-    // FUNÇÃO QUE FAZ A MÁGICA DO AJUSTE DE VALOR EM TEMPO REAL
     function recalcularValorNaHora() {
         let novoValor = parseFloat(document.getElementById('txtValorDinamico').value) || 0.00;
         valorGlobal = novoValor;
@@ -145,13 +153,13 @@
     function copiarChavePix() {
         let codigoMutado = document.getElementById('pixCodigo').innerText;
         navigator.clipboard.writeText(codigoMutado).then(() => {
-            alert('Código Pix JCS_software Copiado com Sucesso! Valor Ajustado: R\$ ' + valorGlobal.toFixed(2).replace('.', ','));
+            alert('Código Pix JCS_software Copiado com Sucesso! Valor: R\$ ' + valorGlobal.toFixed(2).replace('.', ','));
         });
     }
 
     function avancarParaBoleto() {
-        let descFinal = document.getElementById('labelProduto').innerText + ` - R$: ${valorGlobal.toFixed(2).replace('.', ',')}`;
-        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descFinal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
+        let descPura = document.getElementById('labelProduto').innerText;
+        window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descPura)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
     }
 
     extrairParametrosDinamicos();
