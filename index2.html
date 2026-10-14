@@ -38,6 +38,7 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
+        .seletor-prazo option { background: #15803d; }
 
         .alerta-peixao {
             background-color: #fff159;
@@ -50,6 +51,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border: 2px solid #000000;
+            text-align: center;
         }
 
         .via-cedula {
@@ -85,6 +87,18 @@
             display: flex;
             justify-content: space-between;
         }
+        
+        .painel-moeda-troca {
+            background: #eff6ff;
+            color: #1e3a8a;
+            border-left: 4px solid #3b82f6;
+            padding: 10px;
+            font-size: 11px;
+            margin-top: 10px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
         .tarja-autenticacao {
             margin-top: 12px;
             border-top: 2px solid #000000;
@@ -100,10 +114,7 @@
             gap: 10px;
             margin-top: 15px;
         }
-        .linha-botoes-duplos {
-            display: flex;
-            gap: 10px;
-        }
+        .linha-botoes-duplos { display: flex; gap: 10px; }
         .btn-acao {
             flex: 1;
             padding: 12px;
@@ -126,7 +137,6 @@
             .container { border: none; max-width: 100%; padding: 0; }
             .bloco-botoes, .seletor-prazo, .linha-corte, .alerta-peixao { display: none !important; }
             .via-cedula { border: 3px double #000000; page-break-inside: avoid; }
-            .tarja-autenticacao { background: #eeeeee !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -134,12 +144,17 @@
 
 <div class="container">
     <div class="alerta-peixao" id="lblAlertaPeixao">
-        🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO! CLIENTE DE CONFIANÇA NA CARTEIRA!
+        🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!
     </div>
 
+    <!-- SELETOR COM AS OPÇÕES EXATAS EXIGIDAS NO BALCÃO -->
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira - Taxa Zero)</option>
-        <option value="1">Antecipação Bancária: Receber Amanhã (Desconto Proporcional 1%)</option>
+        <option value="21">Faturado Regulamentar: 21 Dias VIP (Retido em Carteira - Taxa Zero)</option>
+        <option value="14">Faturado Regulamentar: 14 Dias VIP (Retido em Carteira - Taxa Zero)</option>
+        <option value="7">Faturado Regulamentar: 07 Dias VIP (Retido em Carteira - Taxa Zero)</option>
+        <option value="5">À Vista c/ Desconto Regional: 05 Dias (Ganha 5% de Brinde no Balcão)</option>
+        <option value="combinar">Condição Especial: Prazo Direto a Combinar no Balcão</option>
     </select>
 
     <!-- VIA 1: LOJA -->
@@ -150,10 +165,15 @@
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
-        <div class="linha-dados"><span>CONDIÇÃO LOGÍSTICA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
+        <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            LIQUIDEZ DISPONÍVEL: <span id="labelPreco">R\$: 0,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco">R$: 0,00</span>
+        </div>
+
+        <div class="painel-moeda-troca">
+            🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO:<br>
+            Este título confere liberdade cambial. Se o comprador optar por realizar pagamentos parciais antecipados de qualquer valor antes do vencimento, o lojista receberá o montante em dinheiro vivo e amortizará o saldo restante automaticamente para a próxima transação comercial de confiança!
         </div>
         
         <div class="tarja-autenticacao" id="autenticacaoVia1">
@@ -172,12 +192,12 @@
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador2">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre2">MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
-        <div class="linha-dados"><span>CONDIÇÃO LOGÍSTICA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
+        <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            LIQUIDEZ DISPONÍVEL: <span id="labelPreco2">R\$: 0,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 0,00</span>
         </div>
-        
+
         <div style="font-size: 11px; color: #15803d; font-weight: bold; text-align: center; margin-top: 8px; border: 1px dashed #15803d; padding: 4px; background: #f0fdf4;" id="lblTagBrinde">
             🎁 BRINDE PARCEIRO: 5% RETIDO PARA SUA PRÓXIMA COMPRA!
         </div>
@@ -188,49 +208,26 @@
     </div>
 
     <div class="bloco-botoes">
-        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir Cédulas Fiscais</button>
+        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir em PDF Windows</button>
         <div class="linha-botoes-duplos">
-            <button class="btn-acao btn-zap" onclick="dispararCanaisDeValidacao('ZAP')">💬 Enviar via WhatsApp</button>
-            <button class="btn-acao btn-email" onclick="dispararCanaisDeValidacao('EMAIL')">✉️ Enviar via E-mail</button>
+            <button class="btn-acao btn-zap" onclick="dispararCanaisDeValidacao('ZAP')">💬 Notificar via WhatsApp</button>
+            <button class="btn-acao btn-email" onclick="dispararCanaisDeValidacao('EMAIL')">✉️ Notificar via E-mail</button>
         </div>
     </div>
 </div>
 
 <script>
-    let valorOriginalTítulo = 33.00;
+    let valorOriginalSemAcento = 10.00;
     let descOriginal = "Carregando...";
     let lojaOriginal = "MAIRIPORÃ RAÇÕES";
     let validadorOriginal = "RODRIGO";
 
     function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('valor')) valorOriginalTítulo = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('valor')) valorOriginalSemAcento = parseFloat(urlParams.get('valor'));
         if (urlParams.has('desc')) descOriginal = decodeURIComponent(urlParams.get('desc'));
         if (urlParams.has('loja')) lojaOriginal = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorOriginal = decodeURIComponent(urlParams.get('parceiro'));
 
         document.getElementById('lblValidador').innerText = validadorOriginal + "_CRED VIP";
         document.getElementById('lblValidador2').innerText = validadorOriginal + "_CRED VIP";
-        document.getElementById('lblLojaTimbre').innerText = lojaOriginal;
-        document.getElementById('lblLojaTimbre2').innerText = lojaOriginal;
-        document.getElementById('labelProduto').innerText = descOriginal;
-        document.getElementById('labelProduto2').innerText = descOriginal;
-        
-        document.getElementById('lblAlertaPeixao').innerText = `🎣 PARABÉNS ${validadorOriginal}: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!`;
-        
-        calcularPrecosBancariosVIP();
-    }
-
-    function calcularPrecosBancariosVIP() {
-        const opcao = document.getElementById('comboPrazo').value;
-        let valorFinal = valorOriginalTítulo;
-        let textoCondicao = "";
-        let textoTarja = "";
-
-        if (opcao === "28") {
-            textoCondicao = "Retido em Carteira VIP (28 Days cheios)";
-            valorFinal = valorOriginalTítulo;
-            textoTarja = "【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】";
-            document.getElementById('lblTagBrinde').style.display = "block";
-        } else {
-            let descontoAntecipado = valorOriginalTítulo * 0.01;
