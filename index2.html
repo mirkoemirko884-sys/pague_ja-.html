@@ -38,7 +38,6 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-        .seletor-prazo option { background: #15803d; }
 
         .alerta-peixao {
             background-color: #fff159;
@@ -147,14 +146,13 @@
         🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!
     </div>
 
-    <!-- SELETOR COM AS OPÇÕES EXATAS EXIGIDAS NO BALCÃO -->
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira - Taxa Zero)</option>
         <option value="21">Faturado Regulamentar: 21 Dias VIP (Retido em Carteira - Taxa Zero)</option>
         <option value="14">Faturado Regulamentar: 14 Dias VIP (Retido em Carteira - Taxa Zero)</option>
         <option value="7">Faturado Regulamentar: 07 Dias VIP (Retido em Carteira - Taxa Zero)</option>
         <option value="5">À Vista c/ Desconto Regional: 05 Dias (Ganha 5% de Brinde no Balcão)</option>
-        <option value="combinar">Condição Especial: Prazo Direto a Combinar no Balcão</option>
+        <option value="combinar">Condição Especial: Barganha Ajustável a Combinar no Balcão</option>
     </select>
 
     <!-- VIA 1: LOJA -->
@@ -217,17 +215,18 @@
 </div>
 
 <script>
-    let valorOriginalSemAcento = 10.00;
-    let descOriginal = "Carregando...";
-    let lojaOriginal = "MAIRIPORÃ RAÇÕES";
-    let validadorOriginal = "RODRIGO";
+    let valorOriginalLocal = 10.00;
+    let descOriginalLocal = "Carregando...";
+    let lojaOriginalLocal = "MAIRIPORÃ RAÇÕES";
+    let validadorOriginalLocal = "RODRIGO";
 
     function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('valor')) valorOriginalSemAcento = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descOriginal = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaOriginal = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorOriginal = decodeURIComponent(urlParams.get('parceiro'));
+        if (urlParams.has('valor')) valorOriginalLocal = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descOriginalLocal = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaOriginalLocal = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorOriginalLocal = decodeURIComponent(urlParams.get('parceiro'));
 
-        document.getElementById('lblValidador').innerText = validadorOriginal + "_CRED VIP";
-        document.getElementById('lblValidador2').innerText = validadorOriginal + "_CRED VIP";
+        document.getElementById('lblValidador').innerText = validadorOriginalLocal + "_CRED VIP";
+        document.getElementById('lblValidador2').innerText = validadorOriginalLocal + "_CRED VIP";
+        document.getElementById('lblLojaTimbre').innerText = lojaOriginalLocal;
