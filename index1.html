@@ -139,9 +139,9 @@
 
         document.getElementById('lblNomeLoja').innerText = lojaGlobal;
         
-        // CASAMENTO DE CARACTERES IDÊNTICO - SEM BARRA INVERTIDA PARA ROMPER O CACHE
-        let descPura = descGlobal.split(" - R\$: ");
-        document.getElementById('labelProduto').innerText = descPura[0];
+        // Separa a descrição limpando o formato original de balcão de forma idêntica
+        let partes = descGlobal.split(" - R\$: ");
+        document.getElementById('labelProduto').innerText = partes[0];
         document.getElementById('txtValorDinamico').value = valorGlobal.toFixed(2);
     }
 
@@ -153,10 +153,11 @@
     function copiarChavePix() {
         let codigoMutado = document.getElementById('pixCodigo').innerText;
         navigator.clipboard.writeText(codigoMutado).then(() => {
-            alert('Código Pix JCS_software Copiado com Sucesso! Valor: R\$ ' + valorGlobal.toFixed(2).replace('.', ','));
+            alert('Código Pix JCS_software Copiado com Sucesso! Valor Atualizado: R\$ ' + valorGlobal.toFixed(2).replace('.', ','));
         });
     }
 
+    // GATILHO TRANSMISSOR REVISADO DE TRÁS PARA A FRENTE SEM ENGASGOS DE CARACTERES
     function avancarParaBoleto() {
         let descTextoReal = document.getElementById('labelProduto').innerText;
         window.location.href = `index2.html?valor=${valorGlobal}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobal)}&parceiro=${encodeURIComponent(validadorGlobal)}`;
