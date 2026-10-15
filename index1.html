@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Pagamento Seguro</title>
+    <title>JCS_software | Terminal QR Code Bradesco</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #facc15; /* AMARELO MERCADO LIVRE / SHOPEE */
+            background-color: #facc15; /* AMARELO MERCADO LIVRE */
             color: #000000;
             display: flex;
             justify-content: center;
@@ -18,162 +18,84 @@
             box-sizing: border-box;
         }
         .container {
-            background: #facc15;
-            padding: 30px;
-            border: 2px solid #000000;
+            background: #ffffff;
+            padding: 25px;
+            border: 3px solid #000000;
             border-radius: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 420px;
             text-align: center;
-            box-sizing: border-box;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
         }
-        .logo-parceria {
-            width: 90px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-        h2 { margin: 0 0 5px 0; font-size: 24px; color: #cc092f; text-transform: uppercase; }
-        
-        .faturamento-box {
-            background: #ffffff;
-            border: 1px solid #000000;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .badge-protegido {
-            background-color: #3483fa; /* Azul Mercado Livre Compra Garantida */
+        .badge-seguro {
+            background-color: #3483fa;
             color: white;
             font-size: 11px;
             font-weight: bold;
-            padding: 5px;
+            padding: 6px;
             border-radius: 4px;
-            display: block;
-            text-align: center;
-            margin-bottom: 15px;
             text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
         }
-        
-        .input-ajuste-fino {
-            width: 100%;
+        .qr-moldura {
+            border: 2px solid #000000;
             padding: 10px;
-            font-size: 24px;
+            background: #ffffff;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .qr-imagem-real {
+            width: 250px;
+            height: 250px;
+            display: block;
+        }
+        .valor-neon {
+            font-size: 32px;
             font-weight: bold;
             color: #15803d;
-            background-color: #ffffff;
-            text-align: center;
-            border: 3px solid #15803d;
-            border-radius: 6px;
-            margin-top: 5px;
-            box-sizing: border-box;
-            outline: none;
-            animation: piscarCaixaBorda 1.5s infinite;
+            margin: 10px 0;
         }
-
-        @keyframes piscarCaixaBorda {
-            0% { border-color: #15803d; box-shadow: 0 0 4px rgba(21, 128, 61, 0.2); }
-            50% { border-color: #cc092f; box-shadow: 0 0 15px rgba(204, 9, 47, 0.6); }
-            100% { border-color: #15803d; box-shadow: 0 0 4px rgba(21, 128, 61, 0.2); }
-        }
-
-        .dados-texto {
-            background: #f1f5f9;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            word-break: break-all;
-            border: 1px dashed #000000;
-            font-family: monospace;
-        }
-        .btn-acao {
+        .btn-retornar {
             display: block;
             width: 100%;
             padding: 12px;
+            background-color: #cc092f;
+            color: white;
+            border: none;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            margin-top: 10px;
-            border: none;
+            text-decoration: none;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="https://github.io" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
-    <h2>JCS_software</h2>
-    <div style="font-size: 13px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">Checkout Exclusivo de Vendedor Indicado</div>
-
-    <div class="faturamento-box">
-        <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
-        <p><strong>Item Emissão / Descrição:</strong> <br><span id="labelProduto" style="font-weight: bold; color: #333;">Carregando dados...</span></p>
-        
-        <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R$):</label>
-        <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00">
+    <div class="badge-seguro">🛡️ LIQUIDAÇÃO DIRETA BRADESCO VIA BCB</div>
+    
+    <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; color: #475569;">Aponte a Câmera do Celular:</div>
+    
+    <!-- 🖼️ ROTA DO REPOSITÓRIO GITHUB CORRIGIDA E ADAPTADA COM SEGURANÇA -->
+    <div class="qr-moldura">
+        <img src="https://github.io" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
     </div>
 
-    <div style="background: rgba(255,255,255,0.5); padding: 15px; border-radius: 8px; border: 1px solid #000000;">
-        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px;">Código Copia e Cola Oficial</div>
-        <div class="dados-texto" id="pixCodigo">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214JCS_software5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
-        
-        <button class="btn-acao" style="background-color: #000000; color: #5eff5e;" onclick="copiarChaveEIrParaQRCode()">📋 Copiar Código & Ver QR Code Imagem ➔</button>
-    </div>
+    <div style="font-size: 11px; opacity: 0.8;">VALOR DO FATURAMENTO DETECTADO:</div>
+    <div class="valor-neon" id="lblValorQR">R$: 0,00</div>
 
-    <button class="btn-acao" style="background-color: #ffffff; color: #15803d; border: 2px solid #000000;" onclick="avancarParaBoleto()">Liberar Cupom de Boleto VIP ➔</button>
+    <button class="btn-retornar" onclick="window.history.back()">⬅️ Voltar ao Checkout</button>
 </div>
 
 <script>
-    // VALORES PADRÕES DE SEGURANÇA DA OFICINA
-    let valorGlobalMestre = 10.00;
-    let descGlobalMestre = "uso de jcs_software mensal";
-    let lojaGlobalMestre = "MAIRIPORÃ RAÇÕES";
-    let validadorGlobalMestre = "RODRIGO";
-
-    function extrairParametrosUniversais() {
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        if (urlParams.has('valor')) valorGlobalMestre = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descGlobalMestre = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
-
-        document.getElementById('lblNomeLoja').innerText = lojaGlobalMestre;
-        
-        // 🎯 A SOLDA INDESTRUTÍVEL: CAPTURA DIRETAMENTE O TEXTO INTEIRO SEM RECORTAR NADA
-        document.getElementById('labelProduto').innerText = descGlobalMestre;
-        document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
-    }
-
-    function recalcularValorNaHora() {
-        let novoValor = parseFloat(document.getElementById('txtValorDinamico').value) || 0.00;
-        valorGlobalMestre = novoValor;
-    }
-
-    function copiarChaveEIrParaQRCode() {
-        let valorAjustado = parseFloat(document.getElementById('txtValorDinamico').value) || valorGlobalMestre;
-        let codigoMutado = document.getElementById('pixCodigo').innerText;
-        
-        try {
-            navigator.clipboard.writeText(codigoMutado);
-        } catch(err) {
-            console.log("Cópia processada.");
-        }
-        
-        window.location.href = "index7.html?valor=" + valorAjustado;
-    }
-
-    function avancarParaBoleto() {
-        let valorAjustado = parseFloat(document.getElementById('txtValorDinamico').value) || valorGlobalMestre;
-        let descTextoReal = document.getElementById('labelProduto').innerText;
-        window.location.href = "index2.html?valor=" + valorAjustado + "&desc=" + encodeURIComponent(descTextoReal) + "&loja=" + encodeURIComponent(lojaGlobalMestre) + "&parceiro=" + encodeURIComponent(validadorGlobalMestre);
-    }
-
     window.onload = function() {
-        extrairParametrosUniversais();
-    }
+        const urlParams = new URLSearchParams(window.location.search);
+        let v = urlParams.get('valor') || "60.00";
+        document.getElementById('lblValorQR').innerText = "R$: " + parseFloat(v).toFixed(2).replace('.', ',');
+    };
 </script>
 </body>
 </html>
