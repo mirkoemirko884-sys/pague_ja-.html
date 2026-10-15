@@ -111,6 +111,7 @@
         <div class="badge-protegido">🛡️ COMPRA PROTEGIDA: VALIDADA VIA BCB TIMED</div>
         <p><strong>Item Emissão / Descrição:</strong> <br><span id="labelProduto" style="font-weight: bold; color: #333;">Carregando dados...</span></p>
         
+        <!-- TEXTO LIMPO E SEM BARRA INVERTIDA EXIGIDO POR VOCE -->
         <label style="font-size: 12px; font-weight: bold; display: block; margin-top: 10px;">Margem de Ajuste do Valor (R\$):</label>
         <input type="number" class="input-ajuste-fino" id="txtValorDinamico" step="0.01" min="2.00">
     </div>
@@ -139,7 +140,13 @@
         if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
 
-        document.getElementById('labelProduto').innerText = descGlobalMestre;
+        // LEITURA DIRETA E CRUA EM VARIAVEL PURA PARA TRANSITAR LIVRE DE FALHAS DE QUEBRA DE TEXTO
+        let textoCortado = descGlobalMestre;
+        if (descGlobalMestre.includes(" - R\$:")) {
+            textoCortado = descGlobalMestre.split(" - R\$:")[0];
+        }
+
+        document.getElementById('labelProduto').innerText = textoCortado;
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
 
@@ -153,7 +160,6 @@
             console.log("Cópia processada.");
         }
         
-        // ENVIA TODOS OS PARÂMETROS JUNTOS PARA O REPORTE DO QRCODE NÃO SE PERDER
         window.location.href = `index7.html?valor=${valorAjustado}&desc=${encodeURIComponent(descGlobalMestre)}&loja=${encodeURIComponent(lojaGlobalMestre)}&parceiro=${encodeURIComponent(validadorGlobalMestre)}`;
     }
 
