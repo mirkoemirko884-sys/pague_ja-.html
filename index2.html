@@ -114,23 +114,19 @@
             gap: 10px;
             margin-top: 15px;
         }
-        .linha-botoes-duplos { display: flex; gap: 10px; }
-        .btn-acao {
-            flex: 1;
-            padding: 12px;
+        .btn-print {
+            width: 100%;
+            padding: 14px;
+            background-color: #ffffff;
+            color: #15803d;
             border: none;
-            border-radius: 4px;
-            font-size: 12px;
+            border-radius: 6px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            text-align: center;
-            text-decoration: none;
             text-transform: uppercase;
             box-sizing: border-box;
         }
-        .btn-print { background-color: #ffffff; color: #15803d; }
-        .btn-zap { background-color: #25d366; color: #ffffff; }
-        .btn-email { background-color: #3b82f6; color: #ffffff; }
 
         @media print {
             body { background: #ffffff; color: #000000; padding: 0; }
@@ -163,11 +159,11 @@
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">uso de jcs_software mensal</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco">R$: 60,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco">R$: 0,00</span>
         </div>
 
         <div class="painel-moeda-troca">
@@ -190,11 +186,11 @@
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador2">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre2">MAIRIPORÃ RAÇÕES</strong></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">uso de jcs_software mensal</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
         
         <div style="font-size: 18px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 60,00</span>
+            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 0,00</span>
         </div>
 
         <div style="font-size: 11px; color: #15803d; font-weight: bold; text-align: center; margin-top: 8px; border: 1px dashed #15803d; padding: 4px; background: #f0fdf4;" id="lblTagBrinde">
@@ -207,27 +203,31 @@
     </div>
 
     <div class="bloco-botoes">
-        <button class="btn-acao btn-print" onclick="window.print()">🖨️ Imprimir em PDF Windows</button>
-        <div class="linha-botoes-duplos">
-            <button class="btn-acao btn-zap" onclick="dispararCanaisDeValidacao('ZAP')">💬 Notificar via WhatsApp</button>
-            <button class="btn-acao btn-email" onclick="dispararCanaisDeValidacao('EMAIL')">✉️ Notificar via E-mail</button>
-        </div>
+        <!-- MATOU OS OUTROS BOTÕES E DEIXOU APENAS A IMPRESSÃO SOBERANA -->
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cupom de Duplicata (Meia Folha / PDF Windows)</button>
     </div>
 </div>
 
 <script>
-    // DEFINE OS VALORES PADRÕES DIRETOS PARA FORÇAR O NAVEGADOR TRAVADO
-    window.valorMestreBase = 60.00;
-    let descPadrao = "uso de jcs_software mensal";
-    let lojaPadrao = "MAIRIPORÃ RAÇÕES";
-    let validadorPadrao = "RODRIGO";
+    let valorGeralMestre = 10.00;
+    let descGeralMestre = "Carregando...";
+    let lojaGeralMestre = "MAIRIPORÃ RAÇÕES";
+    let validadorGeralMestre = "RODRIGO";
 
-    function extrairParametrosUniversais() {
+    function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Se a URL trouxer novos dados (ex: cabo de enxada), o sistema assume o comando novo
-        if (urlParams.has('valor')) window.valorMestreBase = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descPadrao = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaPadrao = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorPadrao = decodeURIComponent(urlParams.get('parceiro'));
+        if (urlParams.has('valor')) valorGeralMestre = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) descGeralMestre = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('loja')) lojaGeralMestre = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) validadorGeralMestre = decodeURIComponent(urlParams.get('parceiro'));
 
+        document.getElementById('lblValidador').innerText = validadorGeralMestre + "_CRED VIP";
+        document.getElementById('lblValidador2').innerText = validadorGeralMestre + "_CRED VIP";
+        document.getElementById('lblLojaTimbre').innerText = lojaGeralMestre;
+        document.getElementById('lblLojaTimbre2').innerText = lojaGeralMestre;
+        document.getElementById('labelProduto').innerText = descGeralMestre;
+        document.getElementById('labelProduto2').innerText = descGeralMestre;
+        
+        document.getElementById('lblAlertaPeixao').innerText = `🎣 PARABÉNS ${validadorGeralMestre}: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!`;
+        
