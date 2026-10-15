@@ -126,7 +126,6 @@
 </div>
 
 <script>
-    // DEFINE AS VARIÁVEIS UNIVERSAIS COESAS À PROVA DE COMPLICAÇÕES DE URL
     let valorGlobalMestre = 10.00;
     let descGlobalMestre = "cabo de enxada";
     let lojaGlobalMestre = "MAIRIPORÃ RAÇÕES";
@@ -135,17 +134,20 @@
     function extrairParametrosUniversais() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Captura as chaves universais e limpas vindas diretamente da tela 3
         if (urlParams.has('valor')) valorGlobalMestre = parseFloat(urlParams.get('valor'));
         if (urlParams.has('desc')) descGlobalMestre = decodeURIComponent(urlParams.get('desc'));
         if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
+        if (urlParams.has('codigo') && urlParams.get('codigo') !== "") {
+            // Se houver um código opcional vindo da URL, junta com a descrição de exibição
+            descGlobalMestre = urlParams.get('codigo') + " " + descGlobalMestre;
+        }
 
-        // Limpa a string de balcão tirando o R\$ antigo se necessário
-        let textoLimpo = descGlobalMestre.split(" - R\$: ")[0];
-
-        // Injeta os dados limpos direto nos campos de visão do Rodrigo
-        document.getElementById('labelProduto').innerText = textoLimpo;
+        document.getElementById('lblNomeLoja').innerText = lojaGlobalMestre;
+        
+        // Remove qualquer sufixo antigo que dê drible no visor
+        let textoLimpo = descGlobalMestre.split(" - R\$: ");
+        document.getElementById('labelProduto').innerText = textoLimpo[0];
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
 
@@ -159,7 +161,6 @@
             console.log("Cópia processada.");
         }
         
-        // Salto forçado direto para a imagem limpa no index7
         window.location.href = `index7.html?valor=${valorAjustado}`;
     }
 
@@ -169,7 +170,6 @@
         window.location.href = `index2.html?valor=${valorAjustado}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobalMestre)}&parceiro=${encodeURIComponent(validadorGlobalMestre)}`;
     }
 
-    // Inicialização universal sem travas
     window.onload = function() {
         extrairParametrosUniversais();
     }
