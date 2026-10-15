@@ -164,7 +164,7 @@
     <!-- PAINEL DE LIQUIDEZ -->
     <div class="card-caixa">
         <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">LIQUIDEZ PROTEGIDA REGIONALMENTE:</div>
-        <div class="valor-neon" id="lblValorNeon">R\$: 0,00</div>
+        <div class="valor-neon" id="lblValorNeon">R$: 0,00</div>
         <div style="font-size: 12px; color: #5eff5e; font-weight: bold; text-transform: uppercase;" id="lblDescricaoNeon">Aguardando dados...</div>
     </div>
 
@@ -193,28 +193,28 @@
         </thead>
         <tbody>
             <tr>
-                <td><strong>R\$: 10,00</strong></td>
-                <td class="cor-banco">R\$: 0,50</td>
-                <td class="cor-banco">R\$: 2,50</td>
-                <td class="cor-jcs">R\$: 0,10</td>
+                <td><strong>R$: 10,00</strong></td>
+                <td class="cor-banco">R$: 0,50</td>
+                <td class="cor-banco">R$: 2,50</td>
+                <td class="cor-jcs">R$: 0,10</td>
             </tr>
             <tr>
-                <td><strong>R\$: 100,00</strong></td>
-                <td class="cor-banco">R\$: 4,99</td>
-                <td class="cor-banco">R\$: 7,20</td>
-                <td class="cor-jcs">R\$: 1,00</td>
+                <td><strong>R$: 100,00</strong></td>
+                <td class="cor-banco">R$: 4,99</td>
+                <td class="cor-banco">R$: 7,20</td>
+                <td class="cor-jcs">R$: 1,00</td>
             </tr>
             <tr>
-                <td><strong>R\$: 1.000,00</strong></td>
-                <td class="cor-banco">R\$: 49,90</td>
-                <td class="cor-banco">R\$: 61,80</td>
-                <td class="cor-jcs">R\$: 10,00</td>
+                <td><strong>R$: 1.000,00</strong></td>
+                <td class="cor-banco">R$: 49,90</td>
+                <td class="cor-banco">R$: 61,80</td>
+                <td class="cor-jcs">R$: 10,00</td>
             </tr>
             <tr>
-                <td><strong>R\$: 10.000,00</strong></td>
-                <td class="cor-banco">R\$: 499,00</td>
-                <td class="cor-banco">R\$: 598,00</td>
-                <td class="cor-jcs">R\$: 100,00</td>
+                <td><strong>R$: 10.000,00</strong></td>
+                <td class="cor-banco">R$: 499,00</td>
+                <td class="cor-banco">R$: 598,00</td>
+                <td class="cor-jcs">R$: 100,00</td>
             </tr>
         </tbody>
     </table>
@@ -242,7 +242,7 @@
         if (urlParams.has('parceiro')) validadorOriginal = decodeURIComponent(urlParams.get('parceiro'));
 
         document.getElementById('txtNomeEmpresa').innerText = validadorOriginal + "_CRED VIP";
-        document.getElementById('lblValorNeon').innerText = "R\$: " + valorOriginal.toFixed(2).replace('.', ',');
+        document.getElementById('lblValorNeon').innerText = "R$: " + valorOriginal.toFixed(2).replace('.', ',');
         document.getElementById('lblDescricaoNeon').innerText = "✔ " + descOriginal;
     }
 
