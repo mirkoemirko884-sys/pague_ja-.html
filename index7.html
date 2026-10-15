@@ -79,26 +79,37 @@
     
     <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; color: #475569;">Aponte a Câmera do Celular:</div>
     
-    <!-- 🖼️ ROTA DO REPOSITÓRIO GITHUB DO REPOLHO DAS PARCERIAS -->
     <div class="qr-moldura">
         <img src="https://github.io" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
     </div>
 
     <div style="font-size: 11px; opacity: 0.8;">VALOR DO FATURAMENTO DETECTADO:</div>
-    <div class="valor-neon" id="lblValorQR">R$: 60,00</div>
+    <div class="valor-neon" id="lblValorQR">R\$: 0,00</div>
 
-    <!-- ROTA DE RETORNO SEGURA PARA NUNCA MAIS SUMIR PÁGINAS -->
-    <button class="btn-retornar" onclick="window.history.back()">⬅️ Voltar ao Checkout</button>
+    <!-- BOTÃO COM DIRECIONAMENTO FÍSICO CONTRA SUMIÇO DE PÁGINAS -->
+    <button class="btn-retornar" onclick="voltarParaCheckoutSeguro()">⬅️ Voltar ao Checkout</button>
 </div>
 
 <script>
+    let vMestre = "60.00";
+    let dMestre = "uso de jcs_software mensal";
+    let lMestre = "MAIRIPORÃ RAÇÕES";
+    let pMestre = "RODRIGO";
+
     function extrairPrecoUniversal() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Captura o valor de forma inteligente e redundante na URL
-        let v = urlParams.get('valor') || urlParams.get('valorGlobal') || urlParams.get('valorAjustado') || "60.00";
+        if (urlParams.has('valor')) vMestre = urlParams.get('valor');
+        if (urlParams.has('desc')) dMestre = urlParams.get('desc');
+        if (urlParams.has('loja')) lMestre = urlParams.get('loja');
+        if (urlParams.has('parceiro')) pMestre = urlParams.get('parceiro');
         
-        document.getElementById('lblValorQR').innerText = "R$: " + parseFloat(v).toFixed(2).replace('.', ',');
+        document.getElementById('lblValorQR').innerText = "R\$: " + parseFloat(vMestre).toFixed(2).replace('.', ',');
+    }
+
+    function voltarParaCheckoutSeguro() {
+        // Força a volta transportando a fiação de dados limpa
+        window.location.href = `index1.html?valor=${vMestre}&desc=${encodeURIComponent(dMestre)}&loja=${encodeURIComponent(lMestre)}&parceiro=${encodeURIComponent(pMestre)}`;
     }
 
     window.onload = function() {
