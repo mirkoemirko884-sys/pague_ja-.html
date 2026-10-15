@@ -138,16 +138,11 @@
         if (urlParams.has('desc')) descGlobalMestre = decodeURIComponent(urlParams.get('desc'));
         if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
-        if (urlParams.has('codigo') && urlParams.get('codigo') !== "") {
-            // Se houver um código opcional vindo da URL, junta com a descrição de exibição
-            descGlobalMestre = urlParams.get('codigo') + " " + descGlobalMestre;
-        }
 
-        document.getElementById('lblNomeLoja').innerText = lojaGlobalMestre;
+        // SOLDA DA CRÍTICA DEFINITIVA: DIVIDE APENAS PELO TRAÇO DO FORMATO REAL SEM REPETIÇÕES
+        let partes = descGlobalMestre.split(" - R$: ");
         
-        // Remove qualquer sufixo antigo que dê drible no visor
-        let textoLimpo = descGlobalMestre.split(" - R$: ");
-        document.getElementById('labelProduto').innerText = textoLimpo[0];
+        document.getElementById('labelProduto').innerText = partes[0];
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
 
@@ -161,13 +156,13 @@
             console.log("Cópia processada.");
         }
         
-        window.location.href = `index7.html?valor=${valorAjustado}`;
+        window.location.href = "index7.html?valor=" + valorAjustado;
     }
 
     function avancarParaBoleto() {
         let valorAjustado = parseFloat(document.getElementById('txtValorDinamico').value) || valorGlobalMestre;
         let descTextoReal = document.getElementById('labelProduto').innerText;
-        window.location.href = `index2.html?valor=${valorAjustado}&desc=${encodeURIComponent(descTextoReal)}&loja=${encodeURIComponent(lojaGlobalMestre)}&parceiro=${encodeURIComponent(validadorGlobalMestre)}`;
+        window.location.href = "index2.html?valor=" + valorAjustado + "&desc=" + encodeURIComponent(descTextoReal) + "&loja=" + encodeURIComponent(lojaGlobalMestre) + "&parceiro=" + encodeURIComponent(validadorGlobalMestre);
     }
 
     window.onload = function() {
