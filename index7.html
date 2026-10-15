@@ -79,23 +79,30 @@
     
     <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; color: #475569;">Aponte a Câmera do Celular:</div>
     
-    <!-- 🖼️ IMAGEM PNG PURA PROTEGIDA EM AMBIENTE EXCLUSIVO -->
     <div class="qr-moldura">
         <img src="https://github.io" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
     </div>
 
     <div style="font-size: 11px; opacity: 0.8;">VALOR DO FATURAMENTO DETECTADO:</div>
-    <div class="valor-neon" id="lblValorQR">R$: 0,00</div>
+    <div class="valor-neon" id="lblValorQR">R$: 60,00</div>
 
+    <!-- ROTA DE RETORNO SEGURA PARA NÃO SUMIR PÁGINAS -->
     <button class="btn-retornar" onclick="window.history.back()">⬅️ Voltar ao Checkout</button>
 </div>
 
 <script>
-    window.onload = function() {
+    function extrairPrecoUniversal() {
         const urlParams = new URLSearchParams(window.location.search);
-        let v = urlParams.get('valor') || "60.00";
+        
+        // Captura o valor de forma redundante (não importa como a página anterior envie)
+        let v = urlParams.get('valor') || urlParams.get('valorGlobal') || urlParams.get('valorAjustado') || "60.00";
+        
         document.getElementById('lblValorQR').innerText = "R$: " + parseFloat(v).toFixed(2).replace('.', ',');
-    };
+    }
+
+    window.onload = function() {
+        extrairPrecoUniversal();
+    }
 </script>
 </body>
 </html>
