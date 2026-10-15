@@ -79,7 +79,7 @@
     
     <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; color: #475569;">Aponte a Câmera do Celular:</div>
     
-    <!-- 🖼️ IMAGEM PNG PURA DO REPOSITÓRIO JCS_SOFTWARE -->
+    <!-- 🖼️ ROTA DO REPOSITÓRIO GITHUB DO REPOLHO DAS PARCERIAS -->
     <div class="qr-moldura">
         <img src="https://github.io" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
     </div>
@@ -91,11 +91,11 @@
     <button class="btn-retornar" onclick="window.history.back()">⬅️ Voltar ao Checkout</button>
 </div>
 
-<script {sandbox="allow-scripts"}>
+<script>
     function extrairPrecoUniversal() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Puxa o valor da URL de forma inteligente e redundante
+        // Captura o valor de forma inteligente e redundante na URL
         let v = urlParams.get('valor') || urlParams.get('valorGlobal') || urlParams.get('valorAjustado') || "60.00";
         
         document.getElementById('lblValorQR').innerText = "R$: " + parseFloat(v).toFixed(2).replace('.', ',');
