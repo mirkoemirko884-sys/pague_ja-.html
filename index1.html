@@ -126,6 +126,7 @@
 </div>
 
 <script>
+    // VALORES PADRÕES DE SEGURANÇA DA OFICINA
     let valorGlobalMestre = 10.00;
     let descGlobalMestre = "uso de jcs_software mensal";
     let lojaGlobalMestre = "MAIRIPORÃ RAÇÕES";
@@ -139,11 +140,16 @@
         if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
 
-        // CAPTURA UNIVERSAL DIRETA: EXTRAI O TEXTO LIMPO INDEPENDENTE DO SINAL DE DEVOLUÇÃO
-        let textoLimpo = descGlobalMestre.split(" - R$")[0];
-
-        document.getElementById('labelProduto').innerText = textoLimpo;
+        document.getElementById('lblNomeLoja').innerText = lojaGlobalMestre;
+        
+        // 🎯 A SOLDA INDESTRUTÍVEL: CAPTURA DIRETAMENTE O TEXTO INTEIRO SEM RECORTAR NADA
+        document.getElementById('labelProduto').innerText = descGlobalMestre;
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
+    }
+
+    function recalcularValorNaHora() {
+        let novoValor = parseFloat(document.getElementById('txtValorDinamico').value) || 0.00;
+        valorGlobalMestre = novoValor;
     }
 
     function copiarChaveEIrParaQRCode() {
