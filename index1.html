@@ -127,7 +127,7 @@
 
 <script>
     let valorGlobalMestre = 10.00;
-    let descGlobalMestre = "cabo de enxada";
+    let descGlobalMestre = "uso de jcs_software mensal";
     let lojaGlobalMestre = "MAIRIPORÃ RAÇÕES";
     let validadorGlobalMestre = "RODRIGO";
 
@@ -139,10 +139,10 @@
         if (urlParams.has('loja')) lojaGlobalMestre = decodeURIComponent(urlParams.get('loja'));
         if (urlParams.has('parceiro')) validadorGlobalMestre = decodeURIComponent(urlParams.get('parceiro'));
 
-        // SOLDA DA CRÍTICA DEFINITIVA: DIVIDE APENAS PELO TRAÇO DO FORMATO REAL SEM REPETIÇÕES
-        let partes = descGlobalMestre.split(" - R$: ");
-        
-        document.getElementById('labelProduto').innerText = partes[0];
+        // CAPTURA UNIVERSAL DIRETA: EXTRAI O TEXTO LIMPO INDEPENDENTE DO SINAL DE DEVOLUÇÃO
+        let textoLimpo = descGlobalMestre.split(" - R$")[0];
+
+        document.getElementById('labelProduto').innerText = textoLimpo;
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
 
