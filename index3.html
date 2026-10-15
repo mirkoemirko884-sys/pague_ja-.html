@@ -118,7 +118,7 @@
     </div>
     
     <div class="campo-faturamento">
-        <label>Digite o Valor do Faturamento (R\$):</label>
+        <label>Digite o Valor do Faturamento (R$):</label>
         <!-- ADICIONADO O MINIMO DE 2.00 DIRETO NO CAMPO -->
         <input type="number" class="input-valor" id="txtValorLancado" placeholder="0,00" step="0.01" min="2.00" value="20.00">
         
@@ -143,13 +143,13 @@
         const valor = parseFloat(document.getElementById('txtValorLancado').value) || 0.00;
         let desc = document.getElementById('txtDescLancada').value || "Faturamento Geral Simplificado";
         
-        // TRAVA PROTOCOLAR DE CRÉDITO MÍNIMO DE R\$: 2,00
+        // TRAVA PROTOCOLAR DE CRÉDITO MÍNIMO DE R$: 2,00
         if (valor < 2.00) {
-            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento no JCS_software é de R\$: 2,00!");
+            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento no JCS_software é de R$: 2,00!");
             return;
         }
 
-        const descFormatada = `${desc} - R\$: ${valor.toFixed(2).replace('.', ',')}`;
+        const descFormatada = `${desc} - R$: ${valor.toFixed(2).replace('.', ',')}`;
 
         // Envia os dados higienizados para o Pix amarelo (index1)
         window.location.href = "index1.html?valor=" + valor + "&desc=" + encodeURIComponent(descFormatada) + "&loja=" + encodeURIComponent(lojaGlobal);
