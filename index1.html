@@ -146,7 +146,7 @@
         document.getElementById('lblNomeLoja').innerText = lojaGlobalMestre;
         
         // Remove qualquer sufixo antigo que dê drible no visor
-        let textoLimpo = descGlobalMestre.split(" - R\$: ");
+        let textoLimpo = descGlobalMestre.split(" - R$: ");
         document.getElementById('labelProduto').innerText = textoLimpo[0];
         document.getElementById('txtValorDinamico').value = valorGlobalMestre.toFixed(2);
     }
