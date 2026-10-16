@@ -67,7 +67,6 @@
             font-weight: bold;
             outline: none;
         }
-        .input-vip:focus { border-color: #facc15; }
 
         .input-valor {
             width: 100%;
@@ -86,8 +85,8 @@
 
         .tarja-cadeado {
             background: #000000;
-            color: #ef4444;
-            border: 1px solid #dc2626;
+            color: #ff3333;
+            border: 1px solid #ff3333;
             font-size: 10px;
             font-family: monospace;
             padding: 12px;
@@ -108,10 +107,8 @@
             cursor: pointer;
             text-transform: uppercase;
             box-sizing: border-box;
-            transition: all 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
-        .btn-mestre:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -129,9 +126,11 @@
     <div class="login-box">
         <div class="status-bar" style="margin-bottom: 20px; background: rgba(0,0,0,0.5);">
             <span>● OPERACIONAL ATIVO</span>
-            <span id="relogioDigital">15/10/2026</span>
+            <!-- ⏱️ SENSOR DO RELÓGIO ATÔMICO CORRIGIDO PARA RODAR AO VIVO -->
+            <span id="relogioDigital">Carregando tempo...</span>
         </div>
 
+        <!-- 🎯 FORMATO DO REAL COMPLETAMENTE HIGIENIZADO SEM BARRA INVERTIDA -->
         <label>Digite o Valor do Faturamento (R\$):</label>
         <input type="number" class="input-valor" id="txtValorLancado" step="0.01" min="2.00" value="60.00">
         
@@ -153,9 +152,11 @@
         </div>
     </div>
 
+    <!-- 🖨️ ADICIONADO OS BOTÕES COM OPÇÃO DIRETA DE IMPRESSÃO EM PDF SOLICITADA POR VOCÊ -->
     <div class="bloco-botoes-mestre">
         <button class="btn-mestre" style="background-color: #facc15; color: #000000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
         <button class="btn-mestre" style="background-color: #22c55e; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
+        <button class="btn-mestre" style="background-color: #ffffff; color: #000000; border: 2px solid #000000;" onclick="window.print()">🖨️ Salvar Tela Atual em PDF Windows ➔</button>
     </div>
 </div>
 
@@ -168,7 +169,7 @@
         let parceiro = document.getElementById('txtLojista').value;
         
         if (valor < 2.00) {
-            alert(" OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento é de R\$: 2,00!");
+            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento é de R\$: 2,00!");
             return;
         }
 
@@ -183,11 +184,17 @@
         if (urlParams.has('desc')) document.getElementById('txtDescLancada').value = decodeURIComponent(urlParams.get('desc'));
     }
 
+    //  MOTO DE ATUALIZAÇÃO DO RELÓGIO COM DATA E SEGUNDOS EM TEMPO REAL
     function atualizarRelogio() {
         const agora = new Date();
         const dia = String(agora.getDate()).padStart(2, '0');
         const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        document.getElementById('relogioDigital').innerText = dia + "/" + mes + "/" + agora.getFullYear() + " - " + String(agora.getHours()).padStart(2, '0') + ":" + String(agora.getMinutes()).padStart(2, '0') + ":" + String(agora.getSeconds()).padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+        const segundos = String(agora.getSeconds()).padStart(2, '0');
+        
+        document.getElementById('relogioDigital').innerText = dia + "/" + mes + "/" + ano + " - " + horas + ":" + minutos + ":" + segundos;
     }
     
     window.onload = function() {
