@@ -27,7 +27,16 @@
             text-align: center;
             box-shadow: 0 20px 30px rgba(0,0,0,0.3);
         }
-        .logo-parceria { width: 120px; height: auto; margin-bottom: 15px; }
+        .bloco-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .logo-parceria { width: 90px; height: auto; }
+        .logo-maos-azuis { width: 75px; height: auto; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2)); }
+        
         h2 { font-size: 28px; margin: 0 0 5px 0; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #ffffff; }
         .slogan { color: #4ade80; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
         
@@ -114,7 +123,12 @@
 <body>
 
 <div class="container">
-    <img src="png" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
+    <!-- 🤝 INTRODUÇÃO DA MANOBRA DO LOGO MÃOS AZUIS DE ACORDO GARANTIDO -->
+    <div class="bloco-logos">
+        <img src="png" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
+        <img src="https://imgur.com" class="logo-maos-azuis" alt="Acordo de Confiança Garantida">
+    </div>
+
     <h2>JCS_software</h2>
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     
@@ -126,11 +140,9 @@
     <div class="login-box">
         <div class="status-bar" style="margin-bottom: 20px; background: rgba(0,0,0,0.5);">
             <span>● OPERACIONAL ATIVO</span>
-            <!-- ⏱️ SENSOR DO RELÓGIO ATÔMICO CORRIGIDO PARA RODAR AO VIVO -->
-            <span id="relogioDigital">Carregando tempo...</span>
+            <span id="relogioDigital">Iniciando cronômetro...</span>
         </div>
 
-        <!-- 🎯 FORMATO DO REAL COMPLETAMENTE HIGIENIZADO SEM BARRA INVERTIDA -->
         <label>Digite o Valor do Faturamento (R\$):</label>
         <input type="number" class="input-valor" id="txtValorLancado" step="0.01" min="2.00" value="60.00">
         
@@ -152,7 +164,6 @@
         </div>
     </div>
 
-    <!-- 🖨️ ADICIONADO OS BOTÕES COM OPÇÃO DIRETA DE IMPRESSÃO EM PDF SOLICITADA POR VOCÊ -->
     <div class="bloco-botoes-mestre">
         <button class="btn-mestre" style="background-color: #facc15; color: #000000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
         <button class="btn-mestre" style="background-color: #22c55e; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
@@ -169,7 +180,7 @@
         let parceiro = document.getElementById('txtLojista').value;
         
         if (valor < 2.00) {
-            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento é de R\$: 2,00!");
+            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo faturável é de R\$: 2,00!");
             return;
         }
 
@@ -184,7 +195,6 @@
         if (urlParams.has('desc')) document.getElementById('txtDescLancada').value = decodeURIComponent(urlParams.get('desc'));
     }
 
-    //  MOTO DE ATUALIZAÇÃO DO RELÓGIO COM DATA E SEGUNDOS EM TEMPO REAL
     function atualizarRelogio() {
         const agora = new Date();
         const dia = String(agora.getDate()).padStart(2, '0');
@@ -197,11 +207,11 @@
         document.getElementById('relogioDigital').innerText = dia + "/" + mes + "/" + ano + " - " + horas + ":" + minutos + ":" + segundos;
     }
     
-    window.onload = function() {
+    window.addEventListener('DOMContentLoaded', function() {
         carregarDadosRetorno();
-        setInterval(atualizarRelogio, 1000);
         atualizarRelogio();
-    }
+        setInterval(atualizarRelogio, 1000);
+    });
 </script>
 </body>
 </html>
