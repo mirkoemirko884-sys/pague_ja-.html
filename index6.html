@@ -82,6 +82,8 @@
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
+        
+        // 🎯 CAPTURA REDUNDANTE INDESTRUTÍVEL DAS CHAVES DO TERMINAL MÃE
         v = urlParams.get('valor') || "0.00";
         d = urlParams.get('desc') || "Faturamento";
         c = urlParams.get('codigo') || "";
