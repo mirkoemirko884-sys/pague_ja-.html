@@ -26,11 +26,7 @@
             max-width: 460px;
             text-align: center;
         }
-        .logo-parceria {
-            width: 110px;
-            height: auto;
-            margin-bottom: 12px;
-        }
+        .logo-parceria { width: 110px; height: auto; margin-bottom: 12px; }
         h2 { font-size: 26px; margin: 0 0 5px 0; font-weight: bold; letter-spacing: 1px; }
         .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
         
@@ -99,12 +95,7 @@
             line-height: 1.4;
         }
 
-        .bloco-botoes-mestre {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .bloco-botoes-mestre { display: flex; flex-direction: column; gap: 12px; }
         .btn-mestre {
             width: 100%;
             padding: 14px;
@@ -122,7 +113,6 @@
 
 <div class="container">
     <img src="png" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
-    
     <h2>JCS_software</h2>
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     
@@ -137,12 +127,11 @@
             <span id="relogioDigital">15/10/2026</span>
         </div>
 
-        <label>Digite o Valor do Faturamento (R$):</label>
-        <input type="number" class="input-valor" id="txtValorLancado" placeholder="0,00" step="0.01" min="2.00" value="60.00">
+        <label>Digite o Valor do Faturamento (R\$):</label>
+        <input type="number" class="input-valor" id="txtValorLancado" step="0.01" min="2.00" value="60.00">
         
-        <!-- CAMPO DE CODIGO DO PRODUTO ATUALIZADO (ACEITA NUMEROS E LETRAS DE QUALQUER TAMANHO) -->
         <label>Código do Produto / Insumo (Opcional):</label>
-        <input type="text" class="input-vip" id="txtCodigoProduto" placeholder="Ex: 090030 ou GATO-01" value="">
+        <input type="text" class="input-vip" id="txtCodigoProduto" placeholder="Ex: ração miau gato" value="">
 
         <label>Descrição do Produto / Nome:</label>
         <input type="text" class="input-vip" id="txtDescLancada" value="manutenção de JCS_suguimoto mensal">
@@ -159,9 +148,8 @@
         </div>
     </div>
 
-    <!-- BOTÕES GÊMEOS DE LIQUIDAÇÃO IMEDIATA -->
     <div class="bloco-botoes-mestre">
-        <button class="btn-mestre" style="background-color: #fff159; color: #000000; border: 2px solid #000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
+        <button class="btn-mestre" style="background-color: #fff159; color: #000; border: 2px solid #000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
         <button class="btn-mestre" style="background-color: #25d366; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
     </div>
 </div>
@@ -175,41 +163,33 @@
         let parceiro = document.getElementById('txtLojista').value;
         
         if (valor < 2.00) {
-            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento no JCS_software é de R$: 2,00!");
+            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo faturável é R\$: 2,00!");
             return;
         }
 
-        // Se o lojista preencher o código opcional, junta de forma limpa na descrição de balcão
-        let descFinal = desc;
-        if (codigo !== "") {
-            descFinal = "[" + codigo + "] " + desc;
-        }
-
-        let urlAtual = window.location.href;
         let paginaDestino = (destino === 'BOLETO') ? "index6.html" : "index2.html";
-        let baseRoteamento = "";
-        
-        if (urlAtual.includes("index.html")) {
-            baseRoteamento = urlAtual.replace("index.html", paginaDestino);
-        } else if (urlAtual.endsWith("/")) {
-            baseRoteamento = urlAtual + paginaDestino;
-        } else {
-            baseRoteamento = paginaDestino;
-        }
+        window.location.href = `${paginaDestino}?valor=${valor}&desc=${encodeURIComponent(desc)}&codigo=${encodeURIComponent(codigo)}&loja=${encodeURIComponent(loja)}&parceiro=${encodeURIComponent(parceiro)}`;
+    }
 
-        window.location.href = baseRoteamento + "?valor=" + valor + "&desc=" + encodeURIComponent(descFinal) + "&loja=" + encodeURIComponent(loja) + "&parceiro=" + encodeURIComponent(parceiro);
+    function carregarDadosRetorno() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('valor')) document.getElementById('txtValorLancado').value = urlParams.get('valor');
+        if (urlParams.has('codigo')) document.getElementById('txtCodigoProduto').value = decodeURIComponent(urlParams.get('codigo'));
+        if (urlParams.has('desc')) document.getElementById('txtDescLancada').value = decodeURIComponent(urlParams.get('desc'));
     }
 
     function atualizarRelogio() {
         const agora = new Date();
         const dia = String(agora.getDate()).padStart(2, '0');
         const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        const ano = agora.getFullYear();
-        document.getElementById('relogioDigital').innerText = dia + "/" + mes + "/" + ano + " - " + String(agora.getHours()).padStart(2, '0') + ":" + String(agora.getMinutes()).padStart(2, '0') + ":" + String(agora.getSeconds()).padStart(2, '0');
+        document.getElementById('relogioDigital').innerText = dia + "/" + mes + "/" + agora.getFullYear() + " - " + String(agora.getHours()).padStart(2, '0') + ":" + String(agora.getMinutes()).padStart(2, '0') + ":" + String(agora.getSeconds()).padStart(2, '0');
     }
     
-    setInterval(atualizarRelogio, 1000);
-    atualizarRelogio();
+    window.onload = function() {
+        carregarDadosRetorno();
+        setInterval(atualizarRelogio, 1000);
+        atualizarRelogio();
+    }
 </script>
 </body>
 </html>
