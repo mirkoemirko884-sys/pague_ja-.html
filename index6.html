@@ -3,92 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Terminal QR Code Bradesco</title>
+    <title>JCS_software_Faturamento_Protegido.pdf</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #facc15; /* AMARELO MERCADO LIVRE */
-            color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #323639; /* CINZA ESCURO DO LEITOR DE PDF */
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
             box-sizing: border-box;
         }
-        .container {
-            background: #ffffff;
-            padding: 25px;
-            border: 3px solid #000000;
-            border-radius: 12px;
+        
+        /* CONTROLES DO TOPO SIMULANDO O LEITOR DE PDF */
+        .pdf-toolbar {
+            background-color: #2b2b2b;
+            color: #ffffff;
             width: 100%;
-            max-width: 420px;
+            max-width: 595px;
+            padding: 10px 15px;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 13px;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        /* A FOLHA DE PAPEL DIGITAL (MEDIDA APROXIMADA A5) */
+        .pdf-page {
+            background-color: #ffffff;
+            color: #000000;
+            width: 100%;
+            max-width: 595px; /* LARGURA PADRÃO PADRONIZADA */
+            min-height: 520px;
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             text-align: center;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            border: 1px solid #1a1a1a;
         }
+
         .badge-seguro {
-            background-color: #3483fa;
-            color: white;
-            font-size: 11px;
+            background-color: #facc15; /* AMARELO MERCADO LIVRE */
+            color: #000000;
+            font-size: 13px;
             font-weight: bold;
-            padding: 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .qr-moldura {
-            border: 2px solid #000000;
             padding: 10px;
+            border: 2px solid #000000;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        
+        .qr-moldura {
+            border: 4px double #000000;
+            padding: 15px;
             background: #ffffff;
             display: inline-block;
-            margin: 10px 0;
+            margin: 15px 0;
         }
         .qr-imagem-real {
-            width: 250px;
-            height: 250px;
+            width: 240px;
+            height: 240px;
             display: block;
         }
+        
         .valor-neon {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: bold;
             color: #15803d;
             margin: 10px 0;
+            border-top: 2px dashed #000000;
+            border-bottom: 2px dashed #000000;
+            padding: 8px 0;
         }
+
+        .tarja-autenticidade {
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            background: #e2e8f0;
+            padding: 6px;
+            margin-top: 15px;
+            border: 1px solid #000000;
+        }
+
         .btn-retornar {
-            display: block;
-            width: 100%;
-            padding: 12px;
+            display: inline-block;
+            padding: 8px 16px;
             background-color: #cc092f;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
             text-decoration: none;
-            margin-top: 15px;
+            font-family: -apple-system, sans-serif;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="badge-seguro">🛡️ LIQUIDAÇÃO DIRETA BRADESCO VIA BCB</div>
-    
-    <div style="font-size: 14px; font-weight: bold; text-transform: uppercase; color: #475569;">Aponte a Câmera do Celular:</div>
-    
-    <!-- 🖼️ PUXA A IMAGEM PNG ISOLADA DIRETO DA RAIZ DO SEU REPOSITÓRIO -->
-    <div class="qr-moldura">
-        <img src="png" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
+    <!-- BARRA DE CONTROLES DO VISUALIZADOR PDF -->
+    <div class="pdf-toolbar">
+        <span>📄 JCS_software_Faturamento.pdf (1/1)</span>
+        <button class="btn-retornar" onclick="window.history.back()">⬅️ Sair do PDF</button>
     </div>
 
-    <div style="font-size: 11px; opacity: 0.8;">VALOR DO FATURAMENTO DETECTADO:</div>
-    <div class="valor-neon" id="lblValorQR">R$: 0,00</div>
+    <!-- FOLHA DO DOCUMENTO BANCÁRIO -->
+    <div class="pdf-page">
+        <div class="badge-seguro">🛡️ LIQUIDAÇÃO DIRETA BRADESCO VIA BCB TIMED</div>
+        
+        <div style="font-size: 13px; font-weight: bold; text-transform: uppercase; color: #333333; margin-bottom: 5px;">
+            Documento de Quitação de Balcão - Uso de Licença Mensal
+        </div>
+        <div style="font-size: 11px; opacity: 0.7; margin-bottom: 15px;">
+            Emissor: MAIRIPORÃ RAÇÕES | Código Rastreio: BR-JCS-2026-MPO
+        </div>
+        
+        <!-- 🖼️ IMAGEM PNG PURA DO QRCODE CONECTADA DIRETAMENTE DA RAIZ -->
+        <div class="qr-moldura">
+            <img src="png" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco">
+        </div>
 
-    <button class="btn-retornar" onclick="window.history.back()">⬅️ Voltar ao Terminal</button>
-</div>
+        <div style="font-size: 11px; font-weight: bold; opacity: 0.8;">VALOR DO CRÉDITO PROTEGIDO REGIONAL:</div>
+        <div class="valor-neon" id="lblValorQR">R$: 60,00</div>
+
+        <div class="tarja-autenticacao">
+            【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA - TAXA ZERO BCB 】
+        </div>
+    </div>
 
 <script>
     window.onload = function() {
