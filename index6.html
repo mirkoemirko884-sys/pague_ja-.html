@@ -8,137 +8,36 @@
         body {
             font-family: "Courier New", Courier, monospace;
             background-color: #323639; /* CINZA ESCURO DO LEITOR DE PDF */
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box;
         }
-        
         .pdf-toolbar {
-            background-color: #2b2b2b;
-            color: #ffffff;
-            width: 100%;
-            max-width: 650px;
-            padding: 10px 15px;
-            border-radius: 4px 4px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            font-size: 13px;
-            border-bottom: 2px solid #1a1a1a;
+            background-color: #2b2b2b; color: #ffffff; width: 100%; max-width: 650px; padding: 10px 15px;
+            border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; align-items: center;
+            box-sizing: border-box; font-family: -apple-system, sans-serif; font-size: 13px; border-bottom: 2px solid #1a1a1a;
         }
-
         .pdf-page {
-            background-color: #ffffff;
-            color: #000000;
-            width: 100%;
-            max-width: 650px;
-            padding: 25px;
-            box-sizing: border-box;
-            border-radius: 0 0 4px 4px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            border: 1px solid #1a1a1a;
+            background-color: #ffffff; color: #000000; width: 100%; max-width: 650px; padding: 25px;
+            box-sizing: border-box; border-radius: 0 0 4px 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #1a1a1a;
         }
-
-        .topo-boleto {
-            display: flex;
-            align-items: center;
-            border-bottom: 3px solid #000000;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-        .banco-logo {
-            font-size: 22px;
-            font-weight: bold;
-            padding-right: 15px;
-            border-right: 2px solid #000000;
-            text-transform: uppercase;
-        }
-        .banco-codigo {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 0 15px;
-            border-right: 2px solid #000000;
-        }
-        .linha-digitavel {
-            font-size: 13px;
-            font-weight: bold;
-            padding-left: 10px;
-            flex: 1;
-            text-align: right;
-            letter-spacing: 0.5px;
-            word-break: break-all;
-        }
-
-        .tabela-boleto {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-        .tabela-boleto td {
-            border: 1px solid #000000;
-            padding: 6px 10px;
-            font-size: 11px;
-            vertical-align: top;
-        }
-        .tabela-boleto td span {
-            display: block;
-            font-size: 9px;
-            font-weight: bold;
-            color: #444444;
-            text-transform: uppercase;
-            margin-bottom: 3px;
-        }
-
-        .qr-moldura {
-            border: 2px solid #000000;
-            padding: 10px;
-            background: #ffffff;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .qr-imagem-real {
-            width: 210px;
-            height: 210px;
-            display: block;
-        }
-
-        .tarja-autenticacao {
-            font-size: 10px;
-            font-weight: bold;
-            text-align: center;
-            background: #e2e8f0;
-            padding: 8px;
-            margin-top: 15px;
-            border: 1px solid #000000;
-            text-transform: uppercase;
-        }
-
-        .btn-retornar {
-            padding: 8px 16px;
-            background-color: #cc092f;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            text-decoration: none;
-            font-family: -apple-system, sans-serif;
-            font-size: 12px;
-        }
+        .topo-boleto { display: flex; align-items: center; border-bottom: 3px solid #000000; padding-bottom: 8px; margin-bottom: 15px; }
+        .banco-logo { font-size: 22px; font-weight: bold; padding-right: 15px; border-right: 2px solid #000000; text-transform: uppercase; }
+        .banco-codigo { font-size: 18px; font-weight: bold; padding: 0 15px; border-right: 2px solid #000000; }
+        .linha-digitavel { font-size: 13px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; }
+        .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        .tabela-boleto td { border: 1px solid #000000; padding: 6px 10px; font-size: 11px; vertical-align: top; }
+        .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #444444; text-transform: uppercase; margin-bottom: 3px; }
+        .qr-moldura { border: 2px solid #000000; padding: 10px; background: #ffffff; display: inline-block; margin-top: 10px; }
+        .qr-imagem-real { width: 210px; height: 210px; display: block; }
+        .tarja-autenticacao { font-size: 10px; font-weight: bold; text-align: center; background: #fff159; padding: 8px; margin-top: 15px; border: 1px solid #000000; text-transform: uppercase; }
+        .btn-retornar { padding: 8px 16px; background-color: #cc092f; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: -apple-system, sans-serif; font-size: 12px; }
     </style>
 </head>
 <body>
 
     <div class="pdf-toolbar">
         <span>📄 JCS_software_Boleto_VIP.pdf (1/1)</span>
-        <button class="btn-retornar" onclick="window.history.back()">⬅️ Retornar</button>
+        <button class="btn-retornar" onclick="voltarParaTerminalFisico()">⬅️ Voltar ao Terminal</button>
     </div>
 
     <div class="pdf-page">
@@ -162,46 +61,43 @@
             </tr>
             <tr>
                 <td colspan="4"><span>Descrição do Produto / Insumo Logístico</span><strong id="lblDescBoleto">Carregando...</strong></td>
-                <td style="background-color: #f0fdf4;"><span>(=) Valor do Documento (R$)</span><strong id="lblValorBoleto" style="color: #15803d; font-size: 14px;">R$: 0,00</strong></td>
+                <td style="background-color: #f0fdf4;"><span>(=) Valor do Documento (R\$)</span><strong id="lblValorBoleto" style="color: #15803d; font-size: 14px;">R\$: 0,00</strong></td>
             </tr>
             <tr>
                 <td colspan="5" style="text-align: center; padding: 15px;">
                     <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; color: #1e3a8a;">
                         🛡️ LIQUIDAÇÃO DIRETA BRADESCO VIA BCB TIMED
                     </div>
-                    <div style="font-size: 10px; margin-bottom: 10px; opacity: 0.8;">
-                        Aponte a câmera do seu celular para o QR Code do Bradesco ou utilize o código oficial acima para pagar:
-                    </div>
-                    
                     <div class="qr-moldura">
                         <img src="png" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco Real">
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td colspan="5">
-                    <span>Instruções de Balcão (Regra da Moeda de Troca)</span>
-                    <div style="font-size: 10px; line-height: 1.4; text-align: justify;">
-                        Este título confere liberdade cambial no balcão da MAIRIPORÃ RAÇÕES. Caso o comprador realize amortizações parciais antecipadas de qualquer montante em dinheiro vivo antes do vencimento regulamentar, o lojista validará o saldo restante de forma automática para a próxima transação de confiança mútua.
-                    </div>
-                </td>
-            </tr>
         </table>
-
-        <div class="tarja-autenticacao">
-            🔒 【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA POR LEI FEDERAL - JUROS ZERO 】
-        </div>
+        <div class="tarja-autenticacao">🔒 DUPLICATA EM CARTEIRA REGIONAL - JUROS ZERO</div>
     </div>
 
 <script>
+    let v = "0.00", d = "", c = "", l = "", p = "";
+
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        let v = urlParams.get('valor') || "0.00";
-        let d = urlParams.get('desc') || "Faturamento Geral";
+        v = urlParams.get('valor') || "0.00";
+        d = urlParams.get('desc') || "Faturamento";
+        c = urlParams.get('codigo') || "";
+        l = urlParams.get('loja') || "";
+        p = urlParams.get('parceiro') || "";
         
-        document.getElementById('lblValorBoleto').innerText = "R$: " + parseFloat(v).toFixed(2).replace('.', ',');
-        document.getElementById('lblDescBoleto').innerText = decodeURIComponent(d);
+        let textoVisor = d;
+        if (c !== "") { textoVisor = "[" + c + "] " + d; }
+
+        document.getElementById('lblValorBoleto').innerText = "R\$: " + parseFloat(v).toFixed(2).replace('.', ',');
+        document.getElementById('lblDescBoleto').innerText = decodeURIComponent(textoVisor);
     };
+
+    function voltarParaTerminalFisico() {
+        window.location.href = `index.html?valor=${v}&desc=${encodeURIComponent(d)}&codigo=${encodeURIComponent(c)}&loja=${encodeURIComponent(l)}&parceiro=${encodeURIComponent(p)}`;
+    }
 </script>
 </body>
 </html>
