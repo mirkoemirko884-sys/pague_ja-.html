@@ -99,15 +99,18 @@
             line-height: 1.4;
         }
 
-        .btn-portal {
-            display: block;
+        .bloco-botoes-mestre {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-mestre {
             width: 100%;
             padding: 14px;
-            background-color: #25d366; /* VERDE WHATSAPP */
-            color: #ffffff;
             border: none;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
@@ -137,7 +140,11 @@
         <label>Digite o Valor do Faturamento (R$):</label>
         <input type="number" class="input-valor" id="txtValorLancado" placeholder="0,00" step="0.01" min="2.00" value="60.00">
         
-        <label>Descrição do Produto / Insumo:</label>
+        <!-- CAMPO DE CODIGO DO PRODUTO ATUALIZADO (ACEITA NUMEROS E LETRAS DE QUALQUER TAMANHO) -->
+        <label>Código do Produto / Insumo (Opcional):</label>
+        <input type="text" class="input-vip" id="txtCodigoProduto" placeholder="Ex: 090030 ou GATO-01" value="">
+
+        <label>Descrição do Produto / Nome:</label>
         <input type="text" class="input-vip" id="txtDescLancada" value="manutenção de JCS_suguimoto mensal">
 
         <label>NOME DO PROPRIETÁRIO (VALIDADOR):</label>
@@ -152,32 +159,45 @@
         </div>
     </div>
 
-    <button class="btn-portal" onclick="gerarCobrancaInstantanea()">Gerar Cobrança Instantânea ➔</button>
+    <!-- BOTÕES GÊMEOS DE LIQUIDAÇÃO IMEDIATA -->
+    <div class="bloco-botoes-mestre">
+        <button class="btn-mestre" style="background-color: #fff159; color: #000000; border: 2px solid #000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
+        <button class="btn-mestre" style="background-color: #25d366; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
+    </div>
 </div>
 
 <script>
-    // 🎯 O GATILHO COMPORTAMENTAL MESTRE: PEGA O ENDEREÇO DA INTERNET DE FORMA AUTOMÁTICA CONTRA DOWNLOADS LOCAIS
-    function gerarCobrancaInstantanea() {
+    function encaminharEsteira(destino) {
         const valor = parseFloat(document.getElementById('txtValorLancado').value) || 0.00;
+        let codigo = document.getElementById('txtCodigoProduto').value.trim();
+        let desc = document.getElementById('txtDescLancada').value.trim();
+        let loja = document.getElementById('txtEstablishment').value;
+        let parceiro = document.getElementById('txtLojista').value;
         
         if (valor < 2.00) {
             alert("❌ OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento no JCS_software é de R$: 2,00!");
             return;
         }
 
-        // Descobre se está abrindo local ou na nuvem e monta a rota perfeita da página de internet index6.html
+        // Se o lojista preencher o código opcional, junta de forma limpa na descrição de balcão
+        let descFinal = desc;
+        if (codigo !== "") {
+            descFinal = "[" + codigo + "] " + desc;
+        }
+
         let urlAtual = window.location.href;
+        let paginaDestino = (destino === 'BOLETO') ? "index6.html" : "index2.html";
         let baseRoteamento = "";
         
         if (urlAtual.includes("index.html")) {
-            baseRoteamento = urlAtual.replace("index.html", "index6.html");
+            baseRoteamento = urlAtual.replace("index.html", paginaDestino);
         } else if (urlAtual.endsWith("/")) {
-            baseRoteamento = urlAtual + "index6.html";
+            baseRoteamento = urlAtual + paginaDestino;
         } else {
-            baseRoteamento = "index6.html";
+            baseRoteamento = paginaDestino;
         }
 
-        window.location.href = baseRoteamento + "?valor=" + valor;
+        window.location.href = baseRoteamento + "?valor=" + valor + "&desc=" + encodeURIComponent(descFinal) + "&loja=" + encodeURIComponent(loja) + "&parceiro=" + encodeURIComponent(parceiro);
     }
 
     function atualizarRelogio() {
