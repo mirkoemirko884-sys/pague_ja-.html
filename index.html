@@ -118,7 +118,7 @@
 <body>
 
 <div class="container">
-    <img src="https://github.io" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
+    <img src="png" class="logo-parceria" onerror="this.src='https://imgur.com'" alt="Logo JCS_software">
     
     <h2>JCS_software</h2>
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
@@ -156,6 +156,7 @@
 </div>
 
 <script>
+    // 🎯 O GATILHO COMPORTAMENTAL MESTRE: PEGA O ENDEREÇO DA INTERNET DE FORMA AUTOMÁTICA CONTRA DOWNLOADS LOCAIS
     function gerarCobrancaInstantanea() {
         const valor = parseFloat(document.getElementById('txtValorLancado').value) || 0.00;
         
@@ -164,8 +165,19 @@
             return;
         }
 
-        // SALTO CRU, DIRETO E INDESTRUTÍVEL PARA A IMAGEM PNG SALVA NO REPOSITÓRIO
-        window.location.href = "png";
+        // Descobre se está abrindo local ou na nuvem e monta a rota perfeita da página de internet index6.html
+        let urlAtual = window.location.href;
+        let baseRoteamento = "";
+        
+        if (urlAtual.includes("index.html")) {
+            baseRoteamento = urlAtual.replace("index.html", "index6.html");
+        } else if (urlAtual.endsWith("/")) {
+            baseRoteamento = urlAtual + "index6.html";
+        } else {
+            baseRoteamento = "index6.html";
+        }
+
+        window.location.href = baseRoteamento + "?valor=" + valor;
     }
 
     function atualizarRelogio() {
