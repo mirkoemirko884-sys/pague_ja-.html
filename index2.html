@@ -5,163 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software | Cupom de Liberação e Rastreio</title>
     <style>
-        body {
-            font-family: "Courier New", Courier, monospace;
-            background-color: #15803d; /* VERDE DINHEIRO */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .container {
-            background: #15803d;
-            border: 2px solid #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            width: 100%;
-            max-width: 550px;
-            box-sizing: border-box;
-        }
-        
-        .seletor-prazo {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid #ffffff;
-            color: white;
-            padding: 10px;
-            width: 100%;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+        body { font-family: "Courier New", Courier, monospace; background-color: #15803d; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; box-sizing: border-box; }
+        .container { background: #15803d; border: 2px solid #ffffff; border-radius: 8px; padding: 20px; width: 100%; max-width: 550px; box-sizing: border-box; }
+        .seletor-prazo { background: rgba(0,0,0,0.4); border: 1px solid #ffffff; color: white; padding: 10px; width: 100%; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 15px; }
         .seletor-prazo option { background: #15803d; }
-
-        .painel-amortizacao {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px dashed #ffffff;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .input-bico {
-            width: 120px;
-            padding: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            border: 1px solid #ffffff;
-            border-radius: 4px;
-            text-align: center;
-            margin-left: 10px;
-            color: #000;
-        }
-
-        .alerta-peixao {
-            background-color: #fff159;
-            color: #000000;
-            font-size: 13px;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 2px solid #000000;
-            text-align: center;
-        }
-
-        .via-cedula {
-            background: #ffffff;
-            color: #000000;
-            border: 3px double #000000;
-            padding: 15px;
-            margin-bottom: 15px;
-            text-align: left;
-            position: relative;
-        }
-        .via-tag {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 1px solid #000000;
-            padding: 2px 5px;
-        }
-        .titulo-timbre {
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 2px dashed #000000;
-            padding-bottom: 6px;
-            margin-bottom: 12px;
-        }
-        .linha-dados {
-            font-size: 12px;
-            margin: 4px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .painel-moeda-troca {
-            background: #eff6ff;
-            color: #1e3a8a;
-            border-left: 4px solid #3b82f6;
-            padding: 10px;
-            font-size: 11px;
-            margin-top: 10px;
-            font-weight: bold;
-            line-height: 1.4;
-        }
-
-        .tarja-autenticacao {
-            margin-top: 12px;
-            border-top: 2px solid #000000;
-            padding-top: 6px;
-            font-size: 9px;
-            font-weight: bold;
-            text-align: center;
-            background: #e2e8f0;
-        }
-        .bloco-botoes {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .btn-print {
-            width: 100%;
-            padding: 14px;
-            background-color: #ffffff;
-            color: #15803d;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-sizing: border-box;
-        }
-
-        @media print {
-            body { background: #ffffff; color: #000000; padding: 0; }
-            .container { border: none; max-width: 100%; padding: 0; }
-            .bloco-botoes, .seletor-prazo, .linha-corte, .alerta-peixao, .painel-amortizacao { display: none !important; }
-            .via-cedula { border: 3px double #000000; page-break-inside: avoid; }
-        }
+        .painel-amortizacao { background: rgba(255, 255, 255, 0.15); border: 1px dashed #ffffff; border-radius: 6px; padding: 12px; margin-bottom: 15px; text-align: left; }
+        .input-bico { width: 120px; padding: 6px; font-size: 14px; font-weight: bold; border: 1px solid #ffffff; border-radius: 4px; text-align: center; margin-left: 10px; color: #000; }
+        .alerta-peixao { background-color: #fff159; color: #000000; font-size: 13px; font-weight: bold; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; border: 2px solid #000000; text-align: center; }
+        .via-cedula { background: #ffffff; color: #000000; border: 3px double #000000; padding: 15px; margin-bottom: 15px; text-align: left; position: relative; }
+        .via-tag { position: absolute; top: 5px; right: 10px; font-size: 10px; font-weight: bold; text-transform: uppercase; border: 1px solid #000000; padding: 2px 5px; }
+        .titulo-timbre { font-size: 14px; font-weight: bold; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 6px; margin-bottom: 12px; }
+        .linha-dados { font-size: 12px; margin: 4px 0; display: flex; justify-content: space-between; }
+        .painel-moeda-troca { background: #eff6ff; color: #1e3a8a; border-left: 4px solid #3b82f6; padding: 10px; font-size: 11px; margin-top: 10px; font-weight: bold; line-height: 1.4; }
+        .tarja-autenticacao { margin-top: 12px; border-top: 2px solid #000000; padding-top: 6px; font-size: 9px; font-weight: bold; text-align: center; background: #e2e8f0; }
+        .bloco-botoes { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-print { flex: 2; padding: 14px; background-color: #ffffff; color: #15803d; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-voltar { flex: 1; padding: 14px; background-color: #cc092f; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
+        @media print { body { background: #ffffff; color: #000000; padding: 0; } .container { border: none; max-width: 100%; padding: 0; } .bloco-botoes, .seletor-prazo, .linha-corte, .alerta-peixao, .painel-amortizacao { display: none !important; } .via-cedula { border: 3px double #000000; page-break-inside: avoid; } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="alerta-peixao" id="lblAlertaPeixao">
-        🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO COM CAIXA TAXA ZERO!
-    </div>
+    <div class="alerta-peixao" id="lblAlertaPeixao">🎣 PARABÉNS: VOCÊ FISGOU UM PEIXÃO!</div>
 
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira)</option>
@@ -174,73 +40,75 @@
     </select>
 
     <div class="painel-amortizacao">
-        <label style="font-size: 12px; font-weight: bold; display: inline-block;">Amortizar Valor de Bico / Crédito (R$):</label>
-        <input type="number" class="input-bico" id="txtBicoDesconto" placeholder="Ex: 50.00" step="0.01" value="0.00" oninput="calcularPrecosBancariosVIP()">
+        <label>Amortizar Valor de Bico / Crédito (R\$):</label>
+        <input type="number" class="input-bico" id="txtBicoDesconto" value="0.00" oninput="calcularPrecosBancariosVIP()">
     </div>
 
-    <!-- VIA 1: LOJA -->
     <div class="via-cedula">
         <div class="via-tag">Via Loja</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador">RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
-        <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-family: sans-serif; font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
+        <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-weight: bold; background: #000; color: #fff; padding: 2px 6px;">BR-JCS-2026-MPO</span></div>
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
-        
-        <div style="font-size: 17px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco">R$: 0,00</span>
-        </div>
-
-        <div class="painel-moeda-troca">
-            🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO:<br>
-            Este título confere liberdade cambial. Se o comprador optar por realizar pagamentos parciais antecipados de qualquer valor antes do vencimento, o lojista receberá o montante em dinheiro vivo e amortizará o saldo restante automaticamente para a próxima transação comercial de confiança!
-        </div>
-        
-        <div class="tarja-autenticacao" id="autenticacaoVia1">
-            【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】
-        </div>
+        <div style="font-size: 17px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">VALOR: <span id="labelPreco">R\$: 0,00</span></div>
+        <div class="painel-moeda-troca">🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO: amortização automática para a próxima transação!</div>
     </div>
 
-    <div style="border-top: 2px dashed #ffffff; margin: 15px 0; text-align: center; font-size: 11px; color: white;" class="linha-corte">
-        ✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -
-    </div>
-
-    <!-- VIA 2: CLIENTE -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador2">RODRIGO_CRED VIP</strong></div>
-        <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre2">MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
-        <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao2" style="font-weight: bold;">...</span></div>
-        
-        <div style="font-size: 17px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">
-            VALOR EM CARTEIRA: <span id="labelPreco2">R$: 0,00</span>
-        </div>
-        
-        <div class="tarja-autenticacao" id="autenticacaoVia2">
-            【 DUPLICATA EM CARTEIRA REGIONAL - RECONHECIDA COMO PROVA DE DÍVIDA ATIVA 】
-        </div>
+        <div style="font-size: 17px; font-weight: bold; border-top: 1px dashed #000000; margin-top: 10px; padding-top: 5px; text-align: center;">VALOR: <span id="labelPreco2">R\$: 0,00</span></div>
     </div>
 
     <div class="bloco-botoes">
-        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cupom de Duplicata (Meia Folha A5)</button>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Cupom</button>
+        <!-- BOTÃO FÍSICO CORRIGIDO PARA RETORNAR SEM PERDER PREÇOS -->
+        <button class="btn-voltar" onclick="voltarParaTerminalFisico()">⬅️ Voltar</button>
     </div>
 </div>
 
 <script>
-    let valorGeralMestre = 10.00;
-    let descGeralMestre = "Carregando...";
-    let lojaGeralMestre = "MAIRIPORÃ RAÇÕES";
-    let validadorGeralMestre = "RODRIGO";
+    let v = 10.0, d = "", c = "", l = "", p = "";
 
     function extrairParametros() {
         const urlParams = new URLSearchParams(window.location.search);
-        
-        if (urlParams.has('valor')) valorGeralMestre = parseFloat(urlParams.get('valor'));
-        if (urlParams.has('desc')) descGeralMestre = decodeURIComponent(urlParams.get('desc'));
-        if (urlParams.has('loja')) lojaGeralMestre = decodeURIComponent(urlParams.get('loja'));
-        if (urlParams.has('parceiro')) validadorGeralMestre = decodeURIComponent(urlParams.get('parceiro'));
+        if (urlParams.has('valor')) v = parseFloat(urlParams.get('valor'));
+        if (urlParams.has('desc')) d = decodeURIComponent(urlParams.get('desc'));
+        if (urlParams.has('codigo')) c = decodeURIComponent(urlParams.get('codigo'));
+        if (urlParams.has('loja')) l = decodeURIComponent(urlParams.get('loja'));
+        if (urlParams.has('parceiro')) p = decodeURIComponent(urlParams.get('parceiro'));
 
-        document.getElementById('lblValidador').innerText = validadorGeralMestre + "_CRED VIP";
+        let textoVisor = d;
+        if (c !== "") { textoVisor = "[" + c + "] " + d; }
+
+        document.getElementById('labelProduto').innerText = textoVisor;
+        document.getElementById('labelProduto2').innerText = textoVisor;
+        calcularPrecosBancariosVIP();
+    }
+
+    function calcularPrecosBancariosVIP() {
+        const prazo = document.getElementById('comboPrazo').value;
+        const valorBico = parseFloat(document.getElementById('txtBicoDesconto').value) || 0.00;
+        let valorFinal = v - valorBico;
+        if (valorFinal < 0) valorFinal = 0.00;
+
+        let textoCondicao = (prazo === "vista") ? "À VISTA" : (prazo === "permuta") ? "PERMUTA" : `Carteira - ${prazo} Dias`;
+        if (valorBico > 0) textoCondicao += ` [Abatido R$: ${valorBico.toFixed(2)} de Bico]`;
+
+        const formatado = "R\$: " + valorFinal.toFixed(2).replace('.', ',');
+        document.getElementById('labelCondicao').innerText = textoCondicao;
+        document.getElementById('labelPreco').innerText = formatado;
+        document.getElementById('labelPreco2').innerText = formatado;
+    }
+
+    function voltarParaTerminalFisico() {
+        window.location.href = `index.html?valor=${v}&desc=${encodeURIComponent(d)}&codigo=${encodeURIComponent(c)}&loja=${encodeURIComponent(l)}&parceiro=${encodeURIComponent(p)}`;
+    }
+
+    window.onload = extrairParametros;
+</script>
+</body>
+</html>
