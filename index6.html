@@ -1,9 +1,3 @@
----
-
-### 🛠️ 2. RECONEXÃO SOBERANA DO BOLETO: Arquivo `index6.html`
-*Substitua o conteúdo da gaveta 6 por este script corrigido para ler o código alfanumérico enviado da tela mãe:*
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -43,6 +37,7 @@
 
     <div class="pdf-toolbar">
         <span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span>
+        <!-- RETORNO FÍSICO COM MEMÓRIA INTEGRADA PRESERVADA -->
         <button class="btn-retornar" onclick="voltarParaTerminalFisico()">⬅️ Voltar ao Painel</button>
     </div>
 
@@ -59,7 +54,7 @@
                 <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td>
             </tr>
             <tr>
-                <td width="20%"><span>Data do Doc.</span><strong>15/10/2026</strong></td>
+                <td width="20%"><span>Data do Doc.</span><strong>16/10/2026</strong></td>
                 <td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td>
                 <td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td>
                 <td width="20%"><span>Aceite</span><strong>N</strong></td>
@@ -88,6 +83,8 @@
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
+        
+        // MOTOR RECEPTOR UNIFICADO COM AS MESMAS PALAVRAS-CHAVES DO PORTAL
         v = urlParams.get('valor') || "0.00";
         d = urlParams.get('desc') || "Faturamento";
         c = urlParams.get('codigo') || "";
@@ -102,6 +99,7 @@
     };
 
     function voltarParaTerminalFisico() {
+        // Devolve os dados amarrados na URL contra o apagão de memória do Edge
         window.location.href = `index.html?valor=${v}&desc=${encodeURIComponent(d)}&codigo=${encodeURIComponent(c)}&loja=${encodeURIComponent(l)}&parceiro=${encodeURIComponent(p)}`;
     }
 </script>
