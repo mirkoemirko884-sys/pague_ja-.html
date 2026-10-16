@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software_Boleto_Bancario_VIP.pdf</title>
+    <title>JCS_software_Boleto_VIP.pdf</title>
     <style>
         body {
             font-family: "Courier New", Courier, monospace;
-            background-color: #323639; /* CINZA ESCURO DO LEITOR DE PDF */
-            margin: 0; padding: 20px;
+            background-color: #212529; /* CINZA GRAFITE PREMIUM LUXO */
+            margin: 0; padding: 25px;
             display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box;
         }
         .pdf-toolbar {
-            background-color: #2b2b2b; color: #ffffff; width: 100%; max-width: 650px; padding: 10px 15px;
-            border-radius: 4px 4px 0 0; display: flex; justify-content: space-between; align-items: center;
+            background-color: #343a40; color: #ffffff; width: 100%; max-width: 680px; padding: 12px 20px;
+            border-radius: 6px 6px 0 0; display: flex; justify-content: space-between; align-items: center;
             box-sizing: border-box; font-family: -apple-system, sans-serif; font-size: 13px; border-bottom: 2px solid #1a1a1a;
         }
         .pdf-page {
-            background-color: #ffffff; color: #000000; width: 100%; max-width: 650px; padding: 25px;
-            box-sizing: border-box; border-radius: 0 0 4px 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #1a1a1a;
+            background-color: #ffffff; color: #000000; width: 100%; max-width: 680px; padding: 30px;
+            box-sizing: border-box; border-radius: 0 0 6px 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); border: 1px solid #000000;
         }
-        .topo-boleto { display: flex; align-items: center; border-bottom: 3px solid #000000; padding-bottom: 8px; margin-bottom: 15px; }
-        .banco-logo { font-size: 22px; font-weight: bold; padding-right: 15px; border-right: 2px solid #000000; text-transform: uppercase; }
-        .banco-codigo { font-size: 18px; font-weight: bold; padding: 0 15px; border-right: 2px solid #000000; }
-        .linha-digitavel { font-size: 13px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; }
-        .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-        .tabela-boleto td { border: 1px solid #000000; padding: 6px 10px; font-size: 11px; vertical-align: top; }
-        .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #444444; text-transform: uppercase; margin-bottom: 3px; }
-        .qr-moldura { border: 2px solid #000000; padding: 10px; background: #ffffff; display: inline-block; margin-top: 10px; }
-        .qr-imagem-real { width: 210px; height: 210px; display: block; }
-        .tarja-autenticacao { font-size: 10px; font-weight: bold; text-align: center; background: #fff159; padding: 8px; margin-top: 15px; border: 1px solid #000000; text-transform: uppercase; }
-        .btn-retornar { padding: 8px 16px; background-color: #cc092f; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: -apple-system, sans-serif; font-size: 12px; }
+        .topo-boleto { display: flex; align-items: center; border-bottom: 4px solid #000000; padding-bottom: 10px; margin-bottom: 20px; }
+        .banco-logo { font-size: 24px; font-weight: 900; padding-right: 18px; border-right: 3px solid #000000; text-transform: uppercase; color: #cc092f; }
+        .banco-codigo { font-size: 20px; font-weight: 900; padding: 0 18px; border-right: 3px solid #000000; }
+        .linha-digitavel { font-size: 14px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; }
+        .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
+        .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
+        .qr-moldura { border: 2px solid #000000; padding: 12px; background: #ffffff; display: inline-block; margin-top: 12px; }
+        .qr-imagem-real { width: 220px; height: 220px; display: block; }
+        .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-retornar { padding: 8px 18px; background-color: #dc3545; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: -apple-system, sans-serif; font-size: 12px; transition: 0.2s; }
+        .btn-retornar:hover { background-color: #bd2130; }
     </style>
 </head>
 <body>
 
     <div class="pdf-toolbar">
-        <span>📄 JCS_software_Boleto_VIP.pdf (1/1)</span>
-        <button class="btn-retornar" onclick="voltarParaTerminalFisico()">⬅️ Voltar ao Terminal</button>
+        <span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span>
+        <button class="btn-retornar" onclick="voltarParaTerminalFisico()">⬅️ Voltar ao Painel</button>
     </div>
 
     <div class="pdf-page">
@@ -49,7 +50,7 @@
 
         <table class="tabela-boleto">
             <tr>
-                <td colspan="4"><span>Beneficiário Cedente Oficial</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
+                <td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
                 <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td>
             </tr>
             <tr>
@@ -57,16 +58,16 @@
                 <td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td>
                 <td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td>
                 <td width="20%"><span>Aceite</span><strong>N</strong></td>
-                <td><span>Vencimento</span><strong>Carteira Regional VIP</strong></td>
+                <td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td>
             </tr>
             <tr>
-                <td colspan="4"><span>Descrição do Produto / Insumo Logístico</span><strong id="lblDescBoleto">Carregando...</strong></td>
-                <td style="background-color: #f0fdf4;"><span>(=) Valor do Documento (R\$)</span><strong id="lblValorBoleto" style="color: #15803d; font-size: 14px;">R\$: 0,00</strong></td>
+                <td colspan="4"><span>Descrição do Insumo Comercial / Especificação</span><strong id="lblDescBoleto">Carregando...</strong></td>
+                <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento (R\$)</span><strong id="lblValorBoleto" style="color: #1b5e20; font-size: 15px;">R\$: 0,00</strong></td>
             </tr>
             <tr>
-                <td colspan="5" style="text-align: center; padding: 15px;">
-                    <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; color: #1e3a8a;">
-                        🛡️ LIQUIDAÇÃO DIRETA BRADESCO VIA BCB TIMED
+                <td colspan="5" style="text-align: center; padding: 20px;">
+                    <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; color: #0d47a1;">
+                        🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BANCO CENTRAL DO BRASIL
                     </div>
                     <div class="qr-moldura">
                         <img src="png" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco Real">
@@ -74,7 +75,7 @@
                 </td>
             </tr>
         </table>
-        <div class="tarja-autenticacao">🔒 DUPLICATA EM CARTEIRA REGIONAL - JUROS ZERO</div>
+        <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - TAXA ZERO INTERMEDIAÇÃO BCB</div>
     </div>
 
 <script>
@@ -82,8 +83,6 @@
 
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
-        
-        // 🎯 CAPTURA REDUNDANTE INDESTRUTÍVEL DAS CHAVES DO TERMINAL MÃE
         v = urlParams.get('valor') || "0.00";
         d = urlParams.get('desc') || "Faturamento";
         c = urlParams.get('codigo') || "";
