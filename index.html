@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Terminal Digital Ativo</title>
+    <title>JCS_software | Terminal Mestre Premium</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #cc092f; /* VERMELHO RESTRITO */
+            background-color: #b91c1c; /* VERMELHO FERRARI ELEGANTE */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -18,95 +18,100 @@
             box-sizing: border-box;
         }
         .container {
-            background: #cc092f;
-            padding: 30px;
-            border: 2px solid #ffffff;
-            border-radius: 12px;
+            background: #991b1b; /* VERMELHO FECHADO CLÁSSICO */
+            padding: 35px;
+            border: 3px solid #facc15; /* BORDA DOURADA PREMIO */
+            border-radius: 16px;
             width: 100%;
-            max-width: 460px;
+            max-width: 480px;
             text-align: center;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
         }
-        .logo-parceria { width: 110px; height: auto; margin-bottom: 12px; }
-        h2 { font-size: 26px; margin: 0 0 5px 0; font-weight: bold; letter-spacing: 1px; }
-        .slogan { color: #5eff5e; font-size: 13px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .logo-parceria { width: 120px; height: auto; margin-bottom: 15px; }
+        h2 { font-size: 28px; margin: 0 0 5px 0; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #ffffff; }
+        .slogan { color: #4ade80; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .status-bar {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 6px;
-            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px;
             font-size: 11px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: bold;
         }
-        
-        .badge-shopee { background-color: #ff4500; color: white; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 3px; text-transform: uppercase; }
-        .badge-ml { background-color: #fff159; color: #333333; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 3px; text-transform: uppercase; }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #ffffff;
-            border-radius: 8px;
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 25px;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        label { font-size: 11px; font-weight: bold; display: block; margin-bottom: 6px; text-transform: uppercase; }
+        label { font-size: 11px; font-weight: bold; display: block; margin-bottom: 8px; text-transform: uppercase; color: #facc15; letter-spacing: 0.5px; }
         
         .input-vip {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             font-size: 14px;
             color: #000000;
             background-color: #ffffff;
-            border: none;
-            border-radius: 6px;
+            border: 2px solid transparent;
+            border-radius: 8px;
             box-sizing: border-box;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-weight: bold;
+            outline: none;
         }
+        .input-vip:focus { border-color: #facc15; }
 
         .input-valor {
             width: 100%;
-            padding: 12px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #000000;
+            padding: 14px;
+            font-size: 28px;
+            font-weight: 900;
+            color: #166534;
             background-color: #ffffff;
-            border: 2px solid #ffffff;
-            border-radius: 6px;
+            border: 3px solid #4ade80;
+            border-radius: 8px;
             box-sizing: border-box;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            outline: none;
         }
 
         .tarja-cadeado {
             background: #000000;
-            color: #ff3333;
-            border: 1px solid #ff3333;
+            color: #ef4444;
+            border: 1px solid #dc2626;
             font-size: 10px;
             font-family: monospace;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             margin-bottom: 5px;
             text-align: justify;
             line-height: 1.4;
         }
 
-        .bloco-botoes-mestre { display: flex; flex-direction: column; gap: 12px; }
+        .bloco-botoes-mestre { display: flex; flex-direction: column; gap: 14px; }
         .btn-mestre {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 800;
             cursor: pointer;
             text-transform: uppercase;
             box-sizing: border-box;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
+        .btn-mestre:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -117,40 +122,40 @@
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     
     <div class="status-bar">
-        <span class="badge-shopee">⚡ VENDEDOR INDICADO</span>
-        <span class="badge-ml">✔ LOJA OFICIAL</span>
+        <span style="color: #ff4500;">⚡ VALIDADOR INDICADO</span>
+        <span style="color: #facc15;">✔ CANAL CORPORATIVO</span>
     </div>
     
     <div class="login-box">
-        <div class="status-bar" style="margin-bottom: 15px; background: rgba(0,0,0,0.4);">
-            <span>● Terminal Digital Ativo</span>
+        <div class="status-bar" style="margin-bottom: 20px; background: rgba(0,0,0,0.5);">
+            <span>● OPERACIONAL ATIVO</span>
             <span id="relogioDigital">15/10/2026</span>
         </div>
 
         <label>Digite o Valor do Faturamento (R\$):</label>
         <input type="number" class="input-valor" id="txtValorLancado" step="0.01" min="2.00" value="60.00">
         
-        <label>Código do Produto / Insumo (Opcional):</label>
-        <input type="text" class="input-vip" id="txtCodigoProduto" placeholder="Ex: ração miau gato" value="">
+        <label>Código Logístico do Produto (Opcional):</label>
+        <input type="text" class="input-vip" id="txtCodigoProduto" placeholder="Ex: 090030 ou RAÇÃO-GATO" value="">
 
-        <label>Descrição do Produto / Nome:</label>
+        <label>Descrição do Produto / Insumo:</label>
         <input type="text" class="input-vip" id="txtDescLancada" value="manutenção de JCS_suguimoto mensal">
 
-        <label>NOME DO PROPRIETÁRIO (VALIDADOR):</label>
+        <label>Proprietário Responsável:</label>
         <input type="text" class="input-vip" id="txtLojista" value="RODRIGO" readonly>
         
-        <label>NOME DO ESTABELECIMENTO MERCANTIL:</label>
+        <label>Estabelecimento Comercial Emissor:</label>
         <input type="text" class="input-vip" id="txtEstablishment" value="MAIRIPORÃ RAÇÕES" readonly>
         
         <div class="tarja-cadeado">
-            🔒 [SINAL LOCK: FECHAMENTO DE SEGURANÇA ATIVO]<br>
-            PROIBIDA ESTRITAMENTE A REPRODUÇÃO, CÓPIA, ENGENHARIA REVERSA NÃO AUTORIZADA POR TERCEIROS.
+            🔒 [SINAL LOCK: FECHAMENTO PROTEGIDO ATIVO]<br>
+            PROIBIDA ESTRITAMENTE A REPRODUÇÃO, CÓPIA OU ENGENHARIA REVERSA NÃO AUTORIZADA DESTE UTENSÍLIO POR TERCEIROS.
         </div>
     </div>
 
     <div class="bloco-botoes-mestre">
-        <button class="btn-mestre" style="background-color: #fff159; color: #000; border: 2px solid #000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
-        <button class="btn-mestre" style="background-color: #25d366; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
+        <button class="btn-mestre" style="background-color: #facc15; color: #000000;" onclick="encaminharEsteira('BOLETO')">1. Emitir Boleto / QR Code Bradesco ➔</button>
+        <button class="btn-mestre" style="background-color: #22c55e; color: #ffffff;" onclick="encaminharEsteira('DUPLICATA')">2. Emitir Cupom de Duplicata Verde ➔</button>
     </div>
 </div>
 
@@ -163,7 +168,7 @@
         let parceiro = document.getElementById('txtLojista').value;
         
         if (valor < 2.00) {
-            alert("❌ OPERAÇÃO RECUSADA: O valor mínimo faturável é R\$: 2,00!");
+            alert(" OPERAÇÃO RECUSADA: O valor mínimo protocolar para faturamento é de R\$: 2,00!");
             return;
         }
 
