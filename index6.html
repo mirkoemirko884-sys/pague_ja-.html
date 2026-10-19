@@ -7,43 +7,59 @@
     <style>
         body { font-family: "Courier New", Courier, monospace; background-color: #212529; margin: 0; padding: 25px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .pdf-toolbar { background-color: #343a40; color: #ffffff; width: 100%; max-width: 680px; padding: 12px 20px; border-radius: 6px 6px 0 0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; font-family: -apple-system, sans-serif; font-size: 13px; }
-        .pdf-page { background-color: #ffffff; color: #000000; width: 100%; max-width: 680px; padding: 30px; box-sizing: border-box; border-radius: 0 0 6px 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); border: 1px solid #000000; }
+        .pdf-page { background-color: #ffffff; color: #000000; width: 100%; max-width: 680px; padding: 30px; box-sizing: border-box; border-radius: 0 0 6px 6px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); border: 1px solid #000000; text-align: center; }
         .topo-boleto { display: flex; align-items: center; border-bottom: 4px solid #000000; padding-bottom: 10px; margin-bottom: 20px; }
         .banco-logo { font-size: 24px; font-weight: 900; padding-right: 18px; border-right: 3px solid #000000; text-transform: uppercase; color: #cc092f; }
         .banco-codigo { font-size: 20px; font-weight: 900; padding: 0 18px; border-right: 3px solid #000000; }
         .linha-digitavel { font-size: 14px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; }
-        .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: left; }
         .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
         .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
         .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; }
-        .qr-moldura { border: 2px solid #000000; padding: 12px; background: #ffffff; display: inline-block; margin-top: 12px; }
-        .qr-imagem-real { width: 220px; height: 220px; display: block; }
+        
+        /* BLOCO DO QRCODE AJUSTADO REFORÇADO PARA O RODAPÉ */
+        .bloco-qrcode-rodape {
+            margin-top: 25px;
+            padding: 15px;
+            border-top: 3px dashed #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .qr-moldura { border: 3px solid #000000; padding: 12px; background: #ffffff; display: inline-block; margin-top: 10px; }
+        .qr-imagem-real { width: 230px; height: 230px; display: block; }
+        
         .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; }
         @media print { .pdf-toolbar, .input-boleto-dinamico { border: none !important; background: transparent !important; } }
     </style>
 </head>
 <body>
     <div class="pdf-toolbar"><span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span><button onclick="window.print()" style="padding: 5px 10px; font-weight: bold; cursor: pointer;">🖨️ Imprimir PDF</button></div>
+    
     <div class="pdf-page">
         <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-2</div><div class="linha-digitavel">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f6</div></div>
+        
         <table class="tabela-boleto">
-            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
+            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
+                <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
             <tr><td width="20%"><span>Data do Doc.</span><strong>19/10/2026</strong></td><td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td><td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td><td width="20%"><span>Aceite</span><strong>N</strong></td><td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td></tr>
             <tr>
-                <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" value="manutenção de JCS_suguimoto mensal"></td>
-                <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R$ (Mude aqui)</span><input type="text" class="input-boleto-dinamico" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="60,00"></td>
-            </tr>
-            <tr>
-                <td colspan="5" style="text-align: center; padding: 20px;">
-                    <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; color: #0d47a1;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BCB TIMED</div>
-                    <!-- 🎯 LOGICA DE REDUNDANCIA MAXIMA PARA IMPEDIR QUE O CELULAR SUMA COM O QRCODE -->
-                    <div class="qr-moldura">
-                        <img src="png" class="qr-imagem-real" onerror="this.src='https://github.io'" alt="QR Code Bradesco Real">
-                    </div>
-                </td>
+                <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" value="ração de gato"></td>
+                <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R$ (Mude aqui)</span><input type="text" class="input-boleto-dinamico" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00"></td>
             </tr>
         </table>
+        
         <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
+        
+        <!-- 🎯 PROPOSTA DE MESTRE: BLOCO EXCLUSIVO DO QRCODE DESLOCADO PARA O RODAPÉ COM REDUNDÂNCIA ABSOLUTA -->
+        <div class="bloco-qrcode-rodape">
+            <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; letter-spacing: 0.5px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BANCO CENTRAL DO BRASIL</div>
+            <div style="font-size: 10px; color: #555; margin-top: 4px;">Aponte a câmera do celular para pagar via Pix Bradesco Oficial com Taxa Zero</div>
+            <div class="qr-moldura">
+                <!-- ROTA INDESTRUTÍVEL COPLADA COM O LINK REAL DO SEU GITHUB PAGES -->
+                <img src="https://github.io" class="qr-imagem-real" onerror="this.src='https://imgur.com'" alt="QR Code Bradesco Real">
+            </div>
+        </div>
     </div>
 </body>
 </html>
