@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software_Boleto_VIP.pdf</title>
+    <!-- SENSOR DE TEXTO BANCÁRIO INDEPENDENTE DE ALTA VISIBILIDADE -->
+    <script src="https://cloudflare.com"></script>
     <style>
         body { font-family: "Courier New", Courier, monospace; background-color: #212529; margin: 0; padding: 25px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .pdf-toolbar { background-color: #343a40; color: #ffffff; width: 100%; max-width: 680px; padding: 12px 20px; border-radius: 6px 6px 0 0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; font-family: -apple-system, sans-serif; font-size: 13px; }
@@ -16,9 +18,9 @@
         .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
         .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
         .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; }
+        
         .bloco-qrcode-rodape { margin-top: 25px; padding: 15px; border-top: 3px dashed #000000; display: flex; flex-direction: column; align-items: center; }
         .qr-moldura { border: 3px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin-top: 10px; }
-        .qr-imagem-real { width: 220px; height: 220px; display: block; }
         .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; }
         @media print { .pdf-toolbar, .input-boleto-dinamico { border: none !important; background: transparent !important; } }
     </style>
@@ -27,11 +29,10 @@
     <div class="pdf-toolbar"><span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span><button onclick="window.print()" style="padding: 5px 10px; font-weight: bold; cursor: pointer;">🖨️ Imprimir PDF</button></div>
     
     <div class="pdf-page">
-        <!-- 🎯 TEXTO DA LINHA COMPLETA TOTALMENTE ASSEGURADA TERMINANDO EM C2B6 COM ESPAÇO AMPLO PARA NÃO CORTAR -->
         <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-2</div><div class="linha-digitavel" id="txtLinhaDigitavel">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div></div>
         
         <table class="tabela-boleto">
-            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
+            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span>export<strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
                 <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
             <tr><td width="20%"><span>Data do Doc.</span><strong>19/10/2026</strong></td><td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td><td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td><td width="20%"><span>Aceite</span><strong>N</strong></td><td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td></tr>
             <tr>
@@ -46,11 +47,27 @@
             <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; letter-spacing: 0.5px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BANCO CENTRAL DO BRASIL</div>
             <div style="font-size: 10px; color: #555; margin-top: 4px;">Aponte a câmera do celular para pagar via Pix Bradesco Oficial com Taxa Zero</div>
             
-            <!-- 🎯 CHAVE COMPLETA TRAVADA NO MOTOR DE DESENHO DO GOOGLE GARANTINDO O SINAL DO 6 NO FINAL -->
+            <!-- 🎯 CAIXA INTERNA ONDE O SCRIPT VAI DESENHAR O MAPA DO PIX -->
             <div class="qr-moldura">
-                <img src="https://googleapis.com|1&chl=00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" class="qr-imagem-real" alt="QR Code Bradesco Oficial">
+                <div id="canvasOuroQRCode"></div>
             </div>
         </div>
     </div>
+
+<script>
+    // MOTOR DE DESENHO INTERNO AUTOMÁTICO - ENGENHARIA DE PRECISÃO CAMBIAL
+    window.onload = function() {
+        let stringPixReal = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
+        
+        new QRCode(document.getElementById("canvasOuroQRCode"), {
+            text: stringPixReal,
+            width: 220,
+            height: 220,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.L
+        });
+    };
+</script>
 </body>
 </html>
