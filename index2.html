@@ -7,7 +7,7 @@
     <style>
         body { 
             font-family: "Courier New", Courier, monospace; 
-            background-color: #065f46; /* VERDE ESMERALDA REAL */
+            background-color: #065f46; /* VERDE ESMERALDA REAL SOBERANO */
             color: #ffffff; 
             display: flex; 
             justify-content: center; 
@@ -42,7 +42,7 @@
             text-transform: uppercase;
         }
 
-        /* PAINEL DE AMORTIZACAO ULTRA CHAMATIVO */
+        /* PAINEL DE AMORTIZACAO ULTRA CHAMATIVO DO NOSSO CARRO-CHEFE */
         .painel-amortizacao { 
             background: #fff159; /* AMARELO FORTE IMPACTANTE */
             border: 3px dashed #000000; 
@@ -157,21 +157,7 @@
             text-transform: uppercase; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
         }
-        .btn-voltar { 
-            flex: 1; 
-            padding: 16px; 
-            background-color: #dc2626; 
-            color: #ffffff; 
-            border: none; 
-            border-radius: 8px; 
-            font-size: 14px; 
-            font-weight: 900; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            text-align: center; 
-            text-decoration: none; 
-        }
-        
+
         /* REGRAS CRUCIAIS PARA IMPRESSÃO LIMPA E PERFEITA EM COLORIDO OU PRETO E BRANCO */
         @media print { 
             body { background: #ffffff; color: #000000; padding: 0; } 
@@ -185,7 +171,7 @@
 <body>
 
 <div class="container">
-    <div class="alerta-peixao" id="lblAlertaPeixao">🎣 OPERAÇÃO EXTRAORDINÁRIA HOMOLOGADA VIA COMPLIANCE JCS</div>
+    <div class="alerta-peixao">🎣 OPERAÇÃO EXTRAORDINÁRIA HOMOLOGADA VIA COMPLIANCE JCS</div>
 
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosBancariosVIP()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira)</option>
@@ -197,7 +183,7 @@
         <option value="permuta">PERMUTA / Balcão de Insumos e Barganha Ativa</option>
     </select>
 
-    <!-- PAINEL DE CONTROLE DE DESCONTO - NOSSO CARRO CHEFE COGNITIVO -->
+    <!-- PAINEL DE CONTROLE DE DESCONTO - NOSSO CARRO CHEFE DE BALCÃO -->
     <div class="painel-amortizacao">
         <span style="font-weight: 900; font-size: 11px; display: block; text-transform: uppercase; margin-bottom: 6px;">🔥 ENGENHARIA DE DESCONTO PARCIAL DE TÍTULOS (BICOS / REEMBOLSOS):</span>
         <label style="font-size: 13px; font-weight: bold; display: inline-block;">Abater Montante Antecipado (R$):</label>
@@ -208,24 +194,36 @@
     <div class="via-cedula">
         <div class="via-tag">Via Loja</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong id="lblValidador">RODRIGO_CRED VIP</strong></div>
-        <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong id="lblLojaTimbre">MAIRIPORÃ RAÇÕES</strong></div>
+        <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong>RODRIGO_CRED VIP</strong></div>
+        <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong>MAIRIPORÃ RAÇÕES</strong></div>
         <div class="linha-dados"><span>CÓDIGO DE RASTREIO:</span> <span style="font-weight: bold; background: #000; color: #fff; padding: 2px 8px; font-family: sans-serif; font-size: 11px;">BR-JCS-2026-MPO</span></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto" style="font-weight: bold;">Carregando...</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span style="font-weight: bold;">manutenção de JCS_suguimoto mensal</span></div>
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
-        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534; letter-spacing: 0.5px;">VALOR RETIDO: <span id="labelPreco">R$: 0,00</span></div>
+        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534; letter-spacing: 0.5px;">VALOR RETIDO: <span id="labelPreco">R$: 60,00</span></div>
         <div class="painel-moeda-troca">🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO: Fica conferida liberdade cambial para abatimentos parciais em dinheiro vivo antes do vencimento do título comercial.</div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <div style="border-top: 3px dashed #ffffff; margin: 20px 0; text-align: center; font-size: 11px; color: white;" class="linha-corte">
-        ✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -
-    </div>
+    <div style="border-top: 3px dashed #ffffff; margin: 20px 0; text-align: center; font-size: 11px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
 
     <!-- VIA 2: CLIENTE -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span id="labelProduto2" style="font-weight: bold;">Carregando...</span></div>
-        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534; letter-spacing: 0.5px;">VALOR LÍQUIDO: <span id="labelPreco2">R$: 0,00</span></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <span style="font-weight: bold;">manutenção de JCS_suguimoto mensal</span></div>
+        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534; letter-spacing: 0.5px;">VALOR LÍQUIDO: <span id="labelPreco2">R$: 60,00</span></div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
+    </div>
+
+    <div class="bloco-botoes">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA (A5 / PDF)</button>
+    </div>
+</div>
+
+<script>
+    let vMestre = 60.00;
+
+    function calcularPrecosBancariosVIP() {
+        const prazo = document.getElementById('comboPrazo').value;
+        const valorBico = parseFloat(document.getElementById('txtBicoDesconto').value) || 0.00;
+        let valorFinal = vMestre - valorBico;
