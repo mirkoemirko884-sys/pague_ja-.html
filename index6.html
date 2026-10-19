@@ -27,7 +27,6 @@
     <div class="pdf-toolbar"><span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span><button onclick="window.print()" style="padding: 5px 10px; font-weight: bold; cursor: pointer;">🖨️ Imprimir PDF</button></div>
     
     <div class="pdf-page">
-        <!-- LINHA DIGITÁVEL PERFEITA SEM CORTE TERMINANDO EM C2B6 -->
         <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-2</div><div class="linha-digitavel" id="txtLinhaDigitavel">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div></div>
         
         <table class="tabela-boleto">
@@ -46,20 +45,11 @@
             <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; letter-spacing: 0.5px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BANCO CENTRAL DO BRASIL</div>
             <div style="font-size: 10px; color: #555; margin-top: 4px;">Aponte a câmera do celular para pagar via Pix Bradesco Oficial com Taxa Zero</div>
             
-            <!-- MOTOR GRÁFICO AUTÔNOMO INFALÍVEL QUE GERA O DESENHO NA TELA NA HORA SEM TRAVAR -->
             <div class="qr-moldura">
-                <img id="imgEngineQRCode" class="qr-imagem-real" alt="QR Code Bradesco Emissão">
+                <!-- 🎯 ROTA EM CORES DO SERVIDOR HTTPS BLINDADO CONTRA CORTES E GARGALOS DE CACHE -->
+                <img id="imgEngineQRCode" class="qr-imagem-real" src="https://quickchart.io Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" alt="QR Code Bradesco Emissão">
             </div>
         </div>
     </div>
-
-<script>
-    window.onload = function() {
-        let stringChaveBruta = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
-        
-        // Aciona o motor nativo estável contra bloqueios de segurança de navegadores móveis
-        document.getElementById("imgEngineQRCode").src = "https://qrserver.com" + encodeURIComponent(stringChaveBruta);
-    };
-</script>
 </body>
 </html>
