@@ -40,8 +40,25 @@
             font-weight: bold;
             text-transform: uppercase;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
+
+        .bloco-botoes-mestre { display: flex; flex-direction: column; gap: 14px; }
+        .btn-mestre {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        .btn-mestre:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -59,7 +76,20 @@
         🤝 Acordo de Confiança Garantido<br>
         <span style="font-size: 11px; color: #4ade80; display: block; margin-top: 5px;">● TERMINAL RESTRITO E ATIVO</span>
     </div>
+
+    <!-- 🎯 BOTÕES COM DIRECIONAMENTO FÍSICO DIRETO PARA CHAMAR AS PRÓXIMAS TELAS ISOLADAS -->
+    <div class="bloco-botoes-mestre">
+        <button class="btn-mestre" style="background-color: #facc15; color: #000000;" onclick="chamarTelaIsolada('BOLETO')">1. Ver Boleto / QR Code Bradesco ➔</button>
+        <button class="btn-mestre" style="background-color: #22c55e; color: #ffffff;" onclick="chamarTelaIsolada('DUPLICATA')">2. Ver Cupom de Duplicata Verde ➔</button>
+    </div>
 </div>
 
+<script>
+    function chamarTelaIsolada(destino) {
+        // Envia fisicamente o comando de salto para abrir os arquivos independentes da nuvem
+        let paginaAlvo = (destino === 'BOLETO') ? "index6.html" : "index2.html";
+        window.location.href = paginaAlvo;
+    }
+</script>
 </body>
 </html>
