@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software_Boleto_VIP.pdf</title>
-    <!-- MOTOR DE DESENHO ATÔMICO DE QRCODE VIA GOOGLE API (INFALÍVEL E ULTRA-LEVE) -->
     <style>
         body { font-family: "Courier New", Courier, monospace; background-color: #212529; margin: 0; padding: 25px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .pdf-toolbar { background-color: #343a40; color: #ffffff; width: 100%; max-width: 680px; padding: 12px 20px; border-radius: 6px 6px 0 0; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; font-family: -apple-system, sans-serif; font-size: 13px; }
@@ -12,7 +11,7 @@
         .topo-boleto { display: flex; align-items: center; border-bottom: 4px solid #000000; padding-bottom: 10px; margin-bottom: 20px; }
         .banco-logo { font-size: 24px; font-weight: 900; padding-right: 18px; border-right: 3px solid #000000; text-transform: uppercase; color: #cc092f; }
         .banco-codigo { font-size: 20px; font-weight: 900; padding: 0 18px; border-right: 3px solid #000000; }
-        .linha-digitavel { font-size: 11px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; }
+        .linha-digitavel { font-size: 11px; font-weight: bold; padding-left: 10px; flex: 1; text-align: right; letter-spacing: 0.5px; word-break: break-all; color: #000000; line-height: 1.3; }
         .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: left; }
         .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
         .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
@@ -28,6 +27,7 @@
     <div class="pdf-toolbar"><span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span><button onclick="window.print()" style="padding: 5px 10px; font-weight: bold; cursor: pointer;">🖨️ Imprimir PDF</button></div>
     
     <div class="pdf-page">
+        <!-- 🎯 TEXTO DA LINHA COMPLETA TOTALMENTE ASSEGURADA TERMINANDO EM C2B6 COM ESPAÇO AMPLO PARA NÃO CORTAR -->
         <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-2</div><div class="linha-digitavel" id="txtLinhaDigitavel">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div></div>
         
         <table class="tabela-boleto">
@@ -46,7 +46,7 @@
             <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; letter-spacing: 0.5px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL VIA BANCO CENTRAL DO BRASIL</div>
             <div style="font-size: 10px; color: #555; margin-top: 4px;">Aponte a câmera do celular para pagar via Pix Bradesco Oficial com Taxa Zero</div>
             
-            <!-- 🎯 A MÁGICA REVOLUCIONÁRIA: O MOTOR DO GOOGLE ENTRA EM CAMPO E DESENHA O SEU PIX REAL NA HORA -->
+            <!-- 🎯 CHAVE COMPLETA TRAVADA NO MOTOR DE DESENHO DO GOOGLE GARANTINDO O SINAL DO 6 NO FINAL -->
             <div class="qr-moldura">
                 <img src="https://googleapis.com|1&chl=00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" class="qr-imagem-real" alt="QR Code Bradesco Oficial">
             </div>
