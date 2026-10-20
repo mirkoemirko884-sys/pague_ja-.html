@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | QR Code Bradesco Puro</title>
+    <title>JCS_software | QR Code Bradesco Embutido</title>
+    <!-- MOTOR DE DESENHO ATÔMICO LOCAL EM JAVASCRIPT EM CASO DE FALLBACK -->
+    <script src="https://cloudflare.com"></script>
     <style>
         body { 
             background-color: #ffffff; 
@@ -14,17 +16,69 @@
             align-items: center; 
             min-height: 100vh; 
         }
-        .qr-imagem-bruta { 
-            width: 250px; 
-            height: 250px; 
-            display: block; 
+        .container-central {
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .qr-moldura-nativa { 
+            border: 4px solid #000000; 
+            padding: 15px; 
+            background: #ffffff; 
+            display: inline-block; 
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .btn-retorno-balcao {
+            display: block;
+            width: 220px;
+            margin: 20px auto 0 auto;
+            padding: 12px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- 🎯 ROTA 100% ISOLADA, PURA, SEM BORDAS E SEM ENFEITES PARA QUEBRAR O BOICOTE DO CACHE -->
-    <img src="https://quickchart.io Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" class="qr-imagem-bruta" alt="QR Code Pix Ativo">
+<div class="container-central">
+    <div style="font-size: 20px; font-weight: 900; color: #cc092f; margin-bottom: 5px; text-transform: uppercase;">Bradesco Pix</div>
+    <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; margin-bottom: 15px;">🛡️ Liquidação Real BCB Timed</div>
 
+    <!-- 🎯 MÁGICA GRÁFICA LOCAL: O NAVEGADOR FABRICA OS QUADRADINHOS USANDO SCRIPT INTERNO SEM BAIXAR NADA -->
+    <div class="qr-moldura-nativa">
+        <div id="canvasLocalQRCode"></div>
+    </div>
+
+    <div style="font-size: 10px; font-weight: bold; color: #555; margin-top: 10px; width: 250px; line-height: 1.3;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
+
+    <button class="btn-retorno-balcao" onclick="location.href='index6.html'">⬅️ Voltar ao Boleto</button>
+</div>
+
+<script>
+    function fabricarDesenhoPix() {
+        let stringChaveRealMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairipora Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
+        
+        document.getElementById("canvasLocalQRCode").innerHTML = "";
+        new QRCode(document.getElementById("canvasLocalQRCode"), {
+            text: stringChaveRealMestre,
+            width: 220,
+            height: 220,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.M
+        });
+    }
+
+    // Aciona em travas simultâneas para garantir que renderize independente do cache
+    window.onload = fabricarDesenhoPix;
+    document.addEventListener("DOMContentLoaded", fabricarDesenhoPix);
+</script>
 </body>
 </html>
