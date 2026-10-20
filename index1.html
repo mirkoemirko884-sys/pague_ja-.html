@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software | QR Code Bradesco Oficial</title>
+    <!-- MOTOR DE DESENHO NATIVO DE ALTA VISIBILIDADE CONTRA REDE FRACA -->
+    <script src="https://cloudflare.com" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4w9au64x7OqdMotc61g5HS6bxnh979O17NX12r563kTRvzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: #ffffff; color: #000000; margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .container-qr { width: 100%; max-width: 440px; text-align: center; border: 3px solid #000000; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         .topo-banco { font-size: 24px; font-weight: 900; color: #cc092f; border-bottom: 2px solid #000000; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; }
         .visor-preço { font-size: 26px; font-weight: 900; color: #166534; margin: 15px 0; background: #f0fdf4; padding: 10px; border-radius: 6px; border: 1px solid #166534; }
         .qr-moldura { border: 4px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin: 15px 0; border-radius: 8px; }
-        .qr-imagem { width: 250px; height: 230px; display: block; }
+        .qr-canvas-desenho { width: 230px; height: 230px; display: flex; justify-content: center; align-items: center; }
+        .qr-canvas-desenho img { width: 220px !important; height: 220px !important; }
         .btn-voltar-pdf { width: 100%; padding: 14px; background-color: #000000; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
@@ -23,25 +26,41 @@
     
     <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL BCB TIMED</div>
     
-    <!-- 🎯 MOLDURA ULTRA-LEVE: O MOTOR DO GOOGLE GERA DIRETAMENTE EM TELA CHEIA EM QUALQUER SINAL -->
+    <!-- 🎯 COMPARTIMENTO REVOLUCIONÁRIO: O SCRIPT DESENHA LOCALMENTE EM VEZ DE BAIXAR IMAGEM -->
     <div class="qr-moldura">
-        <img src="https://googleapis.com|1&chl=00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" class="qr-imagem" alt="QR Code Pix Ativo">
+        <div id="qrcodeNativoTelaCheia" class="qr-canvas-desenho"></div>
     </div>
     
-    <div style="font-size: 10px; font-weight: bold; color: #555;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
+    <div style="font-size: 10px; font-weight: bold; color: #555; margin-bottom: 5px;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
     
     <button class="btn-voltar-pdf" onclick="window.history.back()">⬅️ Voltar ao Boleto</button>
 </div>
 
 <script>
-    window.onload = function() {
+    function renderizarQrcodeBalcao() {
         const urlParams = new URLSearchParams(window.location.search);
         let valor = urlParams.get('valor') || "25,00";
         let desc = urlParams.get('desc') || "faturamento";
         
         document.getElementById('lblPrecoPix').innerText = "R$: " + valor;
         document.getElementById('lblDescPix').innerText = decodeURIComponent(desc);
-    };
+        
+        let stringChaveMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
+        
+        document.getElementById("qrcodeNativoTelaCheia").innerHTML = "";
+        new QRCode(document.getElementById("qrcodeNativoTelaCheia"), {
+            text: stringChaveMestre,
+            width: 220,
+            height: 220,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.M
+        });
+    }
+
+    // Gatilho de acionamento imediato e redundante
+    window.onload = renderizarQrcodeBalcao;
+    document.addEventListener("DOMContentLoaded", renderizarQrcodeBalcao);
 </script>
 </body>
 </html>
