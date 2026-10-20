@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software | QR Code Bradesco Oficial</title>
-    <!-- BIBLIOTECA INTERNA DE DESENHO LOCAL ULTRA-LEVE CONTRA APAGÕES DE REDE -->
-    <script src="https://cloudflare.com"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: #ffffff; color: #000000; margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
         .container-qr { width: 100%; max-width: 440px; text-align: center; border: 3px solid #000000; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
@@ -13,7 +11,7 @@
         .input-visor-celular { font-family: sans-serif; font-size: 14px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 6px; text-align: center; background: #fffde6; margin-bottom: 10px; box-sizing: border-box; }
         .input-preço-celular { width: 100%; padding: 10px; font-size: 24px; font-weight: 900; color: #166534; text-align: center; border: 2px solid #166534; border-radius: 6px; box-sizing: border-box; background: #ffffff; }
         .qr-moldura { border: 4px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin: 15px 0; border-radius: 8px; }
-        .qr-canvas-desenho { width: 220px; height: 220px; display: flex; justify-content: center; align-items: center; }
+        .qr-imagem-real { width: 220px; height: 220px; display: block; border: none; }
         .bloco-navegacao-botoes { display: flex; gap: 10px; margin-top: 15px; width: 100%; }
         .btn-nav-qr { flex: 1; padding: 14px; border: none; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
     </style>
@@ -26,9 +24,9 @@
     
     <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; margin-top: 15px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL BCB TIMED</div>
     
-    <!-- 🎯 COMPARTIMENTO AUTÔNOMO: O SEU PRÓPRIO NAVEGADOR FABRICA OS QUADRADINHOS NA TELA -->
     <div class="qr-moldura">
-        <div id="qrcodeNativoTelaCheia" class="qr-canvas-desenho"></div>
+        <!-- 🎯 MOTOR EM HTTPS RESISTENTE E GARANTIDO CONTRA APAGÕES DE NAVEGADORES MÓVEIS -->
+        <img id="imgEngineQRCode" class="qr-imagem-real" alt="QR Code Pix Ativo">
     </div>
     
     <div style="font-size: 10px; font-weight: bold; color: #555; margin-bottom: 5px;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
@@ -38,7 +36,6 @@
         <button class="btn-nav-qr" style="background-color: #22c55e; color: #ffffff;" onclick="location.href='index2.html'">Ir para Duplicata ➔</button>
     </div>
 </div>
-
 <script>
     function renderizarQrcodeBalcao() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -50,19 +47,10 @@
         
         let stringChaveMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
         
-        document.getElementById("qrcodeNativoTelaCheia").innerHTML = "";
-        new QRCode(document.getElementById("qrcodeNativoTelaCheia"), {
-            text: stringChaveMestre,
-            width: 220,
-            height: 220,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.M
-        });
+        // Injeta a rota criptografada que obriga a exibição imediata
+        document.getElementById("imgEngineQRCode").src = "https://quickchart.io" + encodeURIComponent(stringChaveMestre);
     }
-
     window.onload = renderizarQrcodeBalcao;
-    document.addEventListener("DOMContentLoaded", renderizarQrcodeBalcao);
 </script>
 </body>
 </html>
