@@ -5,26 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JCS_software | Cupom de Emissão e Desconto Cambial</title>
     <style>
-        body { font-family: "Courier New", Courier, monospace; background-color: #065f46; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 15px; box-sizing: border-box; }
-        .container { background: #065f46; border: 4px solid #facc15; border-radius: 16px; padding: 30px; width: 100%; max-width: 600px; box-sizing: border-box; box-shadow: 0 25px 50px rgba(0,0,0,0.5); }
-        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 12px; width: 100%; border-radius: 8px; font-size: 14px; font-weight: 900; margin-bottom: 20px; outline: none; text-transform: uppercase; }
-        .painel-amortizacao { background: #fff159; border: 3px dashed #000000; color: #000000; border-radius: 10px; padding: 15px; margin-bottom: 25px; text-align: left; }
-        .input-bico { width: 140px; padding: 8px; font-size: 18px; font-weight: 900; border: 2px solid #000000; border-radius: 6px; text-align: center; margin-left: 15px; color: #166534; background: #ffffff; outline: none; }
-        .via-cedula { background: #ffffff; color: #000000; border: 4px double #000000; padding: 22px; margin-bottom: 25px; text-align: left; position: relative; }
-        .via-tag { position: absolute; top: 8px; right: 12px; font-size: 11px; font-weight: 900; text-transform: uppercase; border: 2px solid #000000; padding: 3px 10px; background: #facc15; }
-        .titulo-timbre { font-size: 14px; font-weight: 900; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase; }
-        .linha-dados { font-size: 13px; margin: 8px 0; display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 4px; }
-        .input-cedula-dinamica { font-family: "Courier New", monospace; font-size: 13px; font-weight: bold; border: 1px dashed #000; padding: 2px; width: 70%; box-sizing: border-box; }
-        .painel-moeda-troca { background: #eff6ff; color: #1e3a8a; border-left: 5px solid #3b82f6; padding: 12px; font-size: 11px; margin-top: 15px; font-weight: bold; line-height: 1.5; }
-        .tarja-autenticacao { margin-top: 15px; border-top: 2px solid #000000; padding-top: 8px; font-size: 9px; font-weight: bold; text-align: center; background: #f1f5f9; text-transform: uppercase; }
-        .bloco-botoes { display: flex; gap: 12px; margin-top: 25px; }
-        .btn-print { flex: 2; padding: 16px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
-        .btn-voltar-mestre { flex: 1; padding: 16px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; }
-        @media print { body { background: #ffffff; color: #000000; padding: 0; } .container, .bloco-botoes, .seletor-prazo, .painel-amortizacao, .input-cedula-dinamica { border: none !important; background: transparent !important; } .via-cedula { border: 4px double #000000 !important; page-break-inside: avoid; margin-bottom: 40px; } }
+        /* =========================================================================
+           ### CONFIGURAÇÃO DE DESIGN INTERNO DA CENTRAL COMPACTA ###
+           ========================================================================= */
+        body { font-family: "Courier New", Courier, monospace; background-color: #065f46; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; box-sizing: border-box; }
+        .container { background: #065f46; border: 4px solid #facc15; border-radius: 12px; padding: 15px; width: 100%; max-width: 550px; box-sizing: border-box; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 8px; width: 100%; border-radius: 6px; font-size: 13px; font-weight: 900; margin-bottom: 12px; outline: none; text-transform: uppercase; }
+        
+        .painel-amortizacao { background: #fff159; border: 2px dashed #000000; color: #000000; border-radius: 8px; padding: 10px; margin-bottom: 15px; text-align: left; }
+        .input-bico { width: 120px; padding: 6px; font-size: 16px; font-weight: 900; border: 2px solid #000000; border-radius: 6px; text-align: center; margin-left: 10px; color: #166534; background: #ffffff; outline: none; }
+        
+        /* CÉDULAS CURTAS EXCLUSIVAS PARA MEIA FOLHA A5 */
+        .via-cedula { background: #ffffff; color: #000000; border: 4px double #000000; padding: 12px; margin-bottom: 12px; text-align: left; position: relative; }
+        .via-tag { position: absolute; top: 6px; right: 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; border: 2px solid #000000; padding: 2px 6px; background: #facc15; }
+        .titulo-timbre { font-size: 12px; font-weight: 900; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; }
+        .linha-dados { font-size: 11px; margin: 5px 0; display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 2px; }
+        .input-cedula-dinamica { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; border: 1px dashed #000; padding: 2px; width: 65%; box-sizing: border-box; background: #fffde6; }
+        .painel-moeda-troca { background: #eff6ff; color: #1e3a8a; border-left: 4px solid #3b82f6; padding: 8px; font-size: 10px; margin-top: 10px; font-weight: bold; line-height: 1.3; }
+        .tarja-autenticacao { margin-top: 8px; border-top: 2px solid #000000; padding-top: 4px; font-size: 8px; font-weight: bold; text-align: center; background: #f1f5f9; text-transform: uppercase; }
+        
+        .bloco-botoes { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-print { flex: 2; padding: 12px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+        .btn-voltar-mestre { flex: 1; padding: 12px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
+        
+        /* CONFIGURAÇÃO DE IMPRESSÃO TRAVADA EM UMA FOLHA A5 SEM RODAPÉ DE BOTÕES */
+        @media print { 
+            body { background: #ffffff; color: #000000; padding: 0; } 
+            .container { border: none; max-width: 100%; padding: 0; box-shadow: none; background: transparent; } 
+            .bloco-botoes, .seletor-prazo, .linha-corte, .painel-amortizacao { display: none !important; } 
+            .via-cedula { border: 4px double #000000 !important; page-break-inside: avoid; margin-bottom: 20px; background: #ffffff; color: #000000; } 
+            .input-cedula-dinamica { border: none !important; background: transparent !important; padding: 0 !important; width: auto !important; font-weight: bold !important; }
+        }
     </style>
 </head>
 <body>
+
 <div class="container">
+    <!-- ### SELETOR DE PRAZOS RESTRITO ### -->
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosDinamicosBalcao()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira)</option>
         <option value="21">Faturado Regulamentar: 21 Dias VIP (Retido em Carteira)</option>
@@ -35,62 +52,74 @@
         <option value="permuta">PERMUTA / Balcão de Insumos e Barganha Ativa</option>
     </select>
 
+    <!-- ### PAINEL DE CONTROLE DE DESCONTO - BICOS ### -->
     <div class="painel-amortizacao">
-        <span style="font-weight: 900; font-size: 11px; display: block; text-transform: uppercase; margin-bottom: 6px;">🔥 ENGENHARIA DE DESCONTO PARCIAL DE TÍTULOS (BICOS):</span>
-        <label style="font-size: 13px; font-weight: bold; display: inline-block;">Abater Montante Antecipado (R$:)</label>
+        <span style="font-weight: 900; font-size: 10px; display: block; text-transform: uppercase; margin-bottom: 4px;">🔥 ENGENHARIA DE DESCONTO PARCIAL DE TÍTULOS (BICOS):</span>
+        <label style="font-size: 12px; font-weight: bold; display: inline-block;">Abater Montante Antecipado (R$):</label>
         <input type="number" class="input-bico" id="txtBicoDesconto" value="0.00" oninput="calcularPrecosDinamicosBalcao()">
     </div>
 
-    <!-- VIA 1: LOJA -->
+    <!-- 📦 VIA 1: LOJA (COMPACTA) -->
     <div class="via-cedula">
         <div class="via-tag">Via Loja</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong>RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong>MAIRIPORÃ RAÇÕES</strong></div>
-        <div class="linha-dados"><span>VALOR BASE DO PRODUTO (R\$):</span> <input type="number" class="input-cedula-dinamica" id="txtValorBase" value="60.00" oninput="calcularPrecosDinamicosBalcao()" style="font-size:14px; font-weight:bold; color:#166534;"></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <input type="text" class="input-cedula-dinamica" id="txtDescBase" value="manutenção de JCS_suguimoto mensal" oninput="sincronizarTextos()"></div>
+        
+        <!-- ### ENTRADAS DE DADOS COMPACTAS E LIVRES ### -->
+        <div class="linha-dados"><span>VALOR BASE DO PRODUTO (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtValorBase" value="60.00" oninput="calcularPrecosDinamicosBalcao()" style="font-size:13px; font-weight:bold; color:#166534;"></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <input type="text" class="input-cedula-dinamica" id="txtDescBase" value="manutenção de JCS_suguimoto mensal" oninput="sincronizarTextos()" placeholder="Opcional"></div>
+        
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
-        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534;">VALOR RETIDO: <span id="labelPreco">R\$: 60,00</span></div>
+        <div style="font-size: 18px; font-weight: 900; border-top: 3px double #000000; margin-top: 8px; padding-top: 4px; text-align: center; color: #166534;">VALOR RETIDO: <span id="labelPreco">R$: 60,00</span></div>
         <div class="painel-moeda-troca">🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO: Fica conferida liberdade cambial para abatimentos parciais em dinheiro vivo antes do vencimento do título comercial.</div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <div style="border-top: 3px dashed #ffffff; margin: 20px 0; text-align: center; font-size: 11px;">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
+    <div style="border-top: 2px dashed #ffffff; margin: 10px 0; text-align: center; font-size: 10px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
 
-    <!-- VIA 2: CLIENTE -->
+    <!-- 📦 VIA 2: CLIENTE (TOTALMENTE ESPELHADA E AUTOMÁTICA) -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <strong id="lblDescCliente">manutenção de JCS_suguimoto mensal</strong></div>
-        <div style="font-size: 22px; font-weight: 900; border-top: 3px double #000000; margin-top: 12px; padding-top: 8px; text-align: center; color: #166534;">VALOR LÍQUIDO: <span id="labelPreco2">R\$: 60,00</span></div>
+        <div style="font-size: 18px; font-weight: 900; border-top: 3px double #000000; margin-top: 8px; padding-top: 4px; text-align: center; color: #166534;">VALOR LÍQUIDO: <span id="labelPreco2">R$: 60,00</span></div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <!-- 🎯 BOTÕES FÍSICOS DE COMANDO DE IMPRESSÃO E RETORNO -->
+    <!-- ### APENAS UM BLOCO DE BOTÕES NO RODAPÉ - REMOVIDO O SCRIPT REPETIDO CONTRA ERROS DE ALTURA A5 ### -->
     <div class="bloco-botoes">
-        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA (A5 / PDF)</button>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA</button>
         <button class="btn-voltar-mestre" onclick="location.href='index.html'">⬅️ Voltar ao Portal</button>
     </div>
 </div>
+
 <script>
+    // ### ENGINE GRÁFICA MATEMÁTICA DE ATUALIZAÇÃO SINCRO DO BALCÃO ###
     function calcularPrecosDinamicosBalcao() {
         const valorBase = parseFloat(document.getElementById('txtValorBase').value) || 0.00;
         const valorBico = parseFloat(document.getElementById('txtBicoDesconto').value) || 0.00;
         const prazo = document.getElementById('comboPrazo').value;
+        
         let valorCalculadoFinal = valorBase - valorBico;
         if (valorCalculadoFinal < 0) valorCalculadoFinal = 0.00;
+
         let textoCondicao = (prazo === "vista") ? "À VISTA" : (prazo === "permuta") ? "PERMUTA" : `Carteira - ${prazo} Dias`;
-        if (valorBico > 0) { textoCondicao += ` [Abatido R$: ${valorBico.toFixed(2).replace('.', ',')} de Bico]`; }
+        if (valorBico > 0) { 
+            textoCondicao += ` [Abatido R$: ${valorBico.toFixed(2).replace('.', ',')} de Bico]`; 
+        }
+
         document.getElementById('labelCondicao').innerText = textoCondicao;
-        const formatado = "R\$: " + valorCalculadoFinal.toFixed(2).replace('.', ',');
+        
+        const formatado = "R$: " + valorCalculadoFinal.toFixed(2).replace('.', ',');
+        // REPLICAÇÃO FORÇADA VIVA NAS DUAS VIAS DA FOLHA A5
         document.getElementById('labelPreco').innerText = formatado;
         document.getElementById('labelPreco2').innerText = formatado;
+        
+        sincronizarTextos();
     }
+
     function sincronizarTextos() {
-        let textoDigito = document.getElementById('txtDescBase').value;
-        document.getElementById('lblDescCliente').innerText = textoDigito;
-    }
-    window.onload = function() { calcularPrecosDinamicosBalcao(); };
-</script>
-</body>
-</html>
+        let textoDigito = document.getElementById('txtDescBase').value.trim();
+        
+        // INTERPRETAÇÃO CIRÚRGICA DA DESCRIÇÃO OPCIONAL EXIGIDA POR VOCÊ
