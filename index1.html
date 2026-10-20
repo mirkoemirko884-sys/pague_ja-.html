@@ -3,48 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCS_software | Pix Copia e Cola Bradesco</title>
+    <title>JCS_software | QR Code Bradesco Oficial</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: #212529; color: #000; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .container { background: #ffffff; padding: 30px; border: 3px solid #000000; border-radius: 12px; width: 100%; max-width: 480px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .topo-bancario { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #000000; padding-bottom: 10px; margin-bottom: 20px; }
-        .marca-banco { font-size: 22px; font-weight: 900; color: #cc092f; text-transform: uppercase; }
-        .badge-seguro { background-color: #facc15; color: #000; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
-        .caixa-dados { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; text-align: left; margin-bottom: 20px; }
-        label { font-size: 11px; font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; }
-        .input-balcao { width: 100%; padding: 8px; font-size: 14px; border: 1px solid #000; border-radius: 4px; box-sizing: border-box; margin-bottom: 12px; font-weight: bold; }
-        .input-valor { width: 100%; padding: 10px; font-size: 24px; font-weight: 900; color: #166534; text-align: center; border: 2px solid #166534; border-radius: 6px; box-sizing: border-box; }
-        .codigo-bloco { background: #000000; color: #5eff5e; font-family: monospace; font-size: 11px; padding: 12px; border-radius: 6px; word-break: break-all; margin-bottom: 15px; border: 1px solid #5eff5e; }
-        .btn-copiar { width: 100%; padding: 15px; background-color: #000000; color: #ffffff; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
-        .alerta-sucesso { display: none; background-color: #d1fae5; color: #065f46; font-size: 12px; font-weight: bold; padding: 10px; border-radius: 6px; margin-top: 10px; border: 1px solid #10b981; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: #ffffff; color: #000000; margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .container-qr { width: 100%; max-width: 440px; text-align: center; border: 3px solid #000000; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .topo-banco { font-size: 24px; font-weight: 900; color: #cc092f; border-bottom: 2px solid #000000; padding-bottom: 10px; margin-bottom: 15px; text-transform: uppercase; }
+        .visor-preço { font-size: 26px; font-weight: 900; color: #166534; margin: 15px 0; background: #f0fdf4; padding: 10px; border-radius: 6px; border: 1px solid #166534; }
+        .qr-moldura { border: 4px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin: 15px 0; border-radius: 8px; }
+        .qr-imagem { width: 250px; height: 230px; display: block; }
+        .btn-voltar-pdf { width: 100%; padding: 14px; background-color: #000000; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="topo-bancario">
-        <div class="marca-banco">Bradesco Pix</div>
-        <div class="badge-seguro">BCB Timed ⚡</div>
+<div class="container-qr">
+    <div class="topo-banco">Bradesco Pix Oficial</div>
+    <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569;" id="lblDescPix">...</div>
+    
+    <div class="visor-preço" id="lblPrecoPix">R$: 0,00</div>
+    
+    <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL BCB TIMED</div>
+    
+    <!-- 🎯 MOLDURA ULTRA-LEVE: O MOTOR DO GOOGLE GERA DIRETAMENTE EM TELA CHEIA EM QUALQUER SINAL -->
+    <div class="qr-moldura">
+        <img src="https://googleapis.com|1&chl=00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" class="qr-imagem" alt="QR Code Pix Ativo">
     </div>
-    <div class="caixa-dados">
-        <label>Descrição do Insumo / Produto:</label>
-        <input type="text" class="input-balcao" id="txtDescPix" value="manutenção de JCS_suguimoto mensal">
-        <label>Valor do Faturamento Balcão (R$):</label>
-        <input type="number" class="input-valor" id="txtValorPix" step="0.01" value="60.00" oninput="atualizarValorVisor()">
-    </div>
-    <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; text-align: left;">Código Oficial Copia e Cola:</div>
-    <div class="codigo-bloco" id="txtChavePix">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214JCS_software5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div>
-    <button class="btn-copiar" onclick="copiarPixBalcao()">📋 Copiar Código Pix Oficial ➔</button>
-    <div class="alerta-sucesso" id="msgSucesso">✔ SUCESSO: Código Pix copiado! Cole no seu aplicativo bancário na opção Pix Copia e Cola.</div>
+    
+    <div style="font-size: 10px; font-weight: bold; color: #555;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
+    
+    <button class="btn-voltar-pdf" onclick="window.history.back()">⬅️ Voltar ao Boleto</button>
 </div>
+
 <script>
-    function copiarPixBalcao() {
-        let codigo = document.getElementById('txtChavePix').innerText;
-        const tempText = document.createElement("textarea");
-        tempText.value = codigo; document.body.appendChild(tempText);
-        tempText.select(); document.execCommand("copy");
-        document.body.removeChild(tempText);
-        document.getElementById('msgSucesso').style.display = "block";
-    }
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let valor = urlParams.get('valor') || "25,00";
+        let desc = urlParams.get('desc') || "faturamento";
+        
+        document.getElementById('lblPrecoPix').innerText = "R$: " + valor;
+        document.getElementById('lblDescPix').innerText = decodeURIComponent(desc);
+    };
 </script>
 </body>
 </html>
