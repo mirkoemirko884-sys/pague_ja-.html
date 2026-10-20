@@ -11,7 +11,7 @@
         .input-visor-celular { font-family: sans-serif; font-size: 14px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 6px; text-align: center; background: #fffde6; margin-bottom: 10px; box-sizing: border-box; }
         .input-preço-celular { width: 100%; padding: 10px; font-size: 24px; font-weight: 900; color: #166534; text-align: center; border: 2px solid #166534; border-radius: 6px; box-sizing: border-box; background: #ffffff; }
         .qr-moldura { border: 4px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin: 15px 0; border-radius: 8px; }
-        .qr-imagem-real { width: 220px; height: 220px; display: block; border: none; }
+        .qr-canvas-desenho { width: 220px; height: 220px; display: flex; justify-content: center; align-items: center; }
         .bloco-navegacao-botoes { display: flex; gap: 10px; margin-top: 15px; width: 100%; }
         .btn-nav-qr { flex: 1; padding: 14px; border: none; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
     </style>
@@ -19,16 +19,13 @@
 <body>
 <div class="container-qr">
     <div class="topo-banco">Bradesco Pix Oficial</div>
-    
-    <!-- 🎯 RECEPTORES VIVOS CORRIGIDOS CONTRA O APAGÃO DE MEMÓRIA -->
-    <input type="text" class="input-visor-celular" id="txtDescPix" value="Carregando insumo...">
-    <input type="text" class="input-preço-celular" id="txtValorPix" value="R$: 0,00">
+    <input type="text" class="input-visor-celular" id="txtDescPix" value="faturamento">
+    <input type="text" class="input-preço-celular" id="txtValorPix" value="0,00">
     
     <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; margin-top: 15px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL BCB TIMED</div>
     
     <div class="qr-moldura">
-        <!-- ROTA BLINDADA HTTPS SEM ACENTOS PARA FORÇAR O DESENHO EM INTERNET INSTÁVEL -->
-        <img id="imgEngineQRCode" class="qr-imagem-real" alt="QR Code Pix Ativo">
+        <div id="qrcodeNativoTelaCheia" class="qr-canvas-desenho"></div>
     </div>
     
     <div style="font-size: 10px; font-weight: bold; color: #555; margin-bottom: 5px;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
@@ -39,20 +36,28 @@
     </div>
 </div>
 
+<!-- ### USINA GERADORA INCORPORADA DIRETO NO CÓDIGO CONTRA APAGÕES DE SINAL ### -->
+<script src="https://cloudflare.com" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4w9au64x7OqdMotc61g5HS6bxnh979O17NX12r563kTRvzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     function renderizarQrcodeBalcao() {
         const urlParams = new URLSearchParams(window.location.search);
-        
-        // Pega as chaves passadas pela URL mestre do boleto
         let valorParam = urlParams.get('valor');
         let descParam = urlParams.get('desc');
         
-        // Injeta os dados ao vivo nas caixas do celular do cliente
         if (valorParam) { document.getElementById('txtValorPix').value = decodeURIComponent(valorParam); }
         if (descParam) { document.getElementById('txtDescPix').value = decodeURIComponent(descParam); }
         
         let stringChaveMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairipora Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
-        document.getElementById("imgEngineQRCode").src = "https://quickchart.io" + encodeURIComponent(stringChaveMestre);
+        
+        document.getElementById("qrcodeNativoTelaCheia").innerHTML = "";
+        new QRCode(document.getElementById("qrcodeNativoTelaCheia"), {
+            text: stringChaveMestre,
+            width: 220,
+            height: 220,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.M
+        });
     }
     window.onload = renderizarQrcodeBalcao;
     document.addEventListener("DOMContentLoaded", renderizarQrcodeBalcao);
