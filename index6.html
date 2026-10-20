@@ -16,24 +16,10 @@
         .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
         .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
         .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; }
-        
-        .btn-link-qrcode {
-            width: 100%;
-            padding: 18px;
-            background-color: #facc15;
-            color: #000000;
-            border: 2px solid #000000;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        }
+        .bloco-botoes-barra { display: flex; gap: 10px; width: 100%; max-width: 680px; margin-top: 15px; font-family: -apple-system, sans-serif; }
+        .btn-nav-banco { flex: 1; padding: 14px; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
         .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; }
-        @media print { .pdf-toolbar, .input-boleto-dinamico, .btn-link-qrcode { display: none !important; } }
+        @media print { .pdf-toolbar, .bloco-botoes-barra, .input-boleto-dinamico { display: none !important; } }
     </style>
 </head>
 <body>
@@ -41,29 +27,21 @@
     
     <div class="pdf-page">
         <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-2</div><div class="linha-digitavel" id="txtLinhaDigitavel">00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6</div></div>
-        
         <table class="tabela-boleto">
-            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
-                <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
+            <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
             <tr><td width="20%"><span>Data do Doc.</span><strong>20/10/2026</strong></td><td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td><td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td><td width="20%"><span>Aceite</span><strong>N</strong></td><td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td></tr>
             <tr>
-                <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDesc" value="ração de gato"></td>
-                <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$ (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValor" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00"></td>
+                <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" value="ração de gato"></td>
+                <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R$ (Mude aqui)</span><input type="text" class="input-boleto-dinamico" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00"></td>
             </tr>
         </table>
-        
         <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
-        
-        <!-- 🎯 BOTÃO DOURADO DE DISPARO DA QUARTA PÁGINA -->
-        <button class="btn-link-qrcode" onclick="abrirTelaExclusivaQR()">📱 VER QR CODE DO BRADESCO NA TELA CHEIA ➔</button>
     </div>
 
-<script>
-    function abrirTelaExclusivaQR() {
-        let v = document.getElementById('txtValor').value;
-        let d = document.getElementById('txtDesc').value;
-        window.location.href = `index1.html?valor=${encodeURIComponent(v)}&desc=${encodeURIComponent(d)}`;
-    }
-</script>
+    <!-- 🎯 BOTÕES FÍSICOS DE AVANÇAR E VOLTAR INTEGRADOS -->
+    <div class="bloco-botoes-barra">
+        <button class="btn-nav-banco" style="background-color: #dc2626; color: #ffffff;" onclick="location.href='index.html'">⬅️ Voltar ao Portal</button>
+        <button class="btn-nav-banco" style="background-color: #facc15; color: #000000;" onclick="location.href='index1.html'">📱 Ir para Tela Cheia QR Code ➔</button>
+    </div>
 </body>
 </html>
