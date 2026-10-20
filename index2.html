@@ -19,6 +19,7 @@
         .tarja-autenticacao { margin-top: 15px; border-top: 2px solid #000000; padding-top: 8px; font-size: 9px; font-weight: bold; text-align: center; background: #f1f5f9; text-transform: uppercase; }
         .bloco-botoes { display: flex; gap: 12px; margin-top: 25px; }
         .btn-print { flex: 2; padding: 16px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+        .btn-voltar-mestre { flex: 1; padding: 16px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 8px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; }
         @media print { body { background: #ffffff; color: #000000; padding: 0; } .container, .bloco-botoes, .seletor-prazo, .painel-amortizacao, .input-cedula-dinamica { border: none !important; background: transparent !important; } .via-cedula { border: 4px double #000000 !important; page-break-inside: avoid; margin-bottom: 40px; } }
     </style>
 </head>
@@ -65,33 +66,30 @@
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <div class="bloco-botoes"><button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA (A5 / PDF)</button></div>
+    <!-- 🎯 BOTÕES FÍSICOS DE COMANDO DE IMPRESSÃO E RETORNO -->
+    <div class="bloco-botoes">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA (A5 / PDF)</button>
+        <button class="btn-voltar-mestre" onclick="location.href='index.html'">⬅️ Voltar ao Portal</button>
+    </div>
 </div>
-
 <script>
     function calcularPrecosDinamicosBalcao() {
         const valorBase = parseFloat(document.getElementById('txtValorBase').value) || 0.00;
         const valorBico = parseFloat(document.getElementById('txtBicoDesconto').value) || 0.00;
         const prazo = document.getElementById('comboPrazo').value;
-        
         let valorCalculadoFinal = valorBase - valorBico;
         if (valorCalculadoFinal < 0) valorCalculadoFinal = 0.00;
-
         let textoCondicao = (prazo === "vista") ? "À VISTA" : (prazo === "permuta") ? "PERMUTA" : `Carteira - ${prazo} Dias`;
         if (valorBico > 0) { textoCondicao += ` [Abatido R$: ${valorBico.toFixed(2).replace('.', ',')} de Bico]`; }
-
         document.getElementById('labelCondicao').innerText = textoCondicao;
-        
         const formatado = "R\$: " + valorCalculadoFinal.toFixed(2).replace('.', ',');
         document.getElementById('labelPreco').innerText = formatado;
         document.getElementById('labelPreco2').innerText = formatado;
     }
-
     function sincronizarTextos() {
         let textoDigito = document.getElementById('txtDescBase').value;
         document.getElementById('lblDescCliente').innerText = textoDigito;
     }
-
     window.onload = function() { calcularPrecosDinamicosBalcao(); };
 </script>
 </body>
