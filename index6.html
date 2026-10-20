@@ -44,18 +44,16 @@
             <table class="tabela-boleto">
                 <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>0449 / 0080619-6</strong></td></tr>
                 <tr>
-                    <!-- ### REGIAO LIVRE DE MODIFICAÇÃO DE DATA ### -->
-                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="campoDataDoc" value="20/10/2026"></td>
+                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtDataDoc" value="20/11/2026"></td>
                     <td width="20%"><span>Nº do Documento</span><strong>749201</strong></td>
                     <td width="20%"><span>Espécie Doc.</span><strong>DM</strong></td>
                     <td width="20%"><span>Aceite</span><strong>N</strong></td>
-                    <!-- ### REGIAO LIVRE DE MODIFICAÇÃO DE VENCIMENTO ### -->
-                    <td><span>Vencimento (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="campoVencDoc" value="Liquidação Imediata VIP"></td>
+                    <td><span>Vencimento (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtVencDoc" value="Liquidação Imediata VIP"></td>
                 </tr>
                 <tr>
-                    <!-- ### SENSOR DE IDENTIFICAÇÃO DE DADOS CORRIGIDO ### -->
-                    <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDescMestre" value="ração de gato premium"></td>
-                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorMestre" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="125,00"></td>
+                    <!-- 🎯 SOLDAGEM DOS SINALIZADORES DE CHAVE IDENTICOS PARA ENVIAR SEM PERDA -->
+                    <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDescInput" value="ração de gato premium"></td>
+                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="125,00"></td>
                 </tr>
             </table>
             <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
@@ -79,10 +77,10 @@
         }
     }
 
-    // ### MANOBRA DE PRECISÃO DE TRANSMISSÃO DE CAIXA ###
+    // 🎯 REENGENHARIA DA PONTE DE TRANSMISSÃO EM LINK DIRETO SEM PERDA DE MEMÓRIA
     function irParaTelaCheiaQR() {
-        let v = document.getElementById('txtValorMestre').value;
-        let d = document.getElementById('txtDescMestre').value;
+        let v = document.getElementById('txtValorInput').value.trim();
+        let d = document.getElementById('txtDescInput').value.trim();
         window.location.href = `index1.html?valor=${encodeURIComponent(v)}&desc=${encodeURIComponent(d)}`;
     }
 </script>
