@@ -6,16 +6,17 @@
     <title>JCS_software | Cupom de Emissão e Desconto Cambial</title>
     <style>
         /* =========================================================================
-           ### CONFIGURAÇÃO DE DESIGN INTERNO DA CENTRAL COMPACTA ###
+           ### DESIGN DA CENTRAL ULTRA-COMPACTA MEIA FOLHA A5 ###
            ========================================================================= */
         body { font-family: "Courier New", Courier, monospace; background-color: #065f46; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; box-sizing: border-box; }
         .container { background: #065f46; border: 4px solid #facc15; border-radius: 12px; padding: 15px; width: 100%; max-width: 550px; box-sizing: border-box; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 8px; width: 100%; border-radius: 6px; font-size: 13px; font-weight: 900; margin-bottom: 12px; outline: none; text-transform: uppercase; }
         
+        /* SELETORES E INPUTS DE CONTROLE */
+        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 8px; width: 100%; border-radius: 6px; font-size: 13px; font-weight: 900; margin-bottom: 12px; outline: none; text-transform: uppercase; }
         .painel-amortizacao { background: #fff159; border: 2px dashed #000000; color: #000000; border-radius: 8px; padding: 10px; margin-bottom: 15px; text-align: left; }
         .input-bico { width: 120px; padding: 6px; font-size: 16px; font-weight: 900; border: 2px solid #000000; border-radius: 6px; text-align: center; margin-left: 10px; color: #166534; background: #ffffff; outline: none; }
         
-        /* CÉDULAS CURTAS EXCLUSIVAS PARA MEIA FOLHA A5 */
+        /* CÉDULAS DA IMPRESSÃO SOBERANA */
         .via-cedula { background: #ffffff; color: #000000; border: 4px double #000000; padding: 12px; margin-bottom: 12px; text-align: left; position: relative; }
         .via-tag { position: absolute; top: 6px; right: 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; border: 2px solid #000000; padding: 2px 6px; background: #facc15; }
         .titulo-timbre { font-size: 12px; font-weight: 900; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; }
@@ -28,7 +29,7 @@
         .btn-print { flex: 2; padding: 12px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
         .btn-voltar-mestre { flex: 1; padding: 12px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
         
-        /* CONFIGURAÇÃO DE IMPRESSÃO TRAVADA EM UMA FOLHA A5 SEM RODAPÉ DE BOTÕES */
+        /* REGRAS RESTRITAS DE IMPRESSÃO MEIA FOLHA A5 */
         @media print { 
             body { background: #ffffff; color: #000000; padding: 0; } 
             .container { border: none; max-width: 100%; padding: 0; box-shadow: none; background: transparent; } 
@@ -41,7 +42,7 @@
 <body>
 
 <div class="container">
-    <!-- ### SELETOR DE PRAZOS RESTRITO ### -->
+    <!-- ### SELETOR DE CONDICIONAL DE PRAZOS ### -->
     <select class="seletor-prazo" id="comboPrazo" onchange="calcularPrecosDinamicosBalcao()">
         <option value="28">Faturado Regulamentar: 28 Dias VIP (Retido em Carteira)</option>
         <option value="21">Faturado Regulamentar: 21 Dias VIP (Retido em Carteira)</option>
@@ -52,23 +53,23 @@
         <option value="permuta">PERMUTA / Balcão de Insumos e Barganha Ativa</option>
     </select>
 
-    <!-- ### PAINEL DE CONTROLE DE DESCONTO - BICOS ### -->
+    <!-- ### PAINEL DE CONTROLE ANTECIPADO - BICOS ### -->
     <div class="painel-amortizacao">
         <span style="font-weight: 900; font-size: 10px; display: block; text-transform: uppercase; margin-bottom: 4px;">🔥 ENGENHARIA DE DESCONTO PARCIAL DE TÍTULOS (BICOS):</span>
         <label style="font-size: 12px; font-weight: bold; display: inline-block;">Abater Montante Antecipado (R$):</label>
         <input type="number" class="input-bico" id="txtBicoDesconto" value="0.00" oninput="calcularPrecosDinamicosBalcao()">
     </div>
 
-    <!-- 📦 VIA 1: LOJA (COMPACTA) -->
+    <!-- 📦 VIA 1: LOJA (PREENCHIMENTO COMPACTO DA MÃE) -->
     <div class="via-cedula">
         <div class="via-tag">Via Loja</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
         <div class="linha-dados"><span>VALIDADOR RESPONSÁVEL:</span> <strong>RODRIGO_CRED VIP</strong></div>
         <div class="linha-dados"><span>CANAL EMISSOR:</span> <strong>MAIRIPORÃ RAÇÕES</strong></div>
         
-        <!-- ### ENTRADAS DE DADOS COMPACTAS E LIVRES ### -->
+        <!-- ### CAMPOS LIVRES PARA PREENCHER NA HORA AO VIVO ### -->
         <div class="linha-dados"><span>VALOR BASE DO PRODUTO (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtValorBase" value="60.00" oninput="calcularPrecosDinamicosBalcao()" style="font-size:13px; font-weight:bold; color:#166534;"></div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <input type="text" class="input-cedula-dinamica" id="txtDescBase" value="manutenção de JCS_suguimoto mensal" oninput="sincronizarTextos()" placeholder="Opcional"></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <input type="text" class="input-cedula-dinamica" id="txtDescBase" value="manutenção de JCS_suguimoto mensal" oninput="calcularPrecosDinamicosBalcao()" placeholder="Opcional"></div>
         
         <div class="linha-dados"><span>CONDIÇÃO SELECIONADA:</span> <span id="labelCondicao" style="font-weight: bold;">...</span></div>
         <div style="font-size: 18px; font-weight: 900; border-top: 3px double #000000; margin-top: 8px; padding-top: 4px; text-align: center; color: #166534;">VALOR RETIDO: <span id="labelPreco">R$: 60,00</span></div>
@@ -78,16 +79,16 @@
 
     <div style="border-top: 2px dashed #ffffff; margin: 10px 0; text-align: center; font-size: 10px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
 
-    <!-- 📦 VIA 2: CLIENTE (TOTALMENTE ESPELHADA E AUTOMÁTICA) -->
+    <!-- 📦 VIA 2: CLIENTE (TOTALMENTE ESPELHADA, CLONADA E AUTOMÁTICA) -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <strong id="lblDescCliente">manutenção de JCS_suguimoto mensal</strong></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <strong id="lblDescCliente">...</strong></div>
         <div style="font-size: 18px; font-weight: 900; border-top: 3px double #000000; margin-top: 8px; padding-top: 4px; text-align: center; color: #166534;">VALOR LÍQUIDO: <span id="labelPreco2">R$: 60,00</span></div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <!-- ### APENAS UM BLOCO DE BOTÕES NO RODAPÉ - REMOVIDO O SCRIPT REPETIDO CONTRA ERROS DE ALTURA A5 ### -->
+    <!-- PAINEL ÚNICO DE BOTÕES NO RODAPÉ DA MEIA FOLHA -->
     <div class="bloco-botoes">
         <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA</button>
         <button class="btn-voltar-mestre" onclick="location.href='index.html'">⬅️ Voltar ao Portal</button>
@@ -95,12 +96,13 @@
 </div>
 
 <script>
-    // ### ENGINE GRÁFICA MATEMÁTICA DE ATUALIZAÇÃO SINCRO DO BALCÃO ###
+    // 🎯 ### ENGINE GRÁFICA MATEMÁTICA DE CLONAGEM AUTOMÁTICA EM TEMPO REAL ###
     function calcularPrecosDinamicosBalcao() {
         const valorBase = parseFloat(document.getElementById('txtValorBase').value) || 0.00;
         const valorBico = parseFloat(document.getElementById('txtBicoDesconto').value) || 0.00;
         const prazo = document.getElementById('comboPrazo').value;
         
+        // Realiza o abatimento matemático exato do bico
         let valorCalculadoFinal = valorBase - valorBico;
         if (valorCalculadoFinal < 0) valorCalculadoFinal = 0.00;
 
@@ -112,14 +114,10 @@
         document.getElementById('labelCondicao').innerText = textoCondicao;
         
         const formatado = "R$: " + valorCalculadoFinal.toFixed(2).replace('.', ',');
-        // REPLICAÇÃO FORÇADA VIVA NAS DUAS VIAS DA FOLHA A5
+        
+        // 🎯 O GATILHO COMPORTAMENTAL: REPLICAÇÃO OBRIGATÓRIA VIVA NAS DUAS VIAS DA FOLHA A5
         document.getElementById('labelPreco').innerText = formatado;
         document.getElementById('labelPreco2').innerText = formatado;
         
-        sincronizarTextos();
-    }
-
-    function sincronizarTextos() {
+        // Sincroniza e espelha a descrição de forma inteligente
         let textoDigito = document.getElementById('txtDescBase').value.trim();
-        
-        // INTERPRETAÇÃO CIRÚRGICA DA DESCRIÇÃO OPCIONAL EXIGIDA POR VOCÊ
