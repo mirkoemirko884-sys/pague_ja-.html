@@ -8,46 +8,25 @@
         body { background-color: #ffffff; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .container-central { text-align: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
         .qr-moldura-nativa { border: 4px solid #000000; padding: 15px; background: #ffffff; display: inline-block; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .btn-retorno-balcao { display: block; width: 220px; margin: 20px auto 0 auto; padding: 12px; background-color: #000000; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; text-decoration: none; }
-        /* Layout do Canvas de Desenho Interno */
-        #canvasLocalQRCode table { border-width: 0; border-collapse: collapse; margin: 0 auto; }
-        #canvasLocalQRCode td { border-width: 0; width: 4px; height: 4px; padding: 0; margin: 0; }
-        .p-preto { background-color: #000000; }
-        .p-branco { background-color: #ffffff; }
+        .qr-imagem-real { width: 240px; height: 240px; display: block; border: none; margin: 0 auto; }
+        .btn-retorno-balcao { display: block; width: 220px; margin: 25px auto 0 auto; padding: 12px; background-color: #000000; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; text-decoration: none; font-family: sans-serif; }
     </style>
 </head>
 <body>
 
 <div class="container-central">
-    <div style="font-size: 20px; font-weight: 900; color: #cc092f; margin-bottom: 5px; text-transform: uppercase;">Bradesco Pix</div>
-    <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; margin-bottom: 15px;">🛡️ Liquidação Real BCB Timed</div>
+    <div style="font-size: 22px; font-weight: 900; color: #cc092f; margin-bottom: 5px; text-transform: uppercase; font-family: sans-serif;">Bradesco Pix</div>
+    <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; margin-bottom: 15px; font-family: sans-serif;">🛡️ Liquidação Real BCB Timed</div>
 
-    <!-- 🎯 MÁGICA GRÁFICA INTERNA: COMPARTIMENTO ONDE O GERADOR DESENHA OS QUADRADINHOS SEM BAIXAR NADA -->
+    <!-- 🎯 INJEÇÃO CRISTALINA EM SERVIDOR HTTPS DE ALTA VELOCIDADE EXCLUSIVO PARA QUEBRAR BLOQUEIOS -->
     <div class="qr-moldura-nativa">
-        <div id="canvasLocalQRCode"></div>
+        <img id="imgEngineQRCode" class="qr-imagem-real" src="https://qrserver.com Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6" alt="QR Code Pix">
     </div>
 
-    <div style="font-size: 10px; font-weight: bold; color: #555; margin-top: 15px; width: 250px; line-height: 1.3;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
+    <div style="font-size: 10px; font-weight: bold; color: #555; margin-top: 15px; width: 250px; line-height: 1.3; font-family: sans-serif;">Aponte a câmera do celular para pagar o faturamento de balcão</div>
 
     <button class="btn-retorno-balcao" onclick="location.href='index6.html'">⬅️ Voltar ao Boleto</button>
 </div>
 
-<script>
-    // 🧠 MOTOR GERADOR DE QRCODE 100% EMBUTIDO EM JAVASCRIPT PURO (INFALÍVEL E OFFLINE)
-    var QRCodeAlt = function(text) {
-        // Matriz de dados compactada para a string real terminando em C2B6 do José Carlos Suguimoto
-        this.text = text;
-    };
-    
-    function fabricarDesenhoPix() {
-        let chaveBrutaMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairipora Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
-        
-        // Rota alternativa de injeção direta via API de renderização local forçada contra bloqueios de rede
-        document.getElementById("canvasLocalQRCode").innerHTML = '<img src="https://qrserver.com' + encodeURIComponent(chaveBrutaMestre) + '" style="display:block; border:none; width:220px; height:220px;" alt="QR Code">';
-    }
-
-    window.onload = fabricarDesenhoPix;
-    document.addEventListener("DOMContentLoaded", fabricarDesenhoPix);
-</script>
 </body>
 </html>
