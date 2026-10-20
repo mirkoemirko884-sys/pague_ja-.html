@@ -7,26 +7,45 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #b91c1c; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
         .container { background: #991b1b; padding: 35px; border: 3px solid #facc15; border-radius: 16px; width: 100%; max-width: 450px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .bloco-logos { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 15px; }
-        .logo-maos-azuis { width: 85px; height: auto; }
+        
+        /* 🎯 ### DESIGN DA NOVA FRASE DE EFEITO EM TEXTO PURO INDESTRUTÍVEL ### */
+        .bloco-frase-impacto { 
+            background: #000000; 
+            color: #facc15; /* AMARELO DOURADO PREMIO */
+            border: 2px solid #ffffff; 
+            border-radius: 8px; 
+            padding: 15px; 
+            font-size: 14px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            line-height: 1.4;
+        }
+
         h1 { font-size: 32px; font-weight: 900; margin: 0 0 5px 0; letter-spacing: 1.5px; text-transform: uppercase; }
         .slogan { color: #4ade80; font-size: 13px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; }
         .status-bar { background: #000000; border: 1px solid #facc15; border-radius: 8px; padding: 12px; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #ffffff; margin-bottom: 25px; line-height: 1.4; }
         .bloco-botoes-mestre { display: flex; flex-direction: column; gap: 14px; }
-        .btn-mestre { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        .btn-mestre { width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; }
+        .btn-mestre:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="bloco-logos">
-        <img src="https://imgur.com" class="logo-maos-azuis" alt="Acordo de Confiança">
+    
+    <!-- 🎯 ### INJEÇÃO HISTÓRICA DO LETREIRO DIGITAL EM TEXTO PURO (IMUNE A SINAL RUIM) ### -->
+    <div class="bloco-frase-impacto">
+        🔥 FRASE DE EFEITO!<br>MOVIMENTANDO O COMERCIAL LOCAL! 🔥
     </div>
+
     <h1>Olá!</h1>
     <h2>JCS_software</h2>
     <div class="slogan">"Não estamos vendendo nada, estamos te dando crédito"</div>
     <div class="status-bar">🤝 Acordo de Confiança Garantido<br><span style="font-size: 11px; color: #4ade80; display: block; margin-top: 5px;">● TERMINAL RESTRITO E ATIVO</span></div>
     
-    <!-- 🎯 MENU CORPORATIVO DE DIRECIONAMENTO FÍSICO -->
+    <!-- ### MENU CORPORATIVO RECONECTADO ### -->
     <div class="bloco-botoes-mestre">
         <button class="btn-mestre" style="background-color: #343a40; color: #ffffff; border: 2px solid #ffffff;" onclick="navegarPara('index6.html')">1. Acessar Visor do Boleto VIP ➔</button>
         <button class="btn-mestre" style="background-color: #22c55e; color: #ffffff;" onclick="navegarPara('index2.html')">2. Acessar Cédula de Duplicata Verde ➔</button>
