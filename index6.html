@@ -40,20 +40,22 @@
         <div class="pdf-toolbar"><span>📄 JCS_Boleto_Liquidação_Digital.pdf (1/1)</span><button onclick="window.print()" style="padding: 5px 10px; font-weight: bold; cursor: pointer;">🖨️ Imprimir PDF</button></div>
         
         <div class="pdf-page">
-            <!-- CODIGO E STRING SINTONIZADOS COM A BASE REAL DO PYTHON S/ ACENTO -->
             <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-7</div><div class="linha-digitavel" id="txtLinhaDigitavel">23791.79001 01043.513184 91020.150008 7 98480000008500</div></div>
             <table class="tabela-boleto">
                 <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>0449 / 0080619-6</strong></td></tr>
                 <tr>
-                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" value="20/10/2026"></td>
+                    <!-- ### REGIAO LIVRE DE MODIFICAÇÃO DE DATA ### -->
+                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="campoDataDoc" value="20/10/2026"></td>
                     <td width="20%"><span>Nº do Documento</span><strong>749201</strong></td>
                     <td width="20%"><span>Espécie Doc.</span><strong>DM</strong></td>
                     <td width="20%"><span>Aceite</span><strong>N</strong></td>
-                    <td><span>Vencimento (Mude aqui)</span><input type="text" class="input-boleto-dinamico" value="Liquidação Imediata VIP"></td>
+                    <!-- ### REGIAO LIVRE DE MODIFICAÇÃO DE VENCIMENTO ### -->
+                    <td><span>Vencimento (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="campoVencDoc" value="Liquidação Imediata VIP"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDesc" value="ração de gato"></td>
-                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValor" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00"></td>
+                    <!-- ### SENSOR DE IDENTIFICAÇÃO DE DADOS CORRIGIDO ### -->
+                    <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDescMestre" value="ração de gato premium"></td>
+                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorMestre" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="125,00"></td>
                 </tr>
             </table>
             <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
@@ -77,9 +79,10 @@
         }
     }
 
+    // ### MANOBRA DE PRECISÃO DE TRANSMISSÃO DE CAIXA ###
     function irParaTelaCheiaQR() {
-        let v = document.getElementById('txtValor').value;
-        let d = document.getElementById('txtDesc').value;
+        let v = document.getElementById('txtValorMestre').value;
+        let d = document.getElementById('txtDescMestre').value;
         window.location.href = `index1.html?valor=${encodeURIComponent(v)}&desc=${encodeURIComponent(d)}`;
     }
 </script>
