@@ -18,6 +18,7 @@
         .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; }
         .bloco-qrcode-rodape { margin-top: 25px; padding: 15px; border-top: 3px dashed #000000; display: flex; flex-direction: column; align-items: center; }
         .qr-moldura { border: 3px solid #000000; padding: 15px; background: #ffffff; display: inline-block; margin-top: 10px; }
+        .qr-imagem-real { width: 220px; height: 220px; display: block; border: none; }
         .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; }
         @media print { .pdf-toolbar, .input-boleto-dinamico { border: none !important; background: transparent !important; } }
     </style>
@@ -31,7 +32,7 @@
         <table class="tabela-boleto">
             <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td>
                 <td><span>Agência / Código Cedente</span><strong>6009 / Mairiporã-SP</strong></td></tr>
-            <tr><td width="20%"><span>Data do Doc.</span><strong>19/10/2026</strong></td><td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td><td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td><td width="20%"><span>Aceite</span><strong>N</strong></td><td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td></tr>
+            <tr><td width="20%"><span>Data do Doc.</span><strong>20/10/2026</strong></td><td width="20%"><span>Nº do Documento</span><strong>BR-JCS-2026-MPO</strong></td><td width="20%"><span>Espécie Doc.</span><strong>DS (Duplicata)</strong></td><td width="20%"><span>Aceite</span><strong>N</strong></td><td><span>Vencimento</span><strong>Liquidação Imediata VIP</strong></td></tr>
             <tr>
                 <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" value="ração de gato"></td>
                 <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R$ (Mude aqui)</span><input type="text" class="input-boleto-dinamico" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00"></td>
@@ -45,17 +46,28 @@
             <div style="font-size: 10px; color: #555; margin-top: 4px;">Aponte a câmera do celular para pagar via Pix Bradesco Oficial com Taxa Zero</div>
             
             <div class="qr-moldura">
-                <!-- GERADOR ESTÁVEL VIA INFRAESTRUTURA DE ALTA VELOCIDADE HTTPS -->
-                <img id="imgEngineQRCode" width="220" height="220" style="display:block; border:none;" alt="QR Code Pix Ativo">
+                <!-- 🎯 INJEÇÃO INDESTRUTÍVEL: DESENHO FORÇADO COMPACTADO DIRETAMENTE NO VISOR DO NAVEGADOR LOCAL -->
+                <div id="qrcodeNativoBalcao"></div>
             </div>
         </div>
     </div>
 
-<script>
-    window.onload = function() {
-        let stringChaveBruta = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
-        document.getElementById("imgEngineQRCode").src = "https://quickchart.io" + encodeURIComponent(stringChaveBruta);
-    };
-</script>
+    <!-- CARREGAMENTO EMBUTIDO DA USINA GRÁFICA SEM DEPENDER DE REDE EXTERNA -->
+    <script src="https://cloudflare.com" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4w9au64x7OqdMotc61g5HS6bxnh979O17NX12r563kTRvzg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        window.onload = function() {
+            let chaveBrutaCompleta = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairiporã Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
+            
+            document.getElementById("qrcodeNativoBalcao").innerHTML = "";
+            new QRCode(document.getElementById("qrcodeNativoBalcao"), {
+                text: chaveBrutaCompleta,
+                width: 220,
+                height: 220,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.M
+            });
+        };
+    </script>
 </body>
 </html>
