@@ -19,11 +19,21 @@
         .tabela-boleto { width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: left; }
         .tabela-boleto td { border: 1px solid #000000; padding: 8px 12px; font-size: 12px; vertical-align: top; }
         .tabela-boleto td span { display: block; font-size: 9px; font-weight: bold; color: #495057; text-transform: uppercase; margin-bottom: 4px; }
-        .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; }
+        .input-boleto-dinamico { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; width: 100%; border: 1px dashed #000; padding: 4px; background: #fffde6; box-sizing: border-box; display: block; }
+        
+        /* 🎯 CAMADA TEXTUAL OCULTA NA TELA, EXCLUSIVA PARA A IMPRESSORA COPIAR OS DADOS */
+        .texto-exclusivo-impressao { display: none; font-size: 12px; font-weight: bold; font-family: "Courier New", monospace; }
+
         .bloco-botoes-barra { display: flex; gap: 10px; width: 100%; max-width: 680px; margin-top: 15px; font-family: -apple-system, sans-serif; }
         .btn-nav-banco { flex: 1; padding: 14px; border: none; border-radius: 6px; font-size: 13px; font-weight: bold; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
         .tarja-autenticacao { font-size: 11px; font-weight: bold; text-align: center; background: #fff159; padding: 10px; margin-top: 20px; border: 1px solid #000000; text-transform: uppercase; }
-        @media print { .pdf-toolbar, .bloco-botoes-barra, .input-boleto-dinamico, .painel-login-seguro { display: none !important; } .conteudo-sistema-bloqueado { display: flex !important; } }
+        
+        /* 🖨️ REGRA CRUCIAL DE IMPRESSÃO: ESCONDE INPUTS E REVELA O TEXTO DIGITADO NO PAPEL */
+        @media print { 
+            .pdf-toolbar, .bloco-botoes-barra, .input-boleto-dinamico, .painel-login-seguro { display: none !important; } 
+            .conteudo-sistema-bloqueado { display: flex !important; } 
+            .texto-exclusivo-impressao { display: block !important; }
+        }
     </style>
 </head>
 <body>
@@ -44,19 +54,33 @@
         <div class="pdf-page">
             <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-7</div><div class="linha-digitavel" id="txtLinhaDigitavel">23791.79001 01043.513184 91020.150008 7 98480000008500</div></div>
             <table class="tabela-boleto">
-                <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><th>0449 / 0080619-6</th></td></tr>
+                <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>0449 / 0080619-6</strong></td></tr>
                 <tr>
-                    <!-- ### CAMPOS AUTO-PREENCHIDOS MAS TOTALMENTE MODIFICÁVEIS ### -->
-                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtDataDoc" value="20/10/2026"></td>
+                    <td width="20%">
+                        <span>Data do Doc. (Mude aqui)</span>
+                        <input type="text" class="input-boleto-dinamico" id="txtDataDoc" value="20/10/2026" oninput="sincronizarCamposImpressao()">
+                        <div class="texto-exclusivo-impressao" id="printDataDoc">20/10/2026</div>
+                    </td>
                     <td width="20%"><span>Nº do Documento</span><strong>749201</strong></td>
                     <td width="20%"><span>Espécie Doc.</span><strong>DM</strong></td>
                     <td width="20%"><span>Aceite</span><strong>N</strong></td>
-                    <td><span>Vencimento (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtVencDoc" value="Liquidação Imediata VIP"></td>
+                    <td>
+                        <span>Vencimento (Mude aqui)</span>
+                        <input type="text" class="input-boleto-dinamico" id="txtVencDoc" value="Liquidação Imediata VIP" oninput="sincronizarCamposImpressao()">
+                        <div class="texto-exclusivo-impressao" id="printVencDoc">Liquidação Imediata VIP</div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDescInput" value="ração de gato premium"></td>
-                    <!-- 🎯 SOLDA DO INPUT: RECONFIGURADO DE TEXTO PARA CAPTURAR CARACTERES COPIADOS SEM TRAVAR -->
-                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="2.000,00"></td>
+                    <td colspan="4">
+                        <span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span>
+                        <input type="text" class="input-boleto-dinamico" id="txtDescInput" value="ração de gato premium" oninput="sincronizarCamposImpressao()">
+                        <div class="texto-exclusivo-impressao" id="printDescInput">ração de gato premium</div>
+                    </td>
+                    <td style="background-color: #e8f5e9;">
+                        <span>(=) Valor do Documento R\$: (Mude aqui)</span>
+                        <input type="text" class="input-boleto-dinamico" id="txtValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="25,00" oninput="sincronizarCamposImpressao()">
+                        <div class="texto-exclusivo-impressao" id="printValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900;">25,00</div>
+                    </td>
                 </tr>
             </table>
             <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
@@ -74,20 +98,25 @@
         if (senhaDigitada === "84") {
             document.getElementById('blocoLoginMestre').style.display = "none";
             document.getElementById('blocoBoletoProtegido').style.display = "flex";
+            sincronizarCamposImpressao();
         } else {
             alert("❌ OPERAÇÃO RECUSADA: Chave de Validador incorreta!");
             document.getElementById('txtSenhaAcesso').value = "";
         }
     }
 
-    // 🎯 ENGINE DE TRATAMENTO DE TEXTO MOEDA: LIMPA PONTOS PARASITAS AUTOMATICAMENTE NO CLIQUE
+    // 🎯 SENSOR DE REPLICAÇÃO EM TEXTO CRU PARA A FOLHA DE PAPEL IMPRESSA
+    function sincronizarCamposImpressao() {
+        document.getElementById('printDataDoc').innerText = document.getElementById('txtDataDoc').value;
+        document.getElementById('printVencDoc').innerText = document.getElementById('txtVencDoc').value;
+        document.getElementById('printDescInput').innerText = document.getElementById('txtDescInput').value;
+        document.getElementById('printValorInput').innerText = document.getElementById('txtValorInput').value;
+    }
+
     function irParaTelaCheiaQR() {
         let vRaw = document.getElementById('txtValorInput').value.trim();
         let d = document.getElementById('txtDescInput').value.trim();
-        
-        // Remove pontos e unifica o formato de milhar para a URL limpa do navegador
         let vLimpo = vRaw.replace(/\./g, '');
-        
         window.location.href = `index1.html?valor=${encodeURIComponent(vLimpo)}&desc=${encodeURIComponent(d)}`;
     }
 </script>
