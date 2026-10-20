@@ -20,13 +20,14 @@
 <div class="container-qr">
     <div class="topo-banco">Bradesco Pix Oficial</div>
     
-    <!-- ### RECEPTORES DE DADOS LIVRES ### -->
-    <input type="text" class="input-visor-celular" id="txtDescPix" value="faturamento">
-    <input type="text" class="input-preço-celular" id="txtValorPix" value="0,00">
+    <!-- 🎯 RECEPTORES VIVOS CORRIGIDOS CONTRA O APAGÃO DE MEMÓRIA -->
+    <input type="text" class="input-visor-celular" id="txtDescPix" value="Carregando insumo...">
+    <input type="text" class="input-preço-celular" id="txtValorPix" value="R$: 0,00">
     
     <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #0d47a1; margin-top: 15px;">🛡️ RECONHECIMENTO DE LIQUIDAÇÃO REAL BCB TIMED</div>
     
     <div class="qr-moldura">
+        <!-- ROTA BLINDADA HTTPS SEM ACENTOS PARA FORÇAR O DESENHO EM INTERNET INSTÁVEL -->
         <img id="imgEngineQRCode" class="qr-imagem-real" alt="QR Code Pix Ativo">
     </div>
     
@@ -42,17 +43,19 @@
     function renderizarQrcodeBalcao() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Captura e distribui nas gavetas de exibição de forma idêntica
-        let valor = urlParams.get('valor') || "25,00";
-        let desc = urlParams.get('desc') || "ração de gato";
+        // Pega as chaves passadas pela URL mestre do boleto
+        let valorParam = urlParams.get('valor');
+        let descParam = urlParams.get('desc');
         
-        document.getElementById('txtValorPix').value = decodeURIComponent(valor);
-        document.getElementById('txtDescPix').value = decodeURIComponent(desc);
+        // Injeta os dados ao vivo nas caixas do celular do cliente
+        if (valorParam) { document.getElementById('txtValorPix').value = decodeURIComponent(valorParam); }
+        if (descParam) { document.getElementById('txtDescPix').value = decodeURIComponent(descParam); }
         
         let stringChaveMestre = "00020126760014BR.GOV.BCB.PIX01363d4ee862-439d-481d-9f5b-07d69a7182f60214Mairipora Agro5204000053039865802BR5921JOSE CARLOS SUGUIMOTO6009MAIRIPORA62230519JoseCarlosSuguimoto6304C2B6";
         document.getElementById("imgEngineQRCode").src = "https://quickchart.io" + encodeURIComponent(stringChaveMestre);
     }
     window.onload = renderizarQrcodeBalcao;
+    document.addEventListener("DOMContentLoaded", renderizarQrcodeBalcao);
 </script>
 </body>
 </html>
