@@ -44,10 +44,10 @@
         <div class="pdf-page">
             <div class="topo-boleto"><div class="banco-logo">Bradesco</div><div class="banco-codigo">237-7</div><div class="linha-digitavel" id="txtLinhaDigitavel">23791.79001 01043.513184 91020.150008 7 98480000008500</div></div>
             <table class="tabela-boleto">
-                <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><strong>0449 / 0080619-6</strong></td></tr>
+                <tr><td colspan="4"><span>Beneficiário Cedente Regulamentar</span><strong>JOSE CARLOS SUGUIMOTO - JCS_software</strong></td><td><span>Agência / Código Cedente</span><th>0449 / 0080619-6</th></td></tr>
                 <tr>
-                    <!-- 🎯 ### CAMPOS AUTO-PREENCHIDOS MAS TOTALMENTE MODIFICÁVEIS ### -->
-                    <td width="20 Leeds"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtDataDoc" value="20/10/2026"></td>
+                    <!-- ### CAMPOS AUTO-PREENCHIDOS MAS TOTALMENTE MODIFICÁVEIS ### -->
+                    <td width="20%"><span>Data do Doc. (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtDataDoc" value="20/10/2026"></td>
                     <td width="20%"><span>Nº do Documento</span><strong>749201</strong></td>
                     <td width="20%"><span>Espécie Doc.</span><strong>DM</strong></td>
                     <td width="20%"><span>Aceite</span><strong>N</strong></td>
@@ -55,7 +55,8 @@
                 </tr>
                 <tr>
                     <td colspan="4"><span>Descrição do Insumo Comercial / Especificação (Clique para mudar)</span><input type="text" class="input-boleto-dinamico" id="txtDescInput" value="ração de gato premium"></td>
-                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="1.055,00"></td>
+                    <!-- 🎯 SOLDA DO INPUT: RECONFIGURADO DE TEXTO PARA CAPTURAR CARACTERES COPIADOS SEM TRAVAR -->
+                    <td style="background-color: #e8f5e9;"><span>(=) Valor do Documento R\$: (Mude aqui)</span><input type="text" class="input-boleto-dinamico" id="txtValorInput" style="color: #1b5e20; font-size: 14px; font-weight: 900; text-align: center;" value="2.000,00"></td>
                 </tr>
             </table>
             <div class="tarja-autenticacao">🔒 DUPLICATA INTEGRADA EM CARTEIRA REGIONAL - JUROS ZERO</div>
@@ -79,10 +80,15 @@
         }
     }
 
+    // 🎯 ENGINE DE TRATAMENTO DE TEXTO MOEDA: LIMPA PONTOS PARASITAS AUTOMATICAMENTE NO CLIQUE
     function irParaTelaCheiaQR() {
-        let v = document.getElementById('txtValorInput').value.trim();
+        let vRaw = document.getElementById('txtValorInput').value.trim();
         let d = document.getElementById('txtDescInput').value.trim();
-        window.location.href = `index1.html?valor=${encodeURIComponent(v)}&desc=${encodeURIComponent(d)}`;
+        
+        // Remove pontos e unifica o formato de milhar para a URL limpa do navegador
+        let vLimpo = vRaw.replace(/\./g, '');
+        
+        window.location.href = `index1.html?valor=${encodeURIComponent(vLimpo)}&desc=${encodeURIComponent(d)}`;
     }
 </script>
 </body>
