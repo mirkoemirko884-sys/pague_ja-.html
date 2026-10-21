@@ -6,32 +6,29 @@
     <title>JCS_software | Cupom de Emissão e Desconto Cambial</title>
     <style>
         /* =========================================================================
-           ### DESIGN DA CENTRAL CONTÁBIL ULTRA-COMPACTA MEIA FOLHA A5 ###
+           ### DESIGN DA CENTRAL CONTÁBIL COM ZOOM DE BALCÃO MEIA FOLHA A5 ###
            ========================================================================= */
         body { font-family: "Courier New", Courier, monospace; background-color: #065f46; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; box-sizing: border-box; }
         .container { background: #065f46; border: 4px solid #facc15; border-radius: 12px; padding: 15px; width: 100%; max-width: 550px; box-sizing: border-box; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 8px; width: 100%; border-radius: 6px; font-size: 13px; font-weight: 900; margin-bottom: 15px; outline: none; text-transform: uppercase; }
+        .seletor-prazo { background: #000000; border: 2px solid #facc15; color: #fff; padding: 10px; width: 100%; border-radius: 6px; font-size: 14px; font-weight: 900; margin-bottom: 15px; outline: none; text-transform: uppercase; }
         
-        /* CÉDULAS DA IMPRESSÃO SOBERANA CONTÁBIL */
-        .via-cedula { background: #ffffff; color: #000000; border: 4px double #000000; padding: 12px; margin-bottom: 12px; text-align: left; position: relative; }
-        .via-tag { position: absolute; top: 6px; right: 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; border: 2px solid #000000; padding: 2px 6px; background: #facc15; }
-        .titulo-timbre { font-size: 12px; font-weight: 900; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; }
-        .linha-dados { font-size: 11px; margin: 5px 0; display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 2px; align-items: center; }
-        .input-cedula-dinamica { font-family: "Courier New", monospace; font-size: 12px; font-weight: bold; border: 1px dashed #000; padding: 2px; width: 60%; box-sizing: border-box; background: #fffde6; }
+        .via-cedula { background: #ffffff; color: #000000; border: 4px double #000000; padding: 15px; margin-bottom: 15px; text-align: left; position: relative; }
+        .via-tag { position: absolute; top: 6px; right: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; border: 2px solid #000000; padding: 3px 8px; background: #facc15; }
+        .titulo-timbre { font-size: 14px; font-weight: 900; text-align: center; border-bottom: 2px dashed #000000; padding-bottom: 6px; margin-bottom: 12px; text-transform: uppercase; }
+        .linha-dados { font-size: 12px; margin: 6px 0; display: flex; justify-content: space-between; border-bottom: 1px dashed #cbd5e1; padding-bottom: 3px; align-items: center; }
+        .input-cedula-dinamica { font-family: "Courier New", monospace; font-size: 13px; font-weight: bold; border: 1px dashed #000; padding: 4px; width: 60%; box-sizing: border-box; background: #fffde6; }
         
-        .bloco-contabil-resultado { background: #f8fafc; border: 1px solid #000; border-radius: 6px; padding: 8px; margin-top: 10px; }
-        .linha-contabil { font-size: 11px; font-weight: bold; display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dotted #94a3b8; }
-        .total-credor { font-size: 14px; font-weight: 900; color: #166534; background: #d1fae5; padding: 4px; border-radius: 4px; border: 1px solid #10b981; text-transform: uppercase; }
+        .bloco-contabil-resultado { background: #f8fafc; border: 1px solid #000; border-radius: 6px; padding: 10px; margin-top: 12px; }
+        .linha-contabil { font-size: 12px; font-weight: bold; display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted #94a3b8; align-items: center; }
+        .total-credor { font-size: 16px; font-weight: 900; color: #166534; background: #d1fae5; padding: 6px; border-radius: 4px; border: 1px solid #10b981; text-transform: uppercase; }
 
-        .painel-moeda-troca { background: #eff6ff; color: #1e3a8a; border-left: 4px solid #3b82f6; padding: 6px; font-size: 9.5px; margin-top: 10px; font-weight: bold; line-height: 1.3; }
-        .tarja-autenticacao { margin-top: 8px; border-top: 2px solid #000000; padding-top: 4px; font-size: 8px; font-weight: bold; text-align: center; background: #f1f5f9; text-transform: uppercase; }
+        .painel-moeda-troca { background: #eff6ff; color: #1e3a8a; border-left: 4px solid #3b82f6; padding: 8px; font-size: 10px; margin-top: 12px; font-weight: bold; line-height: 1.3; }
+        .tarja-autenticacao { margin-top: 10px; border-top: 2px solid #000000; padding-top: 6px; font-size: 9px; font-weight: bold; text-align: center; background: #f1f5f9; text-transform: uppercase; }
         
-        /* 🎯 CLASSIFICAÇÃO DOS BOTÕES PARA EXCLUSÃO DO PAPEL */
         .bloco-botoes-comando { display: flex; gap: 10px; margin-top: 15px; }
-        .btn-print { flex: 2; padding: 12px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
-        .btn-voltar-mestre { flex: 1; padding: 12px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
+        .btn-print { flex: 2; padding: 14px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 6px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+        .btn-voltar-mestre { flex: 1; padding: 14px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 6px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
         
-        /* 🖨️ REGRA CRUCIAL DE IMPRESSÃO A5 COM SUPRESSÃO TOTAL DE BOTÕES */
         @media print { 
             body { background: #ffffff; color: #000000; padding: 0; } 
             .container, .seletor-prazo, .linha-corte, .bloco-botoes-comando { border: none !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; display: none !important; } 
@@ -43,7 +40,7 @@
 <body>
 <div class="container">
     <!-- ### SELETOR DE CONDICIONAL DE PRAZOS ### -->
-    <select class="seletor-prazo" id="comboPrazo" oninput="calcularBalcaoContabilMestre()">
+    <select class="seletor-prazo" id="comboPrazo" onchange="calcularBalcaoContabilMestre()">
         <option value="28">Faturado Regulamentar: 28 Days VIP (Retido em Carteira)</option>
         <option value="21">Faturado Regulamentar: 21 Days VIP (Retido em Carteira)</option>
         <option value="14">Faturado Regulamentar: 14 Days VIP (Retido em Carteira)</option>
@@ -63,23 +60,22 @@
         <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <input type="text" class="input-cedula-dinamica" id="txtDescMestre" value="manutenção de JCS_suguimoto mensal" oninput="calcularBalcaoContabilMestre()" placeholder="Opcional"></div>
         
         <div class="bloco-contabil-resultado">
-            <div class="linha-contabil"><span>(=) SALDO DEVEDOR (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtDevedorInput" value="10.00" step="0.01" style="width:100px; text-align:right; font-weight:900;" oninput="calcularBalcaoContabilMestre()"></div>
-            <div class="linha-contabil" style="color: #b91c1c;"><span>(-) CRÉDITO DE AMORTIZAÇÃO (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtCreditoInput" value="1.00" step="0.01" style="width:100px; text-align:right; font-weight:900; color:#b91c1c;" oninput="calcularBalcaoContabilMestre()"></div>
+            <div class="linha-contabil"><span>(=) SALDO DEVEDOR (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtDevedorInput" value="10.00" step="0.01" style="width:110px; text-align:right; font-weight:900;" oninput="calcularBalcaoContabilMestre()"></div>
+            <div class="linha-contabil" style="color: #b91c1c;"><span>(-) CRÉDITO DE AMORTIZAÇÃO (R$):</span> <input type="number" class="input-cedula-dinamica" id="txtCreditoInput" value="1.00" step="0.01" style="width:110px; text-align:right; font-weight:900; color:#b91c1c;" oninput="calcularBalcaoContabilMestre()"></div>
             <div class="linha-contabil" style="border:none; margin-top:5px; align-items:center;"><span>(=) SALDO RESTANTE A PAGAR:</span> <span class="total-credor" id="lblCredorLoja">R$: 9,00</span></div>
         </div>
 
-        <!-- 🎯 OBS VIA LOJA -->
         <div class="painel-moeda-troca">🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO: Fica conferida liberdade cambial para abatimentos parciais em dinheiro vivo antes do vencimento do título comercial.</div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <div style="border-top: 2px dashed #ffffff; margin: 10px 0; text-align: center; font-size: 10px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
+    <div style="border-top: 2px dashed #ffffff; margin: 12px 0; text-align: center; font-size: 10px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
 
-    <!-- 📦 VIA 2: CLIENTE -->
+    <!-- 📦 VIA 2: CLIENTE (TOTALMENTE ESPELHADA E AUTOMÁTICA) -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
-        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <strong id="lblDescCliente">...</strong></div>
+        <div class="linha-dados"><span>DESCRIÇÃO DO PRODUTO:</span> <strong id="lblDescCliente">manutenção de JCS_suguimoto mensal</strong></div>
         
         <div class="bloco-contabil-resultado">
             <div class="linha-contabil"><span>(=) SALDO DEVEDOR ORIGINAL (R$):</span> <span id="lblDevedorCliente" style="font-weight:900;">R$: 10,00</span></div>
@@ -87,12 +83,10 @@
             <div class="linha-contabil" style="border:none; margin-top:5px; align-items:center;"><span>(=) SALDO RESTANTE A PAGAR:</span> <span class="total-credor" id="lblCredorCliente">R$: 9,00</span></div>
         </div>
 
-        <!-- 🎯 ### REPLICAÇÃO DA OBS EXCLUSIVA TAMBÉM NA VIA DO CLIENTE EXIGIDA POR VOCÊ ### -->
         <div class="painel-moeda-troca">🔄 REGRA DA "MOEDA DE TROCA" DE BALCÃO: Fica conferida liberdade cambial para abatimentos parciais em dinheiro vivo antes do vencimento do título comercial.</div>
         <div class="tarja-autenticacao">【 DUPLICATA EM CARTEIRA REGIONAL - PROVA DE DÍVIDA ATIVA TIMED 】</div>
     </div>
 
-    <!-- BOTÕES ENCAPSULADOS PARA SUMIREM NA HORA DO PRINT -->
     <div class="bloco-botoes-comando">
         <button class="btn-print" onclick="window.print()">🖨️ Imprimir Duplicata SOBERANA</button>
         <button class="btn-voltar-mestre" onclick="location.href='index.html'">⬅️ Voltar ao Portal</button>
@@ -100,6 +94,7 @@
 </div>
 
 <script>
+    // 🎯 ### ENGINE GRÁFICA GÊMEA AUTO-ESTÁVEL NO CARREGAMENTO DA PÁGINA ###
     function calcularBalcaoContabilMestre() {
         var devedor = parseFloat(document.getElementById('txtDevedorInput').value) || 0;
         var credito = parseFloat(document.getElementById('txtCreditoInput').value) || 0;
@@ -113,3 +108,7 @@
         
         var fmtDevedor = "R$: " + devedor.toFixed(2).replace('.', ',');
         var fmtCredito = "R$: " + credito.toFixed(2).replace('.', ',');
+        var fmtCredor  = "R$: " + credorFinal.toFixed(2).replace('.', ',');
+
+        document.getElementById('lblCredorLoja').innerText = fmtCredor;
+        document.getElementById('lblDevedorCliente').innerText = fmtDevedor;
