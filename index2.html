@@ -29,6 +29,7 @@
         .btn-print { flex: 2; padding: 14px; background-color: #facc15; color: #000000; border: 2px solid #000000; border-radius: 6px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
         .btn-voltar-mestre { flex: 1; padding: 14px; background-color: #dc2626; color: #ffffff; border: none; border-radius: 6px; font-size: 14px; font-weight: 900; cursor: pointer; text-transform: uppercase; text-align: center; text-decoration: none; }
         
+        /* 🖨️ REGRA DE IMPRESSÃO A5: ESCONDE TOTALMENTE OS BOTÕES NO PAPEL */
         @media print { 
             body { background: #ffffff; color: #000000; padding: 0; } 
             .container, .seletor-prazo, .linha-corte, .bloco-botoes-comando { border: none !important; background: transparent !important; padding: 0 !important; box-shadow: none !important; display: none !important; } 
@@ -71,7 +72,7 @@
 
     <div style="border-top: 2px dashed #ffffff; margin: 12px 0; text-align: center; font-size: 10px;" class="linha-corte">✂- - - - - - - - - - LINHA DE CORTE MEIA FOLHA (A5) - - - - - - - - - -</div>
 
-    <!-- 📦 VIA 2: CLIENTE (TOTALMENTE ESPELHADA E AUTOMÁTICA) -->
+    <!-- 📦 VIA 2: CLIENTE (RESTAURADA E PROTEGIDA CONTRA CORTES) -->
     <div class="via-cedula">
         <div class="via-tag">Via Cliente</div>
         <div class="titulo-timbre">📦 EXTRATO LOGÍSTICO - CUPOM DE RETIRADA PROTEGIDA 📦</div>
@@ -94,7 +95,7 @@
 </div>
 
 <script>
-    // 🎯 ### ENGINE GRÁFICA GÊMEA AUTO-ESTÁVEL NO CARREGAMENTO DA PÁGINA ###
+    // 🎯 ENGINE GRÁFICA CONTÁBIL RESTAURADA DE FORMA REDUNDANTE
     function calcularBalcaoContabilMestre() {
         var devedor = parseFloat(document.getElementById('txtDevedorInput').value) || 0;
         var credito = parseFloat(document.getElementById('txtCreditoInput').value) || 0;
@@ -111,4 +112,3 @@
         var fmtCredor  = "R$: " + credorFinal.toFixed(2).replace('.', ',');
 
         document.getElementById('lblCredorLoja').innerText = fmtCredor;
-        document.getElementById('lblDevedorCliente').innerText = fmtDevedor;
